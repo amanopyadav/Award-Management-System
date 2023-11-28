@@ -24,6 +24,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/assets/scss/paper-dashboard.scss",
               "node_modules/ngx-toastr/toastr.css",
@@ -102,6 +103,7 @@
               "node_modules/bootstrap-notify/bootstrap-notify.js"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/assets/sass/paper-dashboard.scss",
               "src/assets/css/demo.css"
@@ -148,17 +150,7 @@
       }
     }
   },
-  "defaultProject": "pd-free-angularcli",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "app",
-      "styleext": "scss"
-    },
-    "@schematics/angular:directive": {
-      "prefix": "app"
-    }
-  },
   "cli": {
-    "analytics": false
+    "analytics": "16402665-a984-4ac2-8ff9-9569f6acddcc"
   }
 }

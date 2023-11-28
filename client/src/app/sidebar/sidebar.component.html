@@ -10,12 +10,41 @@
       Creative Tim
     </a>
   </div>
-    <ul class="nav">
+    <!-- <ul class="nav">
         <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
             <a [routerLink]="[menuItem.path]">
                 <i class="nc-icon {{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
             </a>
+
+            <div *ngIf="menuItem.children">
+              <a class="dropdown-toggle" (click)="toggleDropdown($event)" data-toggle="dropdown">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+              </a>
+      
+              <ul class="dropdown-menu">
+                <li *ngFor="let childMenuItem of menuItem.children">
+                  <a [routerLink]="[childMenuItem.path]">{{childMenuItem.title}}</a>
+                </li>
+              </ul>
+            </div>
         </li>
+    </ul> -->
+    <ul class="nav">
+      <li *ngFor="let menuItem of menuItems" routerLinkActive="active" [class.active]="menuItem.active" [class.has-sub]="menuItem.children">
+        <a [routerLink]="[menuItem.path]" (click)="toggleDropdown(menuItem)">
+          <i class="nc-icon {{menuItem.icon}}"></i>
+          <p>{{menuItem.title}}</p>
+        </a>
+    
+        <ul *ngIf="menuItem.children" class="sub-menu">
+          <ul *ngFor="let childMenuItem of menuItem.children" [class.active]="childMenuItem.active">
+            <a [routerLink]="[childMenuItem.path]" (click)="toggleDropdown(childMenuItem)">
+              {{childMenuItem.title}}
+            </a>
+          </ul>
+        </ul>
+      </li>
     </ul>
 </div>
