@@ -1,202 +1,468 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="card card-user">
-      <div class="image">
-        <img src="assets/img/damir-bosnjak.jpg" alt="...">
+      <div class="card-header">
+        <h5 class="card-title">Nomination Form</h5>
       </div>
       <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
-            <h5 class="title">Chet Faker</h5>
-          </a>
-          <p class="description">
-            @chetfaker
-          </p>
-        </div>
-        <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container">
+        <form [formGroup]="nominationForm">
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-6 ml-auto">
-              <h5>12
-                <br>
-                <small>Files</small>
-              </h5>
-            </div>
-            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-              <h5>2GB
-                <br>
-                <small>Used</small>
-              </h5>
-            </div>
-            <div class="col-lg-3 mr-auto">
-              <h5>24,6$
-                <br>
-                <small>Spent</small>
-              </h5>
+            <div class="col-md-4 pr-1">
+                <div class="form-group">
+                    <label>Award Category</label>
+                    <select class="form-control" id="award_category" name="award_category"
+                        formControlName="award_category" required>
+                        <option value="" selected>Choose Award Category</option>
+                        <option value="promising_newcomer">Promising Newcomer</option>
+                        <option value="quaterly_award">Quarterly Award</option>
+                        <option value="rising_star">Rising Star Award</option>
+                    </select>
+                </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Team Members</h4>
-      </div>
-      <div class="card-body">
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                DJ Khaled
-                <br />
-                <span class="text-muted">
-                  <small>Offline</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                Creative Tim
-                <br />
-                <span class="text-success">
-                  <small>Available</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-ms-7 col-7">
-                Flume
-                <br />
-                <span class="text-danger">
-                  <small>Busy</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card card-user">
-      <div class="card-header">
-        <h5 class="card-title">Edit Profile</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-5 pr-1">
+
+          
+          
+           <div class="card-body">
+           <form>
+           <!-- <h5 class="card-title">Nominee Details</h5>
+           <div class="row">
+            <div class="col-md-3 px-1">
               <div class="form-group">
-                <label>Company (disabled)</label>
-                <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
+                <label>
+                  <span>Employee/Nominee Name</span>
+                  <i class="fas fa-list icon" (click)="openEmployeeListDialog()"></i>
+                </label>
+                <input type="text" class="form-control" formControlName="employeeName">
+              </div>
+            </div> -->
+            <h5 class="card-title">Nominee Details</h5>
+           <div class="row">  
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Employee/Nominee Name</label>
+                <div class="input-group">
+                  <!-- Your specified icon inside the input group -->
+                  <div class="input-group-prepend">
+                    <!-- <span class="input-group-text cursor-pointer" (click)="showNomineeDialog()"> -->
+                    <span class="input-group-text cursor-pointer">
+                      <i  (click)="openModal()" class="nc-icon nc-bullet-list-67"></i>
+                    </span>
+                  </div>
+                  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h4 class="modal-title"><i class="fa-solid fa-list-check fa-lg"></i> Task </h4> -->
+                                <div class="modal-header">
+                                  <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchData" />
+                              </div>
+                              
+                                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()">
+                                    <i class="fa-sharp fa-regular fa-circle-xmark  fa-2xs"></i>
+                                </button>
+                            </div>
+                
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title"> Nominee List</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="table-responsive">
+                                        <table class="table">
+                                          <thead class="text-primary">
+                                            <!-- <th>Joining Date</th> -->
+                                            <th>Emp ID</th>
+                                            <!-- <th>MindCraft Exp. (months)</th>
+                                            <th>Total Exp. (months)</th>
+                                            <th>Mobile No</th>
+                                            <th>DOB</th> -->
+                                            <th>Emp Name</th>
+                                            <!-- <th>Designation Name</th>
+                                            <th>Unit</th>
+                                            <th>Primary Skill Name</th>
+                                            <th>Email</th> -->
+                                            <th>Actions</th>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <!-- <td>01/08/2023</td> -->
+                                              <td>3644</td>
+                                              <!-- <td>4 months</td>
+                                              <td>4 months</td>
+                                              <td>8108526500</td>
+                                              <td>02/06/2001</td> -->
+                                              <td>Christina Manakkal</td>
+                                              <!-- <td>Associate Consultant</td>
+                                              <td>Projects & Managed Services</td>
+                                              <td>Angular & SpringBoot</td>
+                                              <td>christinajosedaya@gmail.com</td> -->
+                                              <td><button class="btn btn-primary">Add</button></td>
+                                            </tr>
+                                            <tr>
+                                              <!-- <td>01/09/2023</td> -->
+                                              <td>3643</td>
+                                              <!-- <td>4 months</td>
+                                              <td>8 months</td>
+                                              <td>9082121716</td>
+                                              <td>14/08/2000</td> -->
+                                              <td>Nelson Amaran</td>
+                                              <td><button class="btn btn-primary">Add</button></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <input type="text" class="form-control" placeholder="" formControlName="employee_name">
+                </div>
+              </div>
+            </div>
+          
+
+
+            
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Employee Code</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
             <div class="col-md-3 px-1">
               <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="Username" value="michael23">
+                <label>Employee Designation</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Unit</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Skill</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>MindCraft Experience in months</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Total Experience in months</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 pl-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="col-md-3 pl-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Contact Number</label>
+                <input type="email" class="form-control" placeholder="">
               </div>
             </div>
             <div class="col-md-4 pl-1">
               <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" placeholder="Email">
+                <label for="exampleInputEmail1">DOB</label>
+                <input type="email" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label for="exampleInputEmail1">DOJ</label>
+                <input type="email" class="form-control" placeholder="">
+              </div>
+            </div>
+          </div>
+
+          <h5 class="card-title">Nominee Project Details</h5>
+          <div class="row">
+            <div class="col-md-3 px-1">
+              <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 pl-1">
+              <div class="form-group">
+                <label>Project Code</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 pl-1">
+              <div class="form-group">
+                <label>Client</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-3 pl-1">
+              <div class="form-group">
+                <label>Project Description</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 pr-1">
+            <div class="col-md-6 px-1">
               <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" placeholder="Company" value="Chet">
+                <label>Nominated By</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
             <div class="col-md-6 pl-1">
               <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" value="Faker">
+                <label>Designation</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 px-1">
               <div class="form-group">
-                <label>Address</label>
-                <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+                <label>On Behalf of</label>
+                <input type="text" class="form-control" placeholder="" value="">
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Designation</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4 pr-1">
+            <div class="col-md-5 px-1">
               <div class="form-group">
-                <label>City</label>
-                <input type="text" class="form-control" placeholder="City" value="Melbourne">
-              </div>
-            </div>
-            <div class="col-md-4 px-1">
-              <div class="form-group">
-                <label>Country</label>
-                <input type="text" class="form-control" placeholder="Country" value="Australia">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label>Postal Code</label>
-                <input type="number" class="form-control" placeholder="ZIP Code">
+                <label>Nomination Date</label>
+                <input type="text" class="form-control" placeholder="" value="">
               </div>
             </div>
           </div>
+          
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 px-1">
               <div class="form-group">
-                <label>About Me</label>
-                <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+                <label>Reason for nomination</label>
+                <textarea class="form-control textarea">Enter reason for nomination here</textarea>
               </div>
             </div>
           </div>
+
+          <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'promising_newcomer'">
+          <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>   
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Parameter</th>
+                <th>Performance description with examples</th>
+                <th>Rating by Nominator </th>
+                <th>Final Committee Rating </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Exceeding Expectations</td>
+                  <td><textarea class="form-control textarea"></textarea> </td>
+                  <td > </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Process Oriented</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Time Management</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Work Efficiency</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Punctuality</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Quick Learner</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Proactiveness</td>                 
+                  <td><textarea class="form-control textarea"></textarea></td>
+                  <td ></td>
+                  <td></td>
+                </tr>              
+  </tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'quaterly_award'">
+    <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>   
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+          <th>Parameter</th>
+          <th>Performance description with examples</th>
+          <th>Rating by Nominator </th>
+          <th>Final Committee Rating </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td> Customer Satisfaction</td>
+            <td><textarea class="form-control textarea"></textarea> </td>
+            <td > </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Ownership</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Exceeding Expectations</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Process Oriented</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Time Management</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Work Efficiency</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Punctuality</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td ></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Team Player</td>                 
+            <td><textarea class="form-control textarea"></textarea></td>
+            <td></td>
+            <td ></td>
+          </tr>        
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'rising_star'">
+  <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>   
+  <div class="table-responsive">
+    <table class="table">
+      <thead class=" text-primary">
+        <th>Parameter</th>
+        <th>Performance description with examples</th>
+        <th>Rating by Nominator </th>
+        <th>Final Committee Rating </th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exceeding Expectations</td>
+          <td><textarea class="form-control textarea"></textarea> </td>
+          <td > </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Process Oriented</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Time Management</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Work Efficiency</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Punctuality</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Quick Learner</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Proactiveness</td>                 
+          <td><textarea class="form-control textarea"></textarea></td>
+          <td ></td>
+          <td></td>
+        </tr>           
+</tbody>
+</table>
+</div>
+</div>
+          
+          <div class="row justify-content-end align-items-end">
           <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
+            <div class="col-md-6">
+                <button type="reset" class="btn btn-primary">Cancel</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary ml-2">Save</button>
             </div>
           </div>
+          </div>
+
+         
         </form>
       </div>
-    </div>
-  </div>
-</div>
+    

@@ -12,15 +12,27 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { FixedCheckboxDirective } from "./pages/table/fixed-checkbox.directive";
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FixedCheckboxDirective
   ],
   imports: [
     BrowserAnimationsModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),
@@ -28,7 +40,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    ReactiveFormsModule,
+    FixedPluginModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
