@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ManagerService } from 'app/pages/user/manager.service';
+//import { ManagerService } from 'app/pages/user/manager.service';
 import { ConstantPool } from '@angular/compiler';
 import { error } from 'console';
 
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   apiData: any[] = [];
   display: string = 'none';
 
-  constructor(private fb: FormBuilder, private managerService: ManagerService) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() : void {
     this.nominationForm = this.fb.group({
@@ -30,7 +30,7 @@ export class UserComponent implements OnInit {
     });
 
     console.log("Checking")
-    this.fetchAllEmployees();
+    //this.fetchAllEmployees();
     this.showDialog = false;
   }
 
@@ -83,16 +83,16 @@ export class UserComponent implements OnInit {
   //   );
   // }
 
-  fetchAllEmployees() {
-    this.managerService.getAllEmployees().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+  // fetchAllEmployees() {
+  //   this.managerService.getAllEmployees().subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }
 
   // fetchData() {
   //   this.managerService.getAllEmployees().subscribe(

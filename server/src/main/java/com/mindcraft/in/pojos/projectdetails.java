@@ -8,41 +8,43 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="nominee_project_details")
-public class projectdetails {
+@Table(name="nominee_project_details")
+public class ProjectDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-    private int id;
+    @Column(name = "project_id")
+    private String id;
 
     @Column(name = "project_name")
     private String project_name;
 
-    @Column(name = "project_code")
-    private String project_code;
-
+    
     @Column(name = "client")
     private String client;
 
-    @Column(name = "nominated_by")
-    private String nominated_by;
+    @Column(name = "c_id")
+    private String c_id;
+
+
+    @Column(name = "industry_name")
+    private String industry_name;
     
-    public projectdetails() {
+    public ProjectDetails() {
     }
 
-    public projectdetails(int id, String project_name, String project_code, String client, String nominate_by) {
+    public ProjectDetails(String id, String project_name, String client, String c_id, String industry_name) {
         this.id = id;
         this.project_name = project_name;
-        this.project_code = project_code;
         this.client = client;
-        this.nominated_by = nominated_by;
+        this.c_id = c_id;
+        this.industry_name = industry_name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,14 +56,6 @@ public class projectdetails {
         this.project_name = project_name;
     }
 
-    public String getProject_code() {
-        return project_code;
-    }
-
-    public void setProject_code(String project_code) {
-        this.project_code = project_code;
-    }
-
     public String getClient() {
         return client;
     }
@@ -70,12 +64,21 @@ public class projectdetails {
         this.client = client;
     }
 
-    public String getNominated_by() {
-        return nominated_by;
+    public String getC_id() {
+        return c_id;
     }
 
-    public void setNominated_by(String nominated_by) {
-        this.nominated_by = nominated_by;
+    public void setC_id(String c_id) {
+        this.c_id = c_id;
     }
+
+    public String getIndustry_name() {
+        return industry_name;
+    }
+
+    public void setIndustry_name(String industry_name) {
+        this.industry_name = industry_name;
+    }
+
     
 }

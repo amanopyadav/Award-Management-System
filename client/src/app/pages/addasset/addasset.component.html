@@ -1,0 +1,250 @@
+<div class="row">
+    <div class="col">
+        <div class="card card-user">
+            <div class="card-body">
+                <form class="col" [formGroup]="assetForm" (ngSubmit)="onSubmit()">
+                    <h5 class="card-title">Asset Details</h5>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Asset Category</label>
+                                <select class="form-control" id="asset_category" name="asset_category"
+                                    formControlName="asset_category" required>
+                                    <option value="" selected>Choose Asset Category</option>
+                                    <option value="laptop">Laptop</option>
+                                    <option value="desktop">Desktop</option>
+                                    <option value="charger">Charger</option>
+                                    <option value="storage">HDD / SSD</option>
+                                    <option value="wifi">Wifi Device</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <input type="text" id="manufacturer" name="manufacturer" class="form-control"
+                                    formControlName="manufacturer" placeholder="Ex. Asus" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <input type="text" id="product" name="product" formControlName="product"
+                                    class="form-control" placeholder="Product Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop' || assetForm.get('asset_category').value === 'wifi'">
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input type="text" id="model" name="model" formControlName="model" class="form-control"
+                                    placeholder="Ex. B1402CBA-EK0111" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1"
+                            *ngIf="assetForm.get('asset_category').value === 'charger'">
+                            <div class="form-group">
+                                <label>Power Watts</label>
+                                <input type="text" id="watts" name="watts" formControlName="watts" class="form-control"
+                                    placeholder="Ex. 65.0 W" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1"
+                            *ngIf="assetForm.get('asset_category').value === 'storage'">
+                            <div class="form-group">
+                                <label>Storage</label>
+                                <input type="text" id="hdd_ssd" name="hdd_ssd" formControlName="hdd_ssd"
+                                    class="form-control" placeholder="Ex. 512GB SSD">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop' || assetForm.get('asset_category').value === 'wifi'">
+                            <div class="form-group">
+                                <label>Serial Number</label>
+                                <input type="text" id="serial_number" name="serial_number"
+                                    formControlName="serial_number" class="form-control"
+                                    placeholder="Ex. R2NXCV10K399083" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop'">
+                            <div class="form-group">
+                                <label>Ram</label>
+                                <input type="text" id="ram" name="ram" formControlName="ram" class="form-control"
+                                    placeholder="Ex. R2NXCV10K399083" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop'">
+                            <div class="form-group">
+                                <label>Processor</label>
+                                <input type="text" id="processor" name="processor" formControlName="processor"
+                                    class="form-control" placeholder="Ex. Core i3-12Gen">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop'">
+                            <div class="form-group">
+                                <label>Storage</label>
+                                <input type="text" id="hdd_ssd" name="hdd_ssd" formControlName="hdd_ssd"
+                                    class="form-control" placeholder="Ex. 512GB SSD">
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1"
+                            *ngIf="assetForm.get('asset_category').value === 'laptop' || assetForm.get('asset_category').value === 'desktop'">
+                            <div class="form-group">
+                                <label>Operating System</label>
+                                <select id="os" name="os" formControlName="os" class="form-control">
+                                    <option value="" selected>Choose OS</option>
+                                    <option value="win_11">Windows 11</option>
+                                    <option value="win_10">Windows 10</option>
+                                    <option value="sentos">Sent OS</option>
+                                    <option value="linux">Linux</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1" *ngIf="assetForm.get('os').value === 'win_11'">
+                            <div class="form-group">
+                                <label>License Type</label>
+                                <input type="text" id="licence_type" name="licence_type" formControlName="licence_type"
+                                    class="form-control" placeholder="Ex. OEM / Mindcraft License">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Procurement Details</h5>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Procurement Id</label>
+                                <input type="number" id="procurement_id" name="procurement_id" formControlName="procurement_id" class="form-control" placeholder="Ex. 102" required (change)="onProcurementIdChange()">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Procurement Date</label>
+                                <input type="date" class="form-control" [value]="procurementDate" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" class="form-control" [value]="vendorName" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Support Date</label>
+                                <input type="date" id="end_of_support" name="end_of_support"
+                                    formControlName="end_of_support" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Extended Support Years</label>
+                                <input type="number" id="end_of_extended_support" name="end_of_extended_support"
+                                    formControlName="end_of_extended_support" class="form-control"
+                                    placeholder="Ex. 3 Years">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Asset Status</h5>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select class="form-control" id="state" name="state" formControlName="state" required>
+                                    <option value="" selected>Choose State</option>
+                                    <option value="instock">In Stock</option>
+                                    <option value="inuse">In Use</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Sub State - Level 1</label>
+                                <select class="form-control" id="subState1" name="subState1"
+                                    formControlName="subState1">
+                                    <option value="" selected>Select a sub state</option>
+                                    <option value="available">Available</option>
+                                    <option value="damaged">Damaged</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Sub State - Level 2</label>
+                                <select class="form-control" id="subState2" name="subState2"
+                                    formControlName="subState2">
+                                    <option value="" selected>Select a sub state</option>
+                                    <option value="working">Working</option>
+                                    <option value="need_repair">Need Repair</option>
+                                    <option value="in_repair">Scrapped</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Accessories</h5>
+                    <div class="row">
+                        <div class="col-md-3 pr-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_antivirus_yn" name="with_antivirus_yn"
+                                        formControlName="with_antivirus_yn" class="mr-2">
+                                    <!-- Added mr-2 for right margin -->
+                                    Antivirus
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_msoffice_yn" name="with_msoffice_yn"
+                                        formControlName="with_msoffice_yn" class="mr-2">
+                                    MS Office
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_charger_yn" name="with_charger_yn"
+                                        formControlName="with_charger_yn" class="mr-2">
+                                    Charger
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pl-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_laptop_bag_yn" name="with_laptop_bag_yn"
+                                        formControlName="with_laptop_bag_yn" class="mr-2">
+                                    Laptop Bag
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end align-items-end" style="margin-right: 20px;">
+                        <div class="col-md-2 pl-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary ml-2">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
