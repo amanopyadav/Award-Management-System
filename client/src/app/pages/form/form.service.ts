@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class ManagerService {
+export class FormService {
 
     constructor(private http: HttpClient) {}
 
@@ -20,5 +20,9 @@ export class ManagerService {
     getProject(): Observable<any[]> {
         return this.http.get<any[]>(`http://localhost:8080/projects/all`);
     } 
+
+    getExceptFreshers(): Observable<any[]> {
+        return this.http.get<any[]>(`http://localhost:8080/allExceptFreshers`);
+    }
 
 }

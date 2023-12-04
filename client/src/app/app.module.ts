@@ -15,6 +15,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserAnimationsModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),

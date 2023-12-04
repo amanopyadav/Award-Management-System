@@ -11,7 +11,8 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/manager-dashboard', title: 'Manager Form', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
+  { path: '/manager-dashboard', title: 'Nomination Form Demo', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
+  { path: '/form', title: 'Nomination Form', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
   { path: '/hr-dashboard', title: 'Nominee List', icon: 'nc-paper', class: '', roles: ['ROLE_HR'] },
   { path: '/icons', title: 'Icons', icon: 'nc-diamond', class: '', roles: ['ROLE_MANAGER'] },
   { path: '/maps', title: 'Maps', icon: 'nc-pin-3', class: '', roles: ['ROLE_MANAGER'] },
