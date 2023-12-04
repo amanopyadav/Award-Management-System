@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   apiData: any[] = [];
   display: string = 'none';
   Employees: any[] = [];
-  // filteredProjects: any[]=[];
+  filteredProjects: any[]=[];
 
   empId: number;
   empName: string;
