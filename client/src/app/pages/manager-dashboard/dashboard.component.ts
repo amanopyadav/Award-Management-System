@@ -8,15 +8,16 @@ import { EmployeeService } from 'app/employee.service';
   templateUrl: 'dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
-   filteredEmployees: any[] = [];
+  filteredEmployees: any[] = [];
 
   nominationForm: FormGroup;
+  empForm: FormGroup;
   showDialog: boolean;
   searchData: string = '';
   apiData: any[] = [];
   display: string = 'none';
   Employees: any[] = [];
-  // filteredProjects: any[]=[];
+  filteredProjects: any[]=[];
 
   empId: number;
   empName: string;
@@ -30,7 +31,8 @@ export class DashboardComponent implements OnInit {
   dob: Date;
   joiningDate: Date;
   addedEmployees: any[]=[];
-  // Projects: any;
+  projectForm: FormGroup;
+  Projects: any;
 
   constructor(
     private fb: FormBuilder,
@@ -58,9 +60,16 @@ export class DashboardComponent implements OnInit {
       // industry_name: ['', Validators.required],
     });
 
+    this.projectForm = this.fb.group({
+      project_name: ['', Validators.required],
+      project_id: ['', Validators.required],
+      client: ['', Validators.required],
+      industry_name: ['', Validators.required],
+    });
+
     this.Employees=[];
-    // this.filteredProjects=[];
-    // this.Projects=[];
+    this.filteredProjects=[];
+    this.Projects=[];
   }
 
   ngOnInit() {
@@ -95,23 +104,23 @@ export class DashboardComponent implements OnInit {
     this.display = "block";
   }
 
-  // openModalforproj(){
-  //   console.log("Proj dialogbox opened");
-  //   this.fetchAllProjects();
+  openModalforproj(){
+    console.log("Proj dialogbox opened");
+    this.fetchAllProjects();
 
-  //   this.display = "block";
-  // }
+    this.display = "block";
+  }
 
   onCloseHandled() {
     this.display = "none";
     this.searchData = ''; 
   }
 
-  // onCloseHandledforProj(){
-  //   console.log("close proj dialog box");
-  //   this.display = "none";
-  //   this.searchData = ''; 
-  // }
+  onCloseHandledforProj(){
+    console.log("close proj dialog box");
+    this.display = "none";
+    this.searchData = ''; 
+  }
 
   fetchAllEmployees() {
     this.managerService.getEmployees().subscribe(
@@ -125,17 +134,17 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // fetchAllProjects() {
-  //   this.managerService.getProject().subscribe(
-  //     (data) => {
-  //       this.filteredProjects = data;
-  //       console.log(data);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
+  fetchAllProjects() {
+    this.managerService.getProject().subscribe(
+      (data) => {
+        this.filteredProjects = data;
+        console.log(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   addEmployee(employee: any) {
     console.log("Checking!!");

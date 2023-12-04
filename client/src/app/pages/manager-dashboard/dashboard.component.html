@@ -7,6 +7,7 @@
       <div class="card-body">
         <form [formGroup]="nominationForm">
           <div class="row">
+
             <div class="col-md-4 pr-1">
               <div class="form-group">
                 <label>Award Category</label>
@@ -53,12 +54,14 @@
               </div>
             </div>
           </div>
+          </form>
 
           <div class="card-body">
-            <form>
+          <form>
 
               <h5 class="card-title">Nominee Details</h5>
               <div class="row">
+
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label>Employee/Nominee Name</label>
@@ -193,6 +196,10 @@
                   </div>
                 </div>
               </div>
+
+
+
+              
               <h5 class="card-title">Nominee Project Details</h5>
               <div class="row">
                 <div class="col-md-3 px-1">
@@ -205,6 +212,8 @@
                 <div class="col-md-3 pl-1">
                   <div class="form-group">
                     <label>Project Code</label>
+
+                    
                     <input type="text" class="form-control" placeholder="" value="">
                   </div>
                 </div>
@@ -234,6 +243,7 @@
                           <i (click)="openModalforproj()" class="nc-icon nc-bullet-list-67"></i>
                         </span>
                       </div>
+
                       <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
@@ -374,14 +384,14 @@
                         <th>Actions</th>
                       </thead>
                       <tbody>
-                        <!-- Modify the table row to include the removal button -->
-<tr *ngFor="let employee of addedEmployees">
-  <td>{{ employee.empCode }}</td>
-  <td>{{ employee.empName }}</td>
-  <td>
-    <button class="btn btn-danger" (click)="removeEmployee(employee)">Remove</button>
-  </td>
-</tr>
+                                  <!-- Modify the table row to include the removal button -->
+                      <tr *ngFor="let employee of addedEmployees">
+                        <td>{{ employee.empCode }}</td>
+                        <td>{{ employee.empName }}</td>
+                        <td>
+                          <button class="btn btn-danger" (click)="removeEmployee(employee)">Remove</button>
+                        </td>
+                      </tr>
 
                       </tbody>
                     </table>
