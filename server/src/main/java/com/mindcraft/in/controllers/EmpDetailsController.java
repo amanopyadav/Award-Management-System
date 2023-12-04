@@ -31,4 +31,9 @@ public class EmpDetailsController {
         return request;
     }
 
+     @GetMapping("/allExceptFreshers")
+    public List<Map<String, Object>> getAllExceptFreshers() {
+        List<Map<String, Object>> request = employeeDetailsService.getAllExceptFreshers();
+        return request;
+    }
 }

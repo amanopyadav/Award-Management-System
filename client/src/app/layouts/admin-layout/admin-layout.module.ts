@@ -19,7 +19,9 @@ import { AddAssetComponent } from '../../pages/addasset/addasset.component';
 import { LoginComponent } from '../../pages/login/login.component';
 import { HrDashboardComponent } from '../../pages/hr-dashboard/hr-dashboard.component';
 
+
 import { UserService } from '../../pages/login/login.service';
+import { FormComponent } from 'app/pages/form/form.component';
 
 @NgModule({
   imports: [
@@ -41,6 +43,7 @@ import { UserService } from '../../pages/login/login.service';
     AddAssetComponent,
     LoginComponent,
     HrDashboardComponent,
+    FormComponent
   ],
   providers: [UserService],
 })

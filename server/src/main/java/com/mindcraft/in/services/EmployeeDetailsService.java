@@ -48,6 +48,22 @@ public class EmployeeDetailsService {
         }
         return result;
     }
+
+     public List<Map<String, Object>> getAllExceptFreshers() {
+        String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'fresher'";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "No Employees Found.");
+        } else {
+            response.put("status", "error");
+            response.put("message", "All Employees Found.");
+        }
+        return result;
+    }
     
 
 }
