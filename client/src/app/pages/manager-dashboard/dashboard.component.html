@@ -23,6 +23,7 @@
               </div>
             </div>
           </div>
+         
 
           <!-- Spot Award Subcategory Dropdown -->
           <div class="row">
@@ -38,6 +39,8 @@
               </div>
             </div>
           </div>
+
+          
 
           <!-- Half Yearly Award Subcategory Dropdown -->
           <div class="row">
@@ -56,17 +59,7 @@
 
           <div class="card-body">
             <form>
-              <!-- <h5 class="card-title">Nominee Details</h5>
-           <div class="row">
-            <div class="col-md-3 px-1">
-              <div class="form-group">
-                <label>
-                  <span>Employee/Nominee Name</span>
-                  <i class="fas fa-list icon" (click)="openEmployeeListDialog()"></i>
-                </label>
-                <input type="text" class="form-control" formControlName="employeeName">
-              </div>
-            </div> -->
+
               <h5 class="card-title">Nominee Details</h5>
               <div class="row">
                 <div class="col-md-3 px-1">
@@ -97,60 +90,42 @@
 
                             <div class="modal-body">
                               <div class="row">
-                                  <div class="col-md-12">
-                                      <div class="card">
-                                          <div class="card-header">
-                                              <h4 class="card-title"> Nominee List</h4>
-                                          </div>
-                                          <div class="card-body">
-                                              <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-                                                  <table class="table">
-                                                      <thead class="text-primary">
-                                            <!-- <th>Joining Date</th> -->
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title"> Nominee List</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                        <table class="table">
+                                          <thead class="text-primary">
+
                                             <th>Emp ID</th>
-                                            <!-- <th>MindCraft Exp. (months)</th>
-                                            <th>Total Exp. (months)</th>
-                                            <th>Mobile No</th>
-                                            <th>DOB</th> -->
+
                                             <th>Emp Name</th>
-                                            <!-- <th>Designation Name</th>
-                                            <th>Unit</th>
-                                            <th>Primary Skill Name</th>
-                                            <th>Email</th> -->
+
                                             <th>Actions</th>
                                           </thead>
                                           <tbody>
                                             <tr>
-                                              <!-- <td>01/08/2023</td> -->
+
                                               <td>3644</td>
-                                              <!-- <td>4 months</td>
-                                              <td>4 months</td>
-                                              <td>8108526500</td>
-                                              <td>02/06/2001</td> -->
+
                                               <td>Christina Manakkal</td>
-                                              <!-- <td>Associate Consultant</td>
-                                              <td>Projects & Managed Services</td>
-                                              <td>Angular & SpringBoot</td>
-                                              <td>christinajosedaya@gmail.com</td> -->
+
                                               <td><button class="btn btn-primary">Add</button></td>
                                             </tr>
                                             <tr>
-                                              <!-- <td>01/09/2023</td> -->
+
                                               <td>3643</td>
-                                              <!-- <td>4 months</td>
-                                              <td>8 months</td>
-                                              <td>9082121716</td>
-                                              <td>14/08/2000</td> -->
+
                                               <td>Nelson Amaran</td>
                                               <td><button class="btn btn-primary">Add</button></td>
                                             </tr>
                                             <tr>
-                                              <!-- <td>01/09/2023</td> -->
+
                                               <td>3646</td>
-                                              <!-- <td>4 months</td>
-                                              <td>8 months</td>
-                                              <td>9082121716</td>
-                                              <td>14/08/2000</td> -->
+
                                               <td>Neha Sankhe</td>
                                               <td><button class="btn btn-primary">Add</button></td>
                                             </tr>
@@ -159,7 +134,7 @@
                                               <td>Aman Yadav</td>
                                               <td><button class="btn btn-primary">Add</button></td>
                                             </tr>
-                                            
+
                                           </tbody>
                                         </table>
                                       </div>
@@ -331,44 +306,155 @@
                       <tr>
                         <td>Exceeding Expectations</td>
                         <td><textarea class="form-control textarea"></textarea> </td>
-                        <td> </td>
-                        <td></td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Process Oriented</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       <tr>
                         <td>Time Management</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Work Efficiency</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Punctuality</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Quick Learner</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Proactiveness</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -389,50 +475,178 @@
                       <tr>
                         <td> Customer Satisfaction</td>
                         <td><textarea class="form-control textarea"></textarea> </td>
-                        <td> </td>
-                        <td></td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Ownership</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Exceeding Expectations</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Process Oriented</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Time Management</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Work Efficiency</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Punctuality</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Team Player</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -453,44 +667,156 @@
                       <tr>
                         <td>Exceeding Expectations</td>
                         <td><textarea class="form-control textarea"></textarea> </td>
-                        <td> </td>
-                        <td></td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Process Oriented</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Time Management</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Work Efficiency</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Punctuality</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Quick Learner</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Proactiveness</td>
-                        <td><textarea class="form-control textarea"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -510,33 +836,113 @@
                     <tbody>
                       <tr>
                         <td>Quality & Innovation</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter1"></textarea> </td>
-                        <td> </td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Excellence in core function</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>People Orientation</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Ownership & Commitment</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Final Score</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -557,33 +963,113 @@
                     <tbody>
                       <tr>
                         <td>Quality & Innovation</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter1"></textarea> </td>
-                        <td> </td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Excellence in core function</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>People Orientation</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Ownership & Commitment</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>Final Score</td>
-                        <td><textarea class="form-control textarea" formControlName="parameter2"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td><textarea class="form-control textarea"></textarea> </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="finalCommitteeRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

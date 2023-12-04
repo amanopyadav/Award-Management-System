@@ -104,6 +104,7 @@ export class HrDashboardComponent implements OnInit {
           email: 'nelson@gmail.com',
           dob: '14/08/2000'
         },
+        
         {
           empCode: '3646',
           name: 'Neha Sankhe',
