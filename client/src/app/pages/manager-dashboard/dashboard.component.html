@@ -73,12 +73,13 @@
                         <div class="modal-dialog modal-xl" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              
+
                               <div class="modal-header">
-                                <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchData" />
+                                <input type="text" class="form-control" placeholder="Search..."
+                                  [(ngModel)]="searchData" />
                                 <button (click)="search()">Search</button>
                               </div>
-                              
+
 
                               <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()">
                                 <i class="fa-sharp fa-regular fa-circle-xmark  fa-2xs"></i>
@@ -101,7 +102,7 @@
                                             <th>Actions</th>
                                           </thead>
                                           <tbody>
-                                            <tr *ngFor="let employee of filteredEmployees"> 
+                                            <tr *ngFor="let employee of filteredEmployees">
                                               <td>{{employee.emp_id}}</td>
                                               <td>{{employee.emp_name}}</td>
                                               <td>
@@ -127,7 +128,8 @@
                           </div>
                         </div>
                       </div>
-                      <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('empName').value">
+                      <input type="text" class="form-control" placeholder=""
+                        [value]="nominationForm.get('empName').value">
                     </div>
                   </div>
                 </div>
@@ -141,31 +143,36 @@
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label>Employee Designation</label>
-                    <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('empDesignation').value">
+                    <input type="text" class="form-control" placeholder=""
+                      [value]="nominationForm.get('empDesignation').value">
                   </div>
                 </div>
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label>Unit</label>
-                    <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('function_name').value">
+                    <input type="text" class="form-control" placeholder=""
+                      [value]="nominationForm.get('function_name').value">
                   </div>
                 </div>
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label for="primarySkillName">Skill</label>
-                    <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('primarySkillName').value">
+                    <input type="text" class="form-control" placeholder=""
+                      [value]="nominationForm.get('primarySkillName').value">
                   </div>
                 </div>
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label for="mindcraftExpMon">MindCraft Experience in months</label>
-                    <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('mindcraftExpMon').value">
+                    <input type="text" class="form-control" placeholder=""
+                      [value]="nominationForm.get('mindcraftExpMon').value">
                   </div>
                 </div>
                 <div class="col-md-3 px-1">
                   <div class="form-group">
                     <label for="totalExpMon">Total Experience in months</label>
-                    <input type="text" class="form-control" placeholder="" [value]="nominationForm.get('totalExpMon').value">
+                    <input type="text" class="form-control" placeholder=""
+                      [value]="nominationForm.get('totalExpMon').value">
                   </div>
                 </div>
                 <div class="col-md-3 pl-1">
@@ -177,7 +184,8 @@
                 <div class="col-md-3 pl-1">
                   <div class="form-group">
                     <label for="mobileNo">Contact Number</label>
-                    <input type="tel" class="form-control" placeholder="" [value]="nominationForm.get('mobileNo').value">
+                    <input type="tel" class="form-control" placeholder=""
+                      [value]="nominationForm.get('mobileNo').value">
                   </div>
                 </div>
                 <div class="col-md-4 pl-1">
@@ -189,7 +197,8 @@
                 <div class="col-md-4 pl-1">
                   <div class="form-group">
                     <label for="joiningDate">DOJ</label>
-                    <input type="date" class="form-control" placeholder="" [value]="nominationForm.get('joiningDate').value">
+                    <input type="date" class="form-control" placeholder=""
+                      [value]="nominationForm.get('joiningDate').value">
                   </div>
                 </div>
               </div>
@@ -201,21 +210,21 @@
                     <input type="text" class="form-control" placeholder="" value="">
                   </div>
                 </div>
-              
+
                 <div class="col-md-3 pl-1">
                   <div class="form-group">
                     <label>Project Code</label>
                     <input type="text" class="form-control" placeholder="" value="">
                   </div>
                 </div>
-              
+
                 <div class="col-md-3 pl-1">
                   <div class="form-group">
                     <label>Client</label>
                     <input type="text" class="form-control" placeholder="" value="">
                   </div>
                 </div>
-              
+
                 <div class="col-md-3 pl-1">
                   <div class="form-group">
                     <label>Project Description</label>
@@ -223,11 +232,11 @@
                   </div>
                 </div>
               </div>
-              
-            
-               
 
-                    <!--<div class="input-group">
+
+
+
+              <!--<div class="input-group">
                        
                       <div class="input-group-prepend">
                         <span class="input-group-text cursor-pointer">
@@ -303,10 +312,10 @@
                 </div>
                     
                    </div> -->
-                  
-                
-                
-              
+
+
+
+
               <div class="row">
                 <div class="col-md-6 px-1">
                   <div class="form-group">
@@ -354,6 +363,10 @@
                 </div>
               </div>
 
+              <!-- ... Existing code ... -->
+
+              <!-- ... Existing HTML ... -->
+
               <div class="row" *ngIf="nominationForm.get('award_category').value === 'team_award'">
                 <div class="col-md-12 pr-1">
                   <div class="form-group">
@@ -361,9 +374,9 @@
                   </div>
                 </div>
               </div>
- 
 
-              <div class="row" *ngIf="addedEmployees.length > 0 && nominationForm.get('award_category').value === 'team_award'">
+              <div class="row"
+                *ngIf="addedEmployees.length > 0 && nominationForm.get('award_category').value === 'team_award'">
                 <div class="col-md-12 pr-1">
                   <div class="form-group">
                     <h5>Added Employees</h5>
@@ -375,19 +388,22 @@
                       </thead>
                       <tbody>
                         <!-- Modify the table row to include the removal button -->
-<tr *ngFor="let employee of addedEmployees">
-  <td>{{ employee.empCode }}</td>
-  <td>{{ employee.empName }}</td>
-  <td>
-    <button class="btn btn-danger" (click)="removeEmployee(employee)">Remove</button>
-  </td>
-</tr>
-
+                        <tr *ngFor="let employee of addedEmployees">
+                          <td>{{ employee.empCode }}</td>
+                          <td>{{ employee.empName }}</td>
+                          <td>
+                            <button class="btn btn-danger" (click)="removeEmployee(employee)">Remove</button>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
+
+
+              <!-- ... Existing code ... -->
+
 
 
               <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'promising_newcomer'">
@@ -1185,12 +1201,6 @@
                     <button type="submit" class="btn btn-primary ml-2">Save</button>
                   </div>
                 </div>
-                </div>
+              </div>
             </form>
           </div>
-                
-              
-
-
-            
-          
