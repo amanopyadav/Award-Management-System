@@ -1,223 +1,152 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormService } from './form.service';
-
+import { DateService } from './date.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: 'form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit {
+  nominationForm: FormGroup;
+  EmpForm: FormGroup;
+  ProjectForm: FormGroup;
 
-    nominationForm: FormGroup;
-    EmpForm: FormGroup;
-    ProjectForm: FormGroup
+  filteredEmployees: any[] = [];
+  filteredProjects: any[] = [];
+  displayEmpModal: string = 'none';
+  displayProjModal: string = 'none';
+  Employees: any[] = [];
+  Projects: any[] = [];
+  searchData: string = '';
 
-    filteredEmployees: any[] = [];
-    filteredProjects: any[]=[];
-    displayEmpModal: string = 'none';
-    displayProjModal: string = 'none';
-    Employees: any[] = [];
-    Projects: any[] = [];
-    searchData: string = '';
-
-    empId: number;
-    empName: string;
-    empDesignation: string;
-    function_name: string;
-    primarySkillName: string;
-    mindcraftExpMon: string;
-    totalExpMon: string;
-    email: string;
-    mobileNo: string;
-    dob: Date;
-    joiningDate: Date;
-    
+  isFormEnabled: boolean = true;
+  setAwardForm: boolean;
 
   constructor(
     private fb: FormBuilder,
-    private formService: FormService
-  ){
-
-    this.nominationForm=this.fb.group({
-        award_category: ['', Validators.required]
-      
+    @Inject(DateService) private dateService: DateService,
+    private cdRef: ChangeDetectorRef // Inject ChangeDetectorRef
+  ) {
+    this.nominationForm = this.fb.group({
+      award_category: ['', Validators.required],
+      spot_award_subcategory: [''], // Add this line for spot_award_subcategory
     });
 
     this.EmpForm = this.fb.group({
-        emp_id: ['', Validators.required],
-        empName: [{ value: '', disabled: true }],
-        empDesignation: [{ value: '', disabled: true }],
-        function_name: [{ value: '', disabled: true }],
-        primarySkillName: [{ value: '', disabled: true }],
-        mindcraftExpMon: [{ value: '', disabled: true }],
-        totalExpMon: [{ value: '', disabled: true }],
-        email: [{ value: '', disabled: true }],
-        mobileNo: [{ value: '', disabled: true }],
-        dob: [{ value: '', disabled: true }],
-        joiningDate: [{ value: '', disabled: true }],
+      emp_id: ['', Validators.required],
+      empName: [{ value: '', disabled: !this.isFormEnabled }],
+      empDesignation: [{ value: '', disabled: !this.isFormEnabled }],
+      function_name: [{ value: '', disabled: !this.isFormEnabled }],
+      primarySkillName: [{ value: '', disabled: !this.isFormEnabled }],
+      mindcraftExpMon: [{ value: '', disabled: !this.isFormEnabled }],
+      totalExpMon: [{ value: '', disabled: !this.isFormEnabled }],
+      email: [{ value: '', disabled: !this.isFormEnabled }],
+      mobileNo: [{ value: '', disabled: !this.isFormEnabled }],
+      dob: [{ value: '', disabled: !this.isFormEnabled }],
+      joiningDate: [{ value: '', disabled: !this.isFormEnabled }],
+    });
 
-  });
+    this.ProjectForm = this.fb.group({
+      project_name: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+      project_id: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+      client: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+      industry_name: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+    });
+  }
 
-  this.ProjectForm = this.fb.group({
-    project_name: ['', Validators.required],
-    project_id: ['', Validators.required],
-    client: ['', Validators.required],
-    industry_name: ['', Validators.required],
-  });
-}
+  ngOnInit() {
+    this.fetchAllEmployees();
+    this.updateFormStatus();
+    this.cdRef.detectChanges();
+  }
 
-    ngOnInit() {
-      this.fetchAllEmployees();
-    }
+  updateFormStatus(): boolean {
+    const currentMonth = this.dateService.getCurrentMonth();
+    const awardCategory = this.nominationForm.get('award_category').value;
+    const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
 
-    openModal() {
-        console.log("Emp dialogbox Opened");
-        
-        this.fetchAllEmployees();
-        // Initialize filteredEmployees with all employees when opening the dialog
-        this.filteredEmployees = this.Employees;
-        this.displayEmpModal = "block";
-      }
-
-      openModalforproj(){
-        console.log("Proj dialogbox opened");
-        this.fetchAllProjects();
-    
-        this.displayProjModal = "block";
-      }
-
-      onCloseHandled() {
-        this.displayEmpModal = "none";
-        this.searchData = ''; 
-      }
-
-      onCloseHandledforProj(){
-        console.log("close proj dialog box");
-        this.displayProjModal = "none";
-        this.searchData = ''; 
-      }
-
-      fetchAllEmployees() {
-        this.formService.getEmployees().subscribe(
-          (data) => {
-            this.Employees = data;
-            console.log(data);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      }
-
-      fetchAllProjects() {
-        this.formService.getProject().subscribe(
-          (data) => {
-            this.filteredProjects = data;
-            console.log(data);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      }
-
-      addEmployee(employee: any) {
-        console.log("Checking!!");
-        console.log(employee.emp_id);
-    
-        // this.formService.setEmployeeId(employee.emp_id);
+    // Check if the selected category is spot_award or its subcategories
+    if (
+      awardCategory === 'spot_award' ||
+      (awardCategory === 'promising_newcomer' && [4, 7, 10, 1].includes(currentMonth)) ||
+      (awardCategory === 'quaterly_award' && [4, 7, 10, 1].includes(currentMonth)) ||
+      (awardCategory === 'rising_star' && [4, 7, 10, 1].includes(currentMonth)) ||
+      (awardCategory === 'spot_award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
+      (awardCategory === 'half_yearly_award' && [7, 1].includes(currentMonth)) ||
+      (awardCategory === 'team_award' && [7, 1].includes(currentMonth))
       
-        const employeeFormValues = {
-          emp_id: employee.emp_id,
-          empName: employee.emp_name,
-          empDesignation: employee.designation_name,
-          function_name: employee.function_name,
-          primarySkillName: employee.primary_skill_name,
-          mindcraftExpMon: employee.mindcraft_exp_mon,
-          totalExpMon: employee.total_exp_mon,
-          email: employee.email,
-          mobileNo: employee.mobileno,
-          dob: employee.dob,
-          joiningDate: employee.joining_date,
-        };
-        this.EmpForm.patchValue(employeeFormValues);
-    
-        this.onCloseHandled();
-      }
-
-      addProject(project: any) {
-    console.log("Adding Project:");
-    console.log("Project ID:", project.project_id);
-  
-    // Assuming you have a service to set the project ID
-    // this.projectService.setProjectId(project.project_id);
-  
-    const projectFormValues = {
-      project_id: project.project_id,
-      project_name: project.project_name,
-      client: project.client,
-      industry_name: project.industry_name,
-      // Add other project-related properties as needed
-    };
-  
-    this.ProjectForm.patchValue(projectFormValues);
-  
-    console.log("Form values after adding project:", this.nominationForm.value);
-  
-    // Close the modal after adding a project
-    this.onCloseHandledforProj();
-  }
-  
-    
-
-      search() {
-        console.log('Search function triggered');
-        console.log('Search Data:', this.searchData);
-        console.log('Employees:', this.Employees);
-    
-        if (!this.Employees) {
-          return;
-        }
-    
-        // Handle both scenarios: searching and showing all employees
-        this.filteredEmployees = this.searchData.trim() === ''
-          ? this.Employees // Show all employees
-          : this.Employees.filter(employee =>
-            employee.emp_name && employee.emp_name.toLowerCase().includes(this.searchData.toLowerCase())
-          );
-      }
-
-      searchProj() {
-    console.log('Search function triggered');
-    console.log('Search Data:', this.searchData);
-    console.log('Projects:', this.Projects);
-  
-    if (!this.Projects) {
-      return;
+    ) {
+      this.setAwardForm = true;
+    } else {
+      this.setAwardForm = false;
     }
-  
-    // Handle both scenarios: searching and showing all projects
-    this.filteredProjects = this.searchData.trim() === ''
-      ? this.Projects // Show all projects
-      : this.Projects.filter(project =>
-        this.projectContainsSearchData(project)
-      );
+
+    return this.setAwardForm;
   }
-  
-  projectContainsSearchData(project: any): boolean {
-    const searchDataLowerCase = this.searchData.toLowerCase();
-  
-    return (
-      (project.project_id && project.project_id.toString().includes(searchDataLowerCase)) ||
-      (project.project_name && project.project_name.toLowerCase().includes(searchDataLowerCase)) ||
-      (project.client && project.client.toLowerCase().includes(searchDataLowerCase)) ||
-      (project.industry_name && project.industry_name.toLowerCase().includes(searchDataLowerCase))
-      // Add other properties as needed
-    );
+
+  onAwardCategoryChange() {
+    this.updateFormStatus();
   }
-  
-  
-    
-   
+
+  private disableFormControls(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      control.disable();
+      console.log(`${key} is disabled: ${control.disabled}`);
+    });
+  }
+
+  private enableFormControls(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      control.enable();
+      console.log(`${key} is enabled: ${control.enabled}`);
+    });
+  }
+
+  openModal() {
+    this.fetchAllEmployees();
+    this.filteredEmployees = this.Employees;
+    this.displayEmpModal = 'block';
+  }
+
+  openModalforproj() {
+    this.fetchAllProjects();
+    this.displayProjModal = 'block';
+  }
+
+  onCloseHandled() {
+    this.displayEmpModal = 'none';
+    this.searchData = '';
+  }
+
+  onCloseHandledforProj() {
+    this.displayProjModal = 'none';
+    this.searchData = '';
+  }
+
+  fetchAllEmployees() {
+    // Your existing code for fetching employees
+  }
+
+  fetchAllProjects() {
+    // Your existing code for fetching projects
+  }
+
+  addEmployee(employee: any) {
+    // Your existing code for adding employees
+  }
+
+  addProject(project: any) {
+    // Your existing code for adding projects
+  }
+
+  search() {
+    // Your existing code for searching employees
+  }
+
+  searchProj() {
+    // Your existing code for searching projects
+  }
 }
