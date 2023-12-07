@@ -50,7 +50,7 @@ public class EmployeeDetailsService {
     }
 
      public List<Map<String, Object>> getAllExceptFreshers() {
-        String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'fresher'";
+        String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'Fresher'";
 
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         Map<String, Object> response = new HashMap<>();
@@ -64,6 +64,8 @@ public class EmployeeDetailsService {
         }
         return result;
     }
+    
+    
     
 
 }
