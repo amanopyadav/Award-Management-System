@@ -318,7 +318,7 @@
                               </div>
                             </div>
                           </div>
-                    <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('project_name').value">
+                    <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('project_name').value" >
                   </div>
                 </div></div>
 
@@ -347,7 +347,7 @@
     </form>
 
    
-    <form [formGroup]="NominatedByForm">
+    <form [formGroup]="NominatedByForm" *ngIf="updateFormStatus()">
       <div class="row">
     
         <!-- Nominated By Dropdown -->
@@ -376,7 +376,7 @@
     
     
 
-    <form [formGroup]="OnBehalfOfForm">
+    <form [formGroup]="OnBehalfOfForm" *ngIf="updateFormStatus()">
       <div class="row">
     
         <!-- Nominated By Dropdown -->
