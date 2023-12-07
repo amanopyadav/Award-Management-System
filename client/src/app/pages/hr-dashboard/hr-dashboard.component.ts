@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -45,9 +45,20 @@ interface EmployeeTableRow {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+onScroll() {
+throw new Error('Method not implemented.');
+}
   public employeeTableData: EmployeeTableData;
   public filteredEmployeeData: EmployeeTableRow[];
   public searchTerm: string = '';
+
+
+  @ViewChild('shortlistColumn') shortlistColumn: ElementRef;
+  @ViewChild('selectColumn') selectColumn: ElementRef;
+  @ViewChild('tableContainer') tableContainer: ElementRef;
+selectData: any;
+shortlistData: any;
+restData: any;
 
   ngOnInit() {
     // Initialize the employee data here or fetch it from a service
@@ -125,6 +136,10 @@ export class HrDashboardComponent implements OnInit {
       ]
     };
     this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+
+    // Add a scroll event listener to the tableContainer
+    this.tableContainer.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
+  
   }
 
   applyFilter() {
@@ -134,4 +149,8 @@ export class HrDashboardComponent implements OnInit {
       )
     );
   }
+
+
+  
 }
+

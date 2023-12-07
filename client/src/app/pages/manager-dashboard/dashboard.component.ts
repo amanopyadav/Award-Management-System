@@ -54,10 +54,7 @@ export class DashboardComponent implements OnInit {
       dob: [{ value: '', disabled: true }],
       joiningDate: [{ value: '', disabled: true }],
 
-      // project_name: ['', Validators.required],
-      // project_id: ['', Validators.required],
-      // client: ['', Validators.required],
-      // industry_name: ['', Validators.required],
+    
     });
 
     this.projectForm = this.fb.group({
@@ -90,9 +87,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    // Initialize filteredEmployees with all employees
-    // this.filteredEmployees = this.Employees;
-    // this.filteredProjects = this.Projects;
+  
   }
 
   openModal() {
@@ -104,23 +99,23 @@ export class DashboardComponent implements OnInit {
     this.display = "block";
   }
 
-  openModalforproj(){
-    console.log("Proj dialogbox opened");
-    this.fetchAllProjects();
+  // openModalforproj(){
+  //   console.log("Proj dialogbox opened");
+  //   this.fetchAllProjects();
 
-    this.display = "block";
-  }
+  //   this.display = "block";
+  // }
 
   onCloseHandled() {
     this.display = "none";
     this.searchData = ''; 
   }
 
-  onCloseHandledforProj(){
-    console.log("close proj dialog box");
-    this.display = "none";
-    this.searchData = ''; 
-  }
+  // onCloseHandledforProj(){
+  //   console.log("close proj dialog box");
+  //   this.display = "none";
+  //   this.searchData = ''; 
+  // }
 
   fetchAllEmployees() {
     this.managerService.getEmployees().subscribe(
@@ -134,17 +129,17 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  fetchAllProjects() {
-    this.managerService.getProject().subscribe(
-      (data) => {
-        this.filteredProjects = data;
-        console.log(data);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
+  // fetchAllProjects() {
+  //   this.managerService.getProject().subscribe(
+  //     (data) => {
+  //       this.filteredProjects = data;
+  //       console.log(data);
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }
 
   addEmployee(employee: any) {
     console.log("Checking!!");
@@ -170,28 +165,7 @@ export class DashboardComponent implements OnInit {
     this.onCloseHandled();
   }
 
-  // addProject(project: any) {
-  //   console.log("Adding Project:");
-  //   console.log("Project ID:", project.project_id);
   
-  //   // Assuming you have a service to set the project ID
-  //   // this.projectService.setProjectId(project.project_id);
-  
-  //   const projectFormValues = {
-  //     project_id: project.project_id,
-  //     project_name: project.project_name,
-  //     client: project.client,
-  //     industry_name: project.industry_name,
-  //     // Add other project-related properties as needed
-  //   };
-  
-  //   this.nominationForm.patchValue(projectFormValues);
-  
-  //   console.log("Form values after adding project:", this.nominationForm.value);
-  
-  //   // Close the modal after adding a project
-  //   this.onCloseHandledforProj();
-  // }
   
   
 
@@ -240,51 +214,31 @@ export class DashboardComponent implements OnInit {
       );
   }
 
-  // searchproj() {
-  //   console.log('Search function triggered');
-  //   console.log('Search Data:', this.searchData);
-  //   console.log('Projects:', this.Projects);
   
-  //   if (!this.Projects) {
-  //     return;
-  //   }
-  
-  //   // Handle both scenarios: searching and showing all projects
-  //   this.filteredProjects = this.searchData.trim() === ''
-  //     ? this.Projects // Show all projects
-  //     : this.Projects.filter(project =>
-  //       this.projectContainsSearchData(project)
-  //     );
-  // }
-  
-  // projectContainsSearchData(project: any): boolean {
-  //   const searchDataLowerCase = this.searchData.toLowerCase();
-  
-  //   return (
-  //     (project.project_id && project.project_id.toString().includes(searchDataLowerCase)) ||
-  //     (project.project_name && project.project_name.toLowerCase().includes(searchDataLowerCase)) ||
-  //     (project.client && project.client.toLowerCase().includes(searchDataLowerCase)) ||
-  //     (project.industry_name && project.industry_name.toLowerCase().includes(searchDataLowerCase))
-  //     // Add other properties as needed
-  //   );
-  // }
-  
-  
-  addEmp() {
-    // Add your form values to addedEmployees array
-    this.addedEmployees.push({
-      // Access form values using this.nominationForm.value
-      // For example: employeeName: this.nominationForm.get('employeeName').value,
-      // Add other fields accordingly
-    });
+ 
+
+addEmp() {
+  // Add your form values to addedEmployees array
+  this.addedEmployees.push({
+    empCode: this.nominationForm.get('emp_id').value,
+    empName: this.nominationForm.get('empName').value,
+    // Add other fields accordingly
+  });
+
+  // Clear the form or reset as needed
+  this.nominationForm.reset();
+}
+
+
+
+removeEmployee(employee: any) {
+  const index = this.addedEmployees.indexOf(employee);
+  if (index !== -1) {
+    this.addedEmployees.splice(index, 1);
   }
-  
-  removeEmployee(employee: any) {
-    const index = this.addedEmployees.indexOf(employee);
-    if (index !== -1) {
-      this.addedEmployees.splice(index, 1);
-    }
-  }
+}
+
+
   
   
 }

@@ -22,6 +22,7 @@ import { HrDashboardComponent } from '../../pages/hr-dashboard/hr-dashboard.comp
 
 import { UserService } from '../../pages/login/login.service';
 import { FormComponent } from 'app/pages/form/form.component';
+import { DateService } from 'app/pages/form/date.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,6 @@ import { FormComponent } from 'app/pages/form/form.component';
     HrDashboardComponent,
     FormComponent
   ],
-  providers: [UserService],
+  providers: [UserService,DateService],
 })
 export class AdminLayoutModule { }
