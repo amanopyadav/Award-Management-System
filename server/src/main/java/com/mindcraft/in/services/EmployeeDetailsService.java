@@ -27,7 +27,7 @@ public class EmployeeDetailsService {
             response.put("status", "error");
             response.put("message", "No Employees Found.");
         } else {
-            response.put("status", "error");
+            response.put("status", "success"); // Change status to "success"
             response.put("message", "All Employees Found.");
         }
         return result;
@@ -43,13 +43,13 @@ public class EmployeeDetailsService {
             response.put("status", "error");
             response.put("message", "No Employees Found.");
         } else {
-            response.put("status", "error");
+            response.put("status", "success"); // Change status to "success"
             response.put("message", "All Employees Found.");
         }
         return result;
     }
 
-     public List<Map<String, Object>> getAllExceptFreshers() {
+    public List<Map<String, Object>> getAllExceptFreshers() {
         String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'Fresher'";
 
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
@@ -59,11 +59,9 @@ public class EmployeeDetailsService {
             response.put("status", "error");
             response.put("message", "No Employees Found.");
         } else {
-            response.put("status", "error");
+            response.put("status", "success"); // Change status to "success"
             response.put("message", "All Employees Found.");
         }
         return result;
     }
-    
-
 }
