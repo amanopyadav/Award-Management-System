@@ -5,95 +5,45 @@
     <h5 class="card-title">Nomination Form</h5>
 </div>
 <div class="card-body">
-    <!--<form [formGroup]="nominationForm">
-            <div class="row">
-  
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>Award Category</label>
-                  <select class="form-control" id="award_category" name="award_category" formControlName="award_category"
-                    required>
-                    <option value="" selected>Choose Award Category</option>
-                    <option value="promising_newcomer">Promising Newcomer</option>
-                    <option value="quaterly_award">Quarterly Award</option>
-                    <option value="rising_star">Rising Star Award</option>
-                    <option value="spot_award">Spot Award</option>
-                    <option value="half_yearly_award">Half Yearly Award</option>
-                    <option value="team_award">Team Award</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-  
-             Spot Award Subcategory Dropdown 
-            <div class="row">
-              <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'spot_award'">
-                <div class="form-group">
-                  <label>Spot Award Subcategory</label>
-                  
-                  <select class="form-control" id="spot_award_subcategory" name="spot_award_subcategory"
-                    formControlName="spot_award_subcategory" required>
-                    <option value="" selected>Choose Subcategory</option>
-                    <option value="in_recognition_of">InRecognition Of</option>
-                    <option value="going_extra_mile">Going Extra Mile</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-  
-             Half Yearly Award Subcategory Dropdown 
-            <div class="row">
-              <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'half_yearly_award'">
-                <div class="form-group">
-                  <label>Half Yearly Award Subcategory</label>
-                  <select class="form-control" id="half_yearly_award_subcategory" name="half_yearly_award_subcategory"
-                    formControlName="half_yearly_award_subcategory" required>
-                    <option value="" selected>Choose Subcategory</option>
-                    <option value="lead_award">Lead Award</option>
-                    <option value="individual_award">Individual Award</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            </form>-->
+   
             <form [formGroup]="nominationForm">
               <div class="row">
             
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>Award Category</label>
-                    <select class="form-control" id="award_category" name="award_category" formControlName="award_category" required>
+                    <select class="form-control" id="award_category" name="award_category" formControlName="award_category" required (change)="onAwardCategoryChange()">
                       <option value="" selected>Choose Award Category</option>
-                      <option value="promising_newcomer">Promising Newcomer</option>
-                      <option value="quaterly_award">Quarterly Award</option>
-                      <option value="rising_star">Rising Star Award</option>
-                      <option value="spot_award">Spot Award</option>
-                      <option value="half_yearly_award">Half Yearly Award</option>
-                      <option value="team_award">Team Award</option>
+                      <option value="Promising newcomer">Promising Newcomer</option>
+                      <option value="Quarterly Award">Quarterly Award</option>
+                      <option value="Rising Star Award">Rising Star Award</option>
+                      <option value="Spot Award">Spot Award</option>
+                      <option value="Half Yearly Award">Half Yearly Award</option>
+                      <option value="Team Award">Team Award</option>
                     </select>
                   </div>
                 </div>
             
                 <!-- Spot Award Subcategory Dropdown -->
-                <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'spot_award'">
+                <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'Spot Award'">
                   <div class="form-group">
                     <label>Spot Award Subcategory</label>
-                    <select class="form-control" id="spot_award_subcategory" name="spot_award_subcategory" formControlName="spot_award_subcategory" required>
+                    <select class="form-control" id="spot_award_subcategory" name="spot_award_subcategory" formControlName="spot_award_subcategory" (change)="onAwardCategoryChange()" required>
                       <option value="" selected>Choose Subcategory</option>
-                      <option value="in_recognition_of">InRecognition Of</option>
-                      <option value="going_extra_mile">Going Extra Mile</option>
+                      <option value="In Recognition Of">InRecognition Of</option>
+                      <option value="Going Extra Mile">Going Extra Mile</option>
                     </select>
                   </div>
                 </div>
             
                 <!-- Half Yearly Award Subcategory Dropdown -->
-                <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'half_yearly_award'">
+                <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award'">
                   <div class="form-group">
                     <label>Half Yearly Award Subcategory</label>
-                    <select class="form-control" id="half_yearly_award_subcategory" name="half_yearly_award_subcategory" formControlName="half_yearly_award_subcategory" required>
+                    <select class="form-control" id="half_yearly_award_subcategory" name="half_yearly_award_subcategory" formControlName="half_yearly_award_subcategory" (change)="onAwardCategoryChange()" required>
                       <option value="" selected>Choose Subcategory</option>
-                      <option value="lead_award">Lead Award</option>
-                      <option value="individual_award">Individual Award</option>
+                      <option value="Lead Award">Lead Award</option>
+                      <option value="Individual Award">Individual Award</option>
                     </select>
                   </div>
                 </div>

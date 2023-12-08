@@ -25,4 +25,17 @@ export class FormService {
         return this.http.get<any[]>(`http://localhost:8080/allExceptFreshers`);
     }
 
+    getAwardId(awardCategory: string, awardSubCategory: string): Observable<number> {
+        const url = `http://localhost:8080/getAwardId?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}`;
+      
+        return this.http.get<number>(url);
+      }
+
+    getAwardIdSingle(awardCategory: string): Observable<number> {
+        const url = `http://localhost:8080/getAwardId?awardCategory=${awardCategory}`;
+      
+        return this.http.get<number>(url);
+      }
+
+
 }
