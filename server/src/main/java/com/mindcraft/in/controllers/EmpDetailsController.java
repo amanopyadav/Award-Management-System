@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mindcraft.in.services.EmployeeDetailsService;
@@ -36,4 +37,16 @@ public class EmpDetailsController {
         List<Map<String, Object>> request = employeeDetailsService.getAllExceptFreshers();
         return request;
     }
+
+
+    @GetMapping("/getAwardId")
+    public Integer getAwardId(@RequestParam String awardCategory, @RequestParam(required = false) String awardSubCategory) {
+        if(awardSubCategory!=null){
+            return employeeDetailsService.getAwardId(awardCategory, awardSubCategory);
+        }else{
+            return employeeDetailsService.getAwardIdSingle(awardCategory);
+        }
+    }
+
+
 }

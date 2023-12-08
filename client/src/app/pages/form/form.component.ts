@@ -40,10 +40,9 @@ export class FormComponent implements OnInit {
     mobileNo: string;
     dob: Date;
     joiningDate: Date;
-  // isFormEnabled: any;
-
-  isFormEnabled: boolean = true;
-  setAwardForm: boolean;
+    isFormEnabled: boolean = true;
+    setAwardForm: boolean;
+    selectedAwardId: number;
     
 
   constructor(
@@ -54,7 +53,8 @@ export class FormComponent implements OnInit {
   ) {
     this.nominationForm = this.fb.group({
       award_category: ['', Validators.required],
-      spot_award_subcategory: [''], // Add this line for spot_award_subcategory
+      spot_award_subcategory: [''],
+      half_yearly_award_subcategory: ['']
     });
 
     this.EmpForm = this.fb.group({
@@ -111,6 +111,9 @@ export class FormComponent implements OnInit {
         console.error(error);
       }
     );
+
+    
+
   }
 
   updateFormStatus(): boolean {
@@ -120,13 +123,13 @@ export class FormComponent implements OnInit {
 
     // Check if the selected category is spot_award or its subcategories
     if (
-      awardCategory === 'spot_award' ||
-      (awardCategory === 'promising_newcomer' && [4, 7, 10, 1].includes(currentMonth)) ||
-      (awardCategory === 'quaterly_award' && [4, 7, 10, 1].includes(currentMonth)) ||
-      (awardCategory === 'rising_star' && [4, 7, 10, 1].includes(currentMonth)) ||
-      (awardCategory === 'spot_award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
-      (awardCategory === 'half_yearly_award' && [7, 1].includes(currentMonth)) ||
-      (awardCategory === 'team_award' && [7, 1].includes(currentMonth))
+      awardCategory === 'Spot Award' ||
+      (awardCategory === 'Promising newcomer' && [4, 7, 10, 12].includes(currentMonth)) ||
+      (awardCategory === 'Quarterly Award' && [4, 7, 10, 12].includes(currentMonth)) ||
+      (awardCategory === 'Rising Star Award' && [4, 7, 10, 12].includes(currentMonth)) ||
+      (awardCategory === 'Spot Award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
+      (awardCategory === 'Half Yearly Award' && [7, 12].includes(currentMonth)) ||
+      (awardCategory === 'Team Award' && [7, 12].includes(currentMonth))
       
     ) {
       this.setAwardForm = true;
@@ -139,6 +142,45 @@ export class FormComponent implements OnInit {
 
   onAwardCategoryChange() {
     this.updateFormStatus();
+    const awardCategory = this.nominationForm.get('award_category').value;
+  const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
+  const halfYearlyAwardSubcategory = this.nominationForm.get('half_yearly_award_subcategory').value;
+
+  console.log("Award: ", awardCategory);
+  console.log("Spot award: ", spotAwardSubcategory);
+  console.log("Half yearly: ", halfYearlyAwardSubcategory);
+
+  if (awardCategory === 'Spot Award' && spotAwardSubcategory) {
+    this.formService.getAwardId(awardCategory, spotAwardSubcategory).subscribe(
+      (data) => {
+        console.log('Fetched award_id:', data);
+        // You can use the fetched award_id as needed
+      },
+      (error) => {
+        console.error('Error fetching award_id:', error);
+      }
+    );
+  } else if (awardCategory === 'Half Yearly Award' && halfYearlyAwardSubcategory) {
+    this.formService.getAwardId(awardCategory, halfYearlyAwardSubcategory).subscribe(
+      (data) => {
+        console.log('Fetched award_id:', data);
+        // You can use the fetched award_id as needed
+      },
+      (error) => {
+        console.error('Error fetching award_id:', error);
+      }
+    );
+  } else {
+    this.formService.getAwardIdSingle(awardCategory).subscribe(
+      (data) => {
+        console.log('Fetched award_id:', data);
+        // You can use the fetched award_id as needed
+      },
+      (error) => {
+        console.error('Error fetching award_id:', error);
+      }
+    );
+  }
   }
 
   private disableFormControls(formGroup: FormGroup): void {
@@ -156,15 +198,6 @@ export class FormComponent implements OnInit {
       console.log(`${key} is enabled: ${control.enabled}`);
     });
   }
-
-  // openModal() {
-  //   this.fetchAllEmployees();
-  //   this.filteredEmployees = this.Employees;
-  //   this.displayEmpModal = 'block';
-  // }
-    // ngOnInit() {
-    //   this.fetchAllEmployees();
-    // }
 
     openModal() {
         console.log("Emp dialogbox Opened");
@@ -271,9 +304,6 @@ export class FormComponent implements OnInit {
     console.log("Adding Project:");
     console.log("Project ID:", project.project_id);
   
-    // Assuming you have a service to set the project ID
-    // this.projectService.setProjectId(project.project_id);
-  
     const projectFormValues = {
       project_id: project.project_id,
       project_name: project.project_name,
@@ -289,22 +319,6 @@ export class FormComponent implements OnInit {
     this.onCloseHandledforProj();
   }
 
-  // addNominatedBy(nominated_by: any) {
-  //   console.log("Autofill nominated by", nominated_by);
-  //   //console.log(nominated_by.emp_id);
-
-  //   // this.formService.setEmployeeId(employee.emp_id);
-  
-  //   const nominatedbyFormValues = {
-      
-  //     empName: nominated_by.emp_name,
-  //     empDesignation: nominated_by.designation_name,
-      
-  //   };
-  //   this.NominatedByForm.patchValue(nominatedbyFormValues);
-
-  //   this.onCloseHandledforNominatedBy();
-  // }
   addNominatedBy(selectedEmpName: string) {
     const selectedEmployee = this.nominatedByOptions.find(emp => emp.emp_name === selectedEmpName);
   
@@ -319,22 +333,7 @@ export class FormComponent implements OnInit {
   }
   
   
-  // addOnBehalf(on_behalf: any) {
-  //   console.log("Autofill nominated by", on_behalf);
-  //   //console.log(nominated_by.emp_id);
 
-  //   // this.formService.setEmployeeId(employee.emp_id);
-  
-  //   const onbehalfFormValues = {
-      
-  //     empName: on_behalf.emp_name,
-  //     empDesignation: on_behalf.designation_name,
-      
-  //   };
-  //   this.OnBehalfOfForm.patchValue(onbehalfFormValues);
-
-  //   this.onCloseHandledforOnBehalf();
-  // }
   addOnBehalf(selectedEmpName: string) {
     const selectedEmployee = this.BehalfOptions.find(emp => emp.emp_name === selectedEmpName);
     
@@ -375,60 +374,6 @@ export class FormComponent implements OnInit {
           this.searchData = event.target.value;
         }
       }
-      
-
-    //   searchProj() {
-    // console.log('Search function triggered');
-    // console.log('Search Data:', this.searchData);
-    // console.log('Projects:', this.Projects);
-  
-    // if (!this.Projects) {
-    //   return;
-    // }
-  
-    // Handle both scenarios: searching and showing all projects
-  //   this.filteredProjects = this.searchData.trim() === ''
-  //     ? this.Projects // Show all projects
-  //     : this.Projects.filter(project =>
-  //       this.projectContainsSearchData(project)
-  //     );
-  // }
-  
-  // projectContainsSearchData(project: any): boolean {
-  //   const searchDataLowerCase = this.searchData.toLowerCase();
-  
-  //   return (
-  //     (project.project_id && project.project_id.toString().includes(searchDataLowerCase)) ||
-  //     (project.project_name && project.project_name.toLowerCase().includes(searchDataLowerCase)) ||
-  //     (project.client && project.client.toLowerCase().includes(searchDataLowerCase)) ||
-  //     (project.industry_name && project.industry_name.toLowerCase().includes(searchDataLowerCase))
-  //     // Add other properties as needed
-  //   );
-  // }
-
-
-
-  // addProject(project: any) {
-  //   console.log("Adding Project:");
-  //   console.log("Project ID:", project.project_id);
-  
-  //   // Assuming you have a service to set the project ID
-  //   // this.projectService.setProjectId(project.project_id);
-  
-  //   const projectFormValues = {
-  //     project_id: project.project_id,
-  //     project_name: project.project_name,
-  //     client: project.client,
-  //     industry_name: project.industry_name,
-  //   };
-  
-  //   this.ProjectForm.patchValue(projectFormValues);
-  
-  //   //console.log("Form values after adding project:", this.nominationForm.value);
-  
-  //   // Close the modal after adding a project
-  //   this.onCloseHandledforProj();
-  // }
   
   onNominatedBySelection() {
     const selectedEmpName = this.NominatedByForm.get('empName').value;
