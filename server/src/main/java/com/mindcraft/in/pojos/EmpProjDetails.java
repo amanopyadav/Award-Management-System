@@ -21,6 +21,10 @@ public class EmpProjDetails {
     @Column(name = "emp_name")
     private String empName;
 
+     @Column(name = "function_name")
+    private String function_name;
+
+
     @Column(name = "designation_name")
     private String designationName;
 
@@ -75,12 +79,13 @@ public class EmpProjDetails {
     public EmpProjDetails() {
     }
 
-    public EmpProjDetails(String empCode, String empName, String designationName, String primarySkillName,
+    public EmpProjDetails(String empCode, String empName, String function_name, String designationName, String primarySkillName,
             Long mindcraftExpMonths, Long totalExpMonths, String email, Long mobileNumber, Date dateOfBirth,
             Date joiningDate, String projectCode, String projectDesc, String clientName, String industryName,
             boolean activeYN, String createdBy, Timestamp createdOn, String updatedBy, Timestamp updatedOn) {
         this.empCode = empCode;
         this.empName = empName;
+        this.function_name = function_name;
         this.designationName = designationName;
         this.primarySkillName = primarySkillName;
         this.mindcraftExpMonths = mindcraftExpMonths;
@@ -114,6 +119,14 @@ public class EmpProjDetails {
 
     public void setEmpName(String empName) {
         this.empName = empName;
+    }
+
+     public String getFunction_name() {
+        return function_name;
+    }
+
+    public void setFunction_name(String function_name) {
+        this.function_name = function_name;
     }
 
     public String getDesignationName() {
