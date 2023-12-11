@@ -38,4 +38,10 @@ export class FormService {
       }
 
 
+
+    getProjectDetailsByEmployeeCode(employeeCode: string): Observable<any[]> {
+        return this.http.get<any[]>(`http://localhost:8080/getProjectDetailsByEmployeeCode?employeeCode=${employeeCode}`);
+      }
+
+
 }

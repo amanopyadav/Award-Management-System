@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
                         console.log('Login success', response);
 
                         const specificValue = response.role;
+                        const specificId = response.id
                         console.log('Value of yourKey:', specificValue);
+                        localStorage.setItem('emp_id', specificId);
                         localStorage.setItem("role", specificValue);
                         const usernameValue = this.loginForm.get('username')?.value;
                         const passwordValue = this.loginForm.get('password')?.value;

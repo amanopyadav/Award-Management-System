@@ -16,7 +16,7 @@ public class EmpDetails {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "emp_id")
-    private Integer id;
+    private String id;
 
     @Column(name = "emp_name")
     private String emp_name;
@@ -51,7 +51,7 @@ public class EmpDetails {
     public EmpDetails() {
     }
 
-    public EmpDetails(Integer id, String emp_name, String designation_name, String unit, String primary_skill_name,
+    public EmpDetails(String id, String emp_name, String designation_name, String unit, String primary_skill_name,
             Integer mindcraft_exp_mon, Integer total_exp_mon, String email, Long mobileno, Date dob,
             Date joining_date) {
         this.id = id;
@@ -67,11 +67,11 @@ public class EmpDetails {
         this.joining_date = joining_date;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

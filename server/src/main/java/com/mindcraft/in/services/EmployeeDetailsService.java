@@ -139,6 +139,16 @@ public class EmployeeDetailsService {
             throw new RuntimeException("Error executing SQL query", e);
         }
     }
+
+
+
+
+    public List<Map<String, Object>> getProjectDetailsByEmployeeCode(String employeeCode) {
+        String sql = "SELECT * FROM nominee_project_record_details WHERE emp_code = ?";
+    
+        return jdbcTemplate.queryForList(sql, employeeCode);
+    }
+    
     
     
 

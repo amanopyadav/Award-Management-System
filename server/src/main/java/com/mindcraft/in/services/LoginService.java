@@ -22,9 +22,11 @@ public class LoginService {
         String sql = "Select roles from login where username = ? and password = ?";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, user.getUsername(), user.getPassword());
         String role = (String) result.get(0).get("roles");
+        String id = (String) result.get(0).get("username");
         Map<String, String> response = new HashMap<>();
         response.put("status", "success");
         response.put("role", role);
+        response.put("id", id);
         response.put("message", "Login successful");
         System.out.println(role);
         return response;

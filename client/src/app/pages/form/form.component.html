@@ -213,7 +213,7 @@
                         <!-- Your specified icon inside the input group -->
                         <div class="input-group-prepend">
                           <span class="input-group-text cursor-pointer">
-                            <i (click)="openModalforproj()" class="nc-icon nc-bullet-list-67"></i>
+                            <i (click)="openModalforproj(EmpForm.get('emp_id').value)" class="nc-icon nc-bullet-list-67"></i>
                           </span>
                         </div>
                         
@@ -244,7 +244,7 @@
                                               </thead>
                                               <tbody>
                                                 <tr *ngFor="let project of filteredProjects"> 
-                                                  <td>{{project.project_id}}</td>
+                                                  <td>{{project.project_code}}</td>
                                                   <td>{{project.project_name}}</td>
                                                   <td>
                                                     <button class="btn btn-primary" (click)="addProject(project)">
@@ -276,7 +276,7 @@
                 <div class="col-md-3 px-1">
                     <div class="form-group">
                       <label>Project Code</label>
-                      <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('project_id').value" readonly>
+                      <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('project_code').value" readonly>
                     </div>
                 </div>
 
@@ -290,7 +290,7 @@
                 <div class="col-md-3 px-1">
                     <div class="form-group">
                       <label>Project Description</label>
-                      <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('industry_name').value" readonly>
+                      <input type="text" class="form-control" placeholder="" [value]="ProjectForm.get('industry').value" readonly>
                     </div>
                 </div>
                 </div>
