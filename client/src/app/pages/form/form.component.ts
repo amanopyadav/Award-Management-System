@@ -2,6 +2,7 @@
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   import { DateService } from './date.service';
   import { FormService } from './form.service';
+  import { NotificationService } from './notification.service'; 
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -50,7 +51,8 @@
       private fb: FormBuilder,
       @Inject(DateService) private dateService: DateService,
       private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
-      private formService: FormService
+      private formService: FormService,
+      private notificationService: NotificationService
     ) {
       this.nominationForm = this.fb.group({
         award_category: ['', Validators.required],
@@ -88,7 +90,43 @@
         empName: [{value:''}], // FormControl for OnBehalf of
         empDesignation: ['']  // FormControl for designation
       });
+
+     
+      
+    
     }
+
+    
+
+
+    
+
+    onSave() {
+      // Perform your save logic here
+    
+      // Notify user
+      this.notificationService.showNotification('Nomination form filled successfully.');
+    
+      // Reset the forms
+      this.nominationForm.reset();
+      this.EmpForm.reset();
+      this.ProjectForm.reset();
+      this.NominatedByForm.reset();
+      this.OnBehalfOfForm.reset();
+
+        // Set default value for award_category
+  this.nominationForm.get('award_category').setValue('');
+
+  // Update the form status
+  this.updateFormStatus();
+    
+      // Log to console
+      console.log('Form saved and reset successfully.');
+    }
+
+
+ 
+    
 
     ngOnInit() {
       
@@ -118,6 +156,7 @@
     }
 
     updateFormStatus(): boolean {
+      
       const currentMonth = this.dateService.getCurrentMonth();
       const awardCategory = this.nominationForm.get('award_category').value;
       const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
@@ -428,3 +467,7 @@
       
     
   }
+function onSave() {
+  throw new Error('Function not implemented.');
+}
+
