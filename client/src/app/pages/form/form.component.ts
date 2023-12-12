@@ -3,6 +3,7 @@
   import { DateService } from './date.service';
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
+  import { ToastrService } from 'ngx-toastr';
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -48,13 +49,16 @@
       showForm: boolean = false;
       showRatingScale = false;
       
+    
+      
 
     constructor(
       private fb: FormBuilder,
       @Inject(DateService) private dateService: DateService,
       private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
       private formService: FormService,
-      private notificationService: NotificationService
+      private notificationService: NotificationService,
+      private toastr: ToastrService
     ) {
       this.nominationForm = this.fb.group({
         award_category: ['', Validators.required],
@@ -109,8 +113,13 @@
       const selectedAwardCategory = this.nominationForm.get('award_category').value;
     
       // Notify user
-      this.notificationService.showNotification('Nomination form filled successfully.');
+      this.notificationService.showNotification('Nominee details filled.');
     
+
+       // Set the flag to show the rating scale
+    this.showRatingScale = true;
+
+
       // Clear the values of form controls
       this.nominationForm.reset();
       this.EmpForm.reset();
@@ -128,6 +137,47 @@
       console.log('Form saved successfully. Fields cleared.');
     }
     
+    resetForm() {
+      // Reset the form
+      this.showRatingScale = false;
+      this.nominationForm.reset();
+      this.EmpForm.reset();
+      this.ProjectForm.reset();
+      this.NominatedByForm.reset();
+      this.OnBehalfOfForm.reset();
+
+      
+  }
+
+  onSecondSetSave() {
+    // Your save logic for the second set here
+    
+    // Notify user for Spot Award
+    if (this.nominationForm.get('award_category').value === 'Spot Award') {
+      this.toastr.success('Nomination form for Spot Award is filled successfully', '');
+    } else {
+      // Notify user for other awards
+      this.toastr.success('Nomination form is filled successfully', '');
+    }
+  
+    // Reset the form and set the default award category after showing the notification
+    setTimeout(() => {
+      this.resetForm();
+      this.nominationForm.get('award_category').setValue('');
+    }, 0);
+  }
+  
+  // resetForm() {
+  //   // Reset the form
+  //   this.showRatingScale = false;
+  //   this.nominationForm.reset();
+  //   this.EmpForm.reset();
+  //   this.ProjectForm.reset();
+  //   this.NominatedByForm.reset();
+  //   this.OnBehalfOfForm.reset();
+  // }
+  
+
     
     
 
