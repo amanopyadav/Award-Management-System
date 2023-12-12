@@ -40,7 +40,7 @@
             
                 <!-- Half Yearly Award Subcategory Dropdown -->
                 <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award'">
-                  <div class="form-group">
+                  <div class="form-group"*ngIf="updateFormStatus()">
                     <label>Half Yearly Award Subcategory</label>
                     <select class="form-control" id="half_yearly_award_subcategory" name="half_yearly_award_subcategory" 
                     formControlName="half_yearly_award_subcategory" (change)="onAwardCategoryChange()" required>

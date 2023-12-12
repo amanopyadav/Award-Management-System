@@ -45,6 +45,8 @@
       isFormEnabled: boolean = true;
       setAwardForm: boolean;
       selectedAwardId: number;
+      showForm: boolean = false;
+      showRatingScale = false;
       
 
     constructor(
@@ -100,29 +102,34 @@
 
 
     
-
     onSave() {
       // Perform your save logic here
+    
+      // Store the selected award category
+      const selectedAwardCategory = this.nominationForm.get('award_category').value;
     
       // Notify user
       this.notificationService.showNotification('Nomination form filled successfully.');
     
-      // Reset the forms
+      // Clear the values of form controls
       this.nominationForm.reset();
       this.EmpForm.reset();
       this.ProjectForm.reset();
       this.NominatedByForm.reset();
       this.OnBehalfOfForm.reset();
-
-        // Set default value for award_category
-  this.nominationForm.get('award_category').setValue('');
-
-  // Update the form status
-  this.updateFormStatus();
+    
+      // Set back the selected award category
+      this.nominationForm.get('award_category').setValue(selectedAwardCategory);
+    
+      // Update the form status if needed
+      this.updateFormStatus();
     
       // Log to console
-      console.log('Form saved and reset successfully.');
+      console.log('Form saved successfully. Fields cleared.');
     }
+    
+    
+    
 
 
  
@@ -164,12 +171,12 @@
       // Check if the selected category is spot_award or its subcategories
       if (
         awardCategory === 'Spot Award' ||
-        (awardCategory === 'Promising newcomer' && [4, 7, 10, 1].includes(currentMonth)) ||
-        (awardCategory === 'Quarterly Award' && [4, 7, 10, 1].includes(currentMonth)) ||
-        (awardCategory === 'Rising Star Award' && [4, 7, 10, 1].includes(currentMonth)) ||
+        (awardCategory === 'Promising newcomer' && [4, 7, 10, 12].includes(currentMonth)) ||
+        (awardCategory === 'Quarterly Award' && [4, 7, 10, 12].includes(currentMonth)) ||
+        (awardCategory === 'Rising Star Award' && [4, 7, 10, 12].includes(currentMonth)) ||
         (awardCategory === 'Spot Award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
-        (awardCategory === 'Half Yearly Award' && [7, 1].includes(currentMonth)) ||
-        (awardCategory === 'Team Award' && [7, 1].includes(currentMonth))
+        (awardCategory === 'Half Yearly Award' && [7, 12].includes(currentMonth)) ||
+        (awardCategory === 'Team Award' && [7, 12].includes(currentMonth))
         
       ) {
         this.setAwardForm = true;
