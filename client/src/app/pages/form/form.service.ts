@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -6,6 +6,8 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class FormService {
+
+    private addNomineeData = 'http://localhost:8080/addNomineeList';
 
     constructor(private http: HttpClient) {}
 
@@ -43,5 +45,14 @@ export class FormService {
         return this.http.get<any[]>(`http://localhost:8080/getProjectDetailsByEmployeeCode?employeeCode=${employeeCode}`);
       }
 
-
+      addNominee(nomineeData: any): Observable<String> {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+        };
+    
+        return this.http.post<string>(this.addNomineeData, nomineeData, httpOptions);
+      }
+    
 }

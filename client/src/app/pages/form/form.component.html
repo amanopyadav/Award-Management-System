@@ -5,7 +5,8 @@
     <h5 class="card-title">Nomination Form</h5>
 </div>
 <div class="card-body">
-   
+
+  <!--<form [formGroup]="mainForm" (ngSubmit)="onSubmit()"> -->
             <form [formGroup]="nominationForm">
               <div class="row">
             
@@ -374,6 +375,9 @@
         </div>
       </div>
     </div>
+
+  <!-- </form> -->
+
 
     <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer'">
       <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
