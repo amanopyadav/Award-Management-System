@@ -5,7 +5,8 @@
     <h5 class="card-title">Nomination Form</h5>
 </div>
 <div class="card-body">
-   
+
+  <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
             <form [formGroup]="nominationForm">
               <div class="row">
             
@@ -379,6 +380,9 @@
         </div>
       </div>
     </div>
+
+  </form>
+
 
     
 
@@ -890,6 +894,8 @@
       </div>
     </div>
 
+    <!-- <div class="row justify-content-end align-items-end">
+      <div class="row" *ngIf="updateFormStatus()">
 
     
     <div class="row justify-content-end align-items-end" *ngIf="showRatingScale && nominationForm.get('award_category').value !== 'Spot Award' && updateFormStatus()">
@@ -901,7 +907,7 @@
           <button type="submit" class="btn btn-primary ml-2" (click)="onSecondSetSave()">Save</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 <!--write everything inside these 3 div-->

@@ -18,6 +18,7 @@
       ProjectForm: FormGroup;
       NominatedByForm: FormGroup;
       OnBehalfOfForm: FormGroup;
+      mainForm: FormGroup;
 
       filteredEmployees: any[] = [];
       filteredProjects: any[]=[];
@@ -95,10 +96,43 @@
       this.OnBehalfOfForm = this.fb.group({
         empName: ['',{value:''}], // FormControl for OnBehalf of
         empDesignation: ['']  // FormControl for designation
-      });
+      });   
 
-     
-      
+      this.mainForm = this.fb.group({
+        nomination: this.fb.group({
+          award_category: ['', Validators.required],
+          spot_award_subcategory: [''],
+          half_yearly_award_subcategory: ['']
+        }),
+        employee: this.fb.group({
+          emp_id: ['', Validators.required],
+          empName: [{ value: '', disabled: !this.isFormEnabled }],
+          empDesignation: [{ value: '', disabled: !this.isFormEnabled }],
+          function_name: [{ value: '', disabled: !this.isFormEnabled }],
+          primarySkillName: [{ value: '', disabled: !this.isFormEnabled }],
+          mindcraftExpMon: [{ value: '', disabled: !this.isFormEnabled }],
+          totalExpMon: [{ value: '', disabled: !this.isFormEnabled }],
+          email: [{ value: '', disabled: !this.isFormEnabled }],
+          mobileNo: [{ value: '', disabled: !this.isFormEnabled }],
+          dob: [{ value: '', disabled: !this.isFormEnabled }],
+          joiningDate: [{ value: '', disabled: !this.isFormEnabled }],
+        }),
+        project: this.fb.group({
+          project_name: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+          project_code: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+          client: [{ value: '', disabled: !this.isFormEnabled }, Validators.required],
+          industry: [{ value: '', disabled: !this.isFormEnabled }, Validators.required]
+        }),
+        nominatedBy: this.fb.group({
+          empName: [{value:''}], // FormControl for nominatedBy
+          empDesignation: ['']
+        }),
+        onBehalfOf: this.fb.group({
+          empName: [{value:''}], // FormControl for OnBehalf of
+          empDesignation: ['']  
+        }),
+      });
+  
     
     }
 
@@ -190,6 +224,12 @@
       this.fetchAllEmployees();
       this.updateFormStatus();
       this.cdRef.detectChanges();
+      this.fetchNominatedBy();
+      this.fetchBehalfOf();
+    
+    }
+
+    fetchNominatedBy(){
       this.formService.getExceptFreshers().subscribe(
         (data) => {
           this.nominatedByOptions = data;
@@ -198,7 +238,9 @@
           console.error(error);
         }
       );
+    }
 
+    fetchBehalfOf(){
       this.formService.getExceptFreshers().subscribe(
         (data) => {
           this.BehalfOptions = data;
@@ -207,10 +249,27 @@
           console.error(error);
         }
       );
-
-      
-
     }
+
+    onSubmit(): void {
+      if (this.mainForm.valid) {
+        const formData = this.mainForm.value;
+  
+        // Call your service to submit formData
+        this.formService.addNominee(formData).subscribe(
+          (response) => {
+            console.log('Nominee data submitted successfully:', response);
+            // Handle success, such as showing a success message
+          },
+          (error) => {
+            console.error('Error submitting nominee data:', error);
+            // Handle error, such as showing an error message
+          }
+        );
+      }
+    }
+    
+
 
     updateFormStatus(): boolean {
       
