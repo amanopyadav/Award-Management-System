@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModel } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -23,10 +24,13 @@ import { HrDashboardComponent } from '../../pages/hr-dashboard/hr-dashboard.comp
 import { UserService } from '../../pages/login/login.service';
 import { FormComponent } from 'app/pages/form/form.component';
 import { DateService } from 'app/pages/form/date.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserModule,
+    ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(AdminLayoutRoutes),
