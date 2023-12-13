@@ -123,7 +123,7 @@ select * from emp_projects_records;
 -- 2023-12-13
 
 
-
+drop table nominee_list
 
 CREATE TABLE nominee_list (
     nomination_id SERIAL PRIMARY KEY,
