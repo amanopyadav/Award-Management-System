@@ -197,6 +197,7 @@
     onSubmit(): void {
       if (this.mainForm.valid) {
         const formData = this.mainForm.value;
+        console.log("FormData:", formData);
   
         // Call your service to submit formData
         this.formService.addNominee(formData).subscribe(
