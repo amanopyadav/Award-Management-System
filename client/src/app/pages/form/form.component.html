@@ -6,7 +6,7 @@
 </div>
 <div class="card-body">
 
-  <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" >
             <form [formGroup]="nominationForm">
               <div class="row">
             
@@ -376,7 +376,7 @@
           <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
         </div>               
         <div class="col-md-6">
-          <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" (click)="onSave()">Save</button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" >Save</button>
         </div>
       </div>
     </div>
@@ -893,21 +893,6 @@
         </table>
       </div>
     </div>
-
-    <!-- <div class="row justify-content-end align-items-end">
-      <div class="row" *ngIf="updateFormStatus()">
-
-    
-    <div class="row justify-content-end align-items-end" *ngIf="showRatingScale && nominationForm.get('award_category').value !== 'Spot Award' && updateFormStatus()">
-      <div class="row">
-        <div class="col-md-6">
-          <button type="reset" class="btn btn-danger">Cancel</button>
-        </div>
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-primary ml-2" (click)="onSecondSetSave()">Save</button>
-        </div>
-      </div>
-    </div> -->
 
 
 <!--write everything inside these 3 div-->
