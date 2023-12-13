@@ -120,3 +120,39 @@ select * from emp_projects_records;
 
 
 
+-- 2023-12-13
+
+
+
+
+CREATE TABLE nominee_list (
+    nomination_id SERIAL PRIMARY KEY,
+	award_id BIGINT NOT NULL,
+	award_category VARCHAR(100) NOT NULL,
+	award_sub_category VARCHAR(100) ,
+    emp_code VARCHAR(100) NOT NULL,
+    emp_name VARCHAR(100) NOT NULL,
+	emp_designation VARCHAR(100) NOT NULL,
+	unit VARCHAR(100) NOT NULL,
+	skill VARCHAR(100) NOT NULL,
+	mindcraft_exp_in_months BIGINT NOT NULL,
+	total_exp_in_months BIGINT NOT NULL,
+	email_id VARCHAR(100) NOT NULL,
+	contact_number BIGINT NOT NULL,
+	dob DATE NOT NULL,
+	doj DATE NOT NULL,
+	project_name VARCHAR(100) NOT NULL,
+	project_code BIGINT NOT NULL,
+	client VARCHAR(100) NOT NULL,
+	industry_name VARCHAR(100) NOT NULL,
+	nominated_by VARCHAR(100) NOT NULL,
+	nom_by_designation VARCHAR(100) NOT NULL,
+	onbehalf_of VARCHAR(100) ,
+	on_behalf_designation VARCHAR(100) ,
+	active_yn BOOLEAN NOT NULL,
+	created_by VARCHAR(100) NOT NULL,
+	created_on TIMESTAMP NOT NULL,
+	updated_by VARCHAR(100) NOT NULL,
+	updated_on TIMESTAMP NOT NULL
+);
+
