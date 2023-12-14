@@ -50,6 +50,7 @@
       selectedAwardId: number;
       showForm: boolean = false;
       showRatingScale = false;
+
     
 
     constructor(
@@ -142,6 +143,29 @@
   
     
     }
+
+    handleCheckboxClick() {
+      // console.log("Clicked this");
+      // console.log("Sales before : "+this.nominationForm.get('half_yearly_award_isSales').value);
+
+      // this.nominationForm.get('half_yearly_award_isSales').setValue('sales');
+
+      // console.log("Sales after : "+this.nominationForm.get('half_yearly_award_isSales').value);
+
+
+       // Check if the checkbox is checked
+      if (this.nominationForm.get('half_yearly_award_isSales').value === 'sales') {
+        console.log("sales value after uncheck : "+this.nominationForm.get('award_category').value === 'Promising newcomer');
+        
+        // If checked, set the value to an empty string when unchecked
+        this.nominationForm.get('half_yearly_award_isSales').setValue('');
+      } else {
+        // If unchecked, set the value to 'sales' when checked
+        this.nominationForm.get('half_yearly_award_isSales').setValue('sales');
+      }
+      
+    }
+
 
     
 

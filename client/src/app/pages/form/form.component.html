@@ -56,8 +56,8 @@
               </div>
         </form>
 
-            <div class="container"  *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'">
-                <input type="checkbox" class="form-check-input" value="sales" id="half_yearly_award_isSales" formControlName="half_yearly_award_isSales" name="half_yearly_award_isSales">
+            <div class="container"  *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'">
+                <input type="checkbox" class="form-check-input" id="half_yearly_award_isSales" formControlName="half_yearly_award_isSales" name="half_yearly_award_isSales" (click)="handleCheckboxClick()">
                 <label class="form-check-label" for="half_yearly_award_isSales">Sales</label>
             </div>
 
@@ -547,7 +547,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales' " >
               <td>Contribution to MindCraft Business</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -561,7 +561,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>People Leadership</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -575,7 +575,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>Customer Relationship & Satisfaction</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -589,7 +589,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+            <tr *ngIf=" nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td> Excellence in the core function</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -604,7 +604,7 @@
             </tr>
 
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+            <tr *ngIf=" nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>Result / Achievement Orientation</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -619,7 +619,7 @@
             </tr>
 
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td>Order Generation</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -633,7 +633,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'"  >
               <td> Customer Connect</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -647,7 +647,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td> Operational Efficiency </td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -661,7 +661,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td>Collection Efficiency</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
