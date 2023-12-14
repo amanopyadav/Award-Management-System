@@ -63,7 +63,8 @@
       this.nominationForm = this.fb.group({
         award_category: ['', Validators.required],
         spot_award_subcategory: [''],
-        half_yearly_award_subcategory: ['']
+        half_yearly_award_subcategory: [''],
+        half_yearly_award_isSales: ['']
       });
 
       this.EmpForm = this.fb.group({
@@ -102,7 +103,8 @@
             nomination: this.fb.group({
               award_category: ['', Validators.required],
               spot_award_subcategory: [''],
-              half_yearly_award_subcategory: ['']
+              half_yearly_award_subcategory: [''],
+              half_yearly_award_isSales : ['']
             }),
 
             employee: this.fb.group({

@@ -1,14 +1,16 @@
 <div class="row">
 <div class="col-md-12">
 <div class="card card-user">
+
 <div class="card-header">
     <h5 class="card-title">Nomination Form</h5>
 </div>
+
 <div class="card-body">
 
-  <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" >
-            <form [formGroup]="nominationForm">
-              <div class="row">
+          <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" >
+                    <form [formGroup]="nominationForm">
+                      <div class="row">
             
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
@@ -26,8 +28,7 @@
                   </div>
                 </div>
                 
-            
-                <!-- Spot Award Subcategory Dropdown -->
+
                 <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'Spot Award'">
                   <div class="form-group">
                     <label>Spot Award Subcategory</label>
@@ -39,7 +40,7 @@
                   </div>
                 </div>
             
-                <!-- Half Yearly Award Subcategory Dropdown -->
+
                 <div class="col-md-4 pr-1" *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award'">
                   <div class="form-group"*ngIf="updateFormStatus()">
                     <label>Half Yearly Award Subcategory</label>
@@ -53,7 +54,13 @@
                 </div>
             
               </div>
-            </form>
+        </form>
+
+            <div class="container"  *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'">
+                <input type="checkbox" class="form-check-input" value="sales" id="half_yearly_award_isSales" formControlName="half_yearly_award_isSales" name="half_yearly_award_isSales">
+                <label class="form-check-label" for="half_yearly_award_isSales">Sales</label>
+            </div>
+
 
             <div *ngIf="!updateFormStatus() && nominationForm.get('award_category').value !== ''" class="alert alert-danger alert-dismissible fade show">
               <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
@@ -66,154 +73,154 @@
             
 
 
-
-<form [formGroup]="EmpForm" *ngIf="updateFormStatus()">
-    <h5 class="card-title">Nominee Details</h5>
-    <div class="row">
-        <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label>Employee/Nominee Name</label>
-              <div class="input-group">
-                <!-- Your specified icon inside the input group -->
-                <div class="input-group-prepend">
-                  <span class="input-group-text cursor-pointer">
-                    <i (click)="openModal()" class="nc-icon nc-bullet-list-67"></i>
-                  </span>
-                </div>
-                <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayEmpModal}">
-                  <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        
-                        <div class="modal-header">
-                          <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchData" (input)="onSearchInputChange($event)"/>
-                          <button (click)="search()">Search</button>
-                        </div>
-                        
-
-                        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()">
-                          <i class="fa-sharp fa-regular fa-circle-xmark  fa-2xs"></i>
-                        </button>
+      <form [formGroup]="EmpForm" *ngIf="updateFormStatus()">
+          <h5 class="card-title">Nominee Details</h5>
+          <div class="row">
+              <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Employee/Nominee Name</label>
+                    <div class="input-group">
+                      <!-- Your specified icon inside the input group -->
+                      <div class="input-group-prepend">
+                        <span class="input-group-text cursor-pointer">
+                          <i (click)="openModal()" class="nc-icon nc-bullet-list-67"></i>
+                        </span>
                       </div>
-
-                      <div class="modal-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="card">
-                              <div class="card-header">
-                                <h4 class="card-title"> Employee Details</h4>
+                      <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayEmpModal}">
+                        <div class="modal-dialog modal-xl" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              
+                              <div class="modal-header">
+                                <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchData" (input)="onSearchInputChange($event)"/>
+                                <button (click)="search()">Search</button>
                               </div>
-                              <div class="card-body">
-                                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-                                  <table class="table">
-                                    <thead class="text-primary">
-                                      <th>Emp ID</th>
-                                      <th>Emp Name</th>
-                                      <th>Actions</th>
-                                    </thead>
-                                    <tbody>
-                                      <tr *ngFor="let employee of filteredEmployees"> 
-                                        <td>{{employee.emp_id}}</td>
-                                        <td>{{employee.emp_name}}</td>
-                                        <td>
-                                          <button class="btn btn-primary" (click)="addEmployee(employee)">
-                                            Add
-                                          </button>
-                                        </td>
-                                      </tr>
+                              
 
-                                    </tbody>
-                                  </table>
+                              <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()">
+                                <i class="fa-sharp fa-regular fa-circle-xmark  fa-2xs"></i>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title"> Employee Details</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                        <table class="table">
+                                          <thead class="text-primary">
+                                            <th>Emp ID</th>
+                                            <th>Emp Name</th>
+                                            <th>Actions</th>
+                                          </thead>
+                                          <tbody>
+                                            <tr *ngFor="let employee of filteredEmployees"> 
+                                              <td>{{employee.emp_id}}</td>
+                                              <td>{{employee.emp_name}}</td>
+                                              <td>
+                                                <button class="btn btn-primary" (click)="addEmployee(employee)">
+                                                  Add
+                                                </button>
+                                              </td>
+                                            </tr>
+
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Close</button>
                             </div>
                           </div>
                         </div>
-
-
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Close</button>
-                      </div>
+                      <input type="text" class="form-control" placeholder="" [value]="EmpForm.get('empName').value">
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" placeholder="" [value]="EmpForm.get('empName').value">
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label>Employee Code</label>
-              <input type="text" class="form-control" placeholder="Ex. 3645" [value]="EmpForm.get('emp_id').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Employee Code</label>
+                    <input type="text" class="form-control" placeholder="Ex. 3645" [value]="EmpForm.get('emp_id').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label>Employee Designation</label>
-              <input type="text" class="form-control" placeholder="Ex. Associate Consultant" [value]="EmpForm.get('empDesignation').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Employee Designation</label>
+                    <input type="text" class="form-control" placeholder="Ex. Associate Consultant" [value]="EmpForm.get('empDesignation').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label>Unit</label>
-              <input type="text" class="form-control" placeholder="Ex. Managed & Services" [value]="EmpForm.get('function_name').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Unit</label>
+                    <input type="text" class="form-control" placeholder="Ex. Managed & Services" [value]="EmpForm.get('function_name').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="primarySkillName">Skill</label>
-              <input type="text" class="form-control" placeholder="Ex. Java" [value]="EmpForm.get('primarySkillName').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="primarySkillName">Skill</label>
+                    <input type="text" class="form-control" placeholder="Ex. Java" [value]="EmpForm.get('primarySkillName').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="mindcraftExpMon">MindCraft Experience in months</label>
-              <input type="text" class="form-control" placeholder="Ex. 18" [value]="EmpForm.get('mindcraftExpMon').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="mindcraftExpMon">MindCraft Experience in months</label>
+                    <input type="text" class="form-control" placeholder="Ex. 18" [value]="EmpForm.get('mindcraftExpMon').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="totalExpMon">Total Experience in months</label>
-              <input type="text" class="form-control" placeholder="Ex. 56" [value]="EmpForm.get('totalExpMon').value" readonly>
-            </div>
-          </div>
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" placeholder="Ex. xyz@gmail.com" [value]="EmpForm.get('email').value" readonly>
-            </div>
-          </div>
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="mobileNo">Contact Number</label>
-              <input type="tel" class="form-control" placeholder="10 Digit Number" [value]="EmpForm.get('mobileNo').value" readonly>
-            </div>
-          </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="totalExpMon">Total Experience in months</label>
+                    <input type="text" class="form-control" placeholder="Ex. 56" [value]="EmpForm.get('totalExpMon').value" readonly>
+                  </div>
+                </div>
 
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="dob">DOB</label>
-              <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY" [value]="EmpForm.get('dob').value" readonly>
-            </div>
-          </div>
-          <div class="col-md-3 px-1">
-            <div class="form-group">
-              <label for="joiningDate">DOJ</label>
-              <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY" [value]="EmpForm.get('joiningDate').value" readonly>
-            </div>
-          </div>
-        
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" placeholder="Ex. xyz@gmail.com" [value]="EmpForm.get('email').value" readonly>
+                  </div>
+                </div>
 
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="mobileNo">Contact Number</label>
+                    <input type="tel" class="form-control" placeholder="10 Digit Number" [value]="EmpForm.get('mobileNo').value" readonly>
+                  </div>
+                </div>
 
-    </div>
-    </form>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="dob">DOB</label>
+                    <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY" [value]="EmpForm.get('dob').value" readonly>
+                  </div>
+                </div>
+
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="joiningDate">DOJ</label>
+                    <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY" [value]="EmpForm.get('joiningDate').value" readonly>
+                  </div>
+                </div>
+     
+            </div>
+          </form>
 
    
     <form [formGroup]="ProjectForm" *ngIf="updateFormStatus()">
@@ -341,52 +348,54 @@
     
     
 
-    <form [formGroup]="OnBehalfOfForm" *ngIf="updateFormStatus()">
-      <div class="row">
-    
-        <!-- Nominated By Dropdown -->
-        <div class="col-md-6 px-1">
-          <div class="form-group">
-            <label>On Behalf of</label>
-            <!-- Use a dropdown without the icon -->
-            <select class="form-control" formControlName="empName" (change)=" addOnBehalf($event.target.value)">
-              <option value="" selected>Choose On Behalf Of</option>
-              <option *ngFor="let on_behalf of BehalfOptions" [value]="on_behalf.emp_name">
-                {{ on_behalf.emp_name }}
-              </option>
-            </select>
+      <form [formGroup]="OnBehalfOfForm" *ngIf="updateFormStatus()">
+          <div class="row">
+        
+            <!-- Nominated By Dropdown -->
+            <div class="col-md-6 px-1">
+              <div class="form-group">
+                <label>On Behalf of</label>
+                <!-- Use a dropdown without the icon -->
+                <select class="form-control" formControlName="empName" (change)=" addOnBehalf($event.target.value)">
+                  <option value="" selected>Choose On Behalf Of</option>
+                  <option *ngFor="let on_behalf of BehalfOptions" [value]="on_behalf.emp_name">
+                    {{ on_behalf.emp_name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+        
+            <!-- Designation -->
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Designation</label>
+                <!-- <input type="text" class="form-control" placeholder="" [value]="NominatedByForm.get('empDesignation').value" readonly> -->
+                <input type="text" class="form-control" formControlName="empDesignation" readonly>
+              </div>
+            </div>
           </div>
-        </div>
-    
-        <!-- Designation -->
-        <div class="col-md-6 pl-1">
-          <div class="form-group">
-            <label>Designation</label>
-            <!-- <input type="text" class="form-control" placeholder="" [value]="NominatedByForm.get('empDesignation').value" readonly> -->
-            <input type="text" class="form-control" formControlName="empDesignation" readonly>
-          </div>
-        </div>
-      </div>
-    </form>
+      </form>
     
 
-    <div class="row justify-content-end align-items-end" *ngIf="updateFormStatus() && nominationForm.get('award_category').value !== '' && !showRatingScale">
-      <div class="row">
-        <div class="col-md-6">
-          <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
-        </div>               
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" >Save</button>
+      <div class="row justify-content-end align-items-end" *ngIf="updateFormStatus() && nominationForm.get('award_category').value !== '' && !showRatingScale">
+        <div class="row">
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
+          </div>               
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" >Save</button>
+          </div>
         </div>
       </div>
-    </div>
 
   </form>
 
 
     
+<!-- Parameter table starts here -->
 
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer'">
+    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Half Yearly Award'">
+
       <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
       <div class="table-responsive">
         <table class="table">
@@ -397,7 +406,8 @@
             
           </thead>
           <tbody>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'">
               <td>Exceeding Expectations</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -409,9 +419,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Process Oriented</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -424,7 +434,7 @@
                 </select>
               </td>
              
-            <tr>
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Time Management</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -435,10 +445,10 @@
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
-              </td>
-             
+              </td> 
             </tr>
-            <tr>
+
+            <tr  *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Work Efficiency</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -450,9 +460,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-              
             </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Punctuality</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -464,9 +474,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Quick Learner</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -478,9 +488,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Proactiveness</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -492,26 +502,11 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'">
-      <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class=" text-primary">
-            <th>Parameter</th>
-            <th>Performance description with examples</th>
-            <th>Rating by Nominator </th>
-            
-          </thead>
-          <tbody>
-            <tr>
-              <td> Customer Satisfaction</td>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'">
+              <td>Customer Satisfaction</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
@@ -522,9 +517,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-              
             </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'">
               <td>Ownership</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -536,79 +531,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-            <tr>
-              <td>Exceeding Expectations</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-              
-            </tr>
-            <tr>
-              <td>Process Oriented</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Time Management</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Work Efficiency</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Punctuality</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-              
-            </tr>
-            <tr>
+
+            <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'" >
               <td>Team Player</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -620,26 +545,10 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Rising Star Award'">
-      <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class=" text-primary">
-            <th>Parameter</th>
-            <th>Performance description with examples</th>
-            <th>Rating by Nominator </th>
-            
-          </thead>
-          <tbody>
-            <tr>
-              <td>Exceeding Expectations</td>
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+              <td>Contribution to MindCraft Business</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
@@ -650,109 +559,123 @@
                   <option value="5">5</option>
                 </select>
               </td>
-              
             </tr>
-            <tr>
-              <td>Process Oriented</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Time Management</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Work Efficiency</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-              
-            </tr>
-            <tr>
-              <td>Punctuality</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Quick Learner</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Proactiveness</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-              
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award'">
-      <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class=" text-primary">
-            <th>Parameter</th>
-            <th>Performance description with examples</th>
-            <th>Rating by Nominator </th>
-            
-          </thead>
-          <tbody>
-            <tr>
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+              <td>People Leadership</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+              <td>Customer Relationship & Satisfaction</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+              <td> Excellence in the core function</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'" >
+              <td>Result / Achievement Orientation</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+              <td>Order Generation</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+              <td> Customer Connect</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+              <td> Operational Efficiency </td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales'" >
+              <td>Collection Efficiency</td>
+              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td>
+                <select class="form-control" formControlName="ratingByNominator">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>Quality & Innovation</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -764,37 +687,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-              
             </tr>
-            <tr>
-              <td>Excellence in core function</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>People Orientation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
+
+            <tr  *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>Ownership & Commitment</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -806,58 +701,9 @@
                   <option value="5">5</option>
                 </select>
               </td>
-             
             </tr>
-            <tr>
-              
-              
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Team Award'">
-      <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
-      <div class="table-responsive">
-        <table class="table">
-          <thead class=" text-primary">
-            <th>Parameter</th>
-            <th>Performance description with examples</th>
-            <th>Rating by Nominator </th>
-            
-          </thead>
-          <tbody>
-            <tr>
-              <td>Quality & Innovation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              <td>Excellence in core function</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
+            <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>People Orientation</td>
               <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -869,35 +715,16 @@
                   <option value="5">5</option>
                 </select>
               </td>
-              
             </tr>
-            <tr>
-              <td>Ownership & Commitment</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
-              <td>
-                <select class="form-control" formControlName="ratingByNominator">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </td>
-             
-            </tr>
-            <tr>
-              
-              
-            </tr>
+
           </tbody>
         </table>
       </div>
+
     </div>
+<!-- Parameter table ends here -->
 
-
-<!--write everything inside these 3 div-->
-
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
