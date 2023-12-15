@@ -30,13 +30,14 @@ public class NomineeListService {
         "on_behalf_designation, active_yn, created_by, created_on, updated_by, updated_on) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+         System.out.println("Nomination ID : "+nomineeList.getNominationId());
 
-
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("nominee_list")
-                .usingGeneratedKeyColumns("nomination_id");
+        // SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+        //         .withTableName("nominee_list")
+        //         .usingGeneratedKeyColumns("nomination_id");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource()
+        // .addValue("nomination_id", nomineeList.getNominationId())
                 .addValue("award_id", nomineeList.getAwardId())
                 .addValue("award_category", nomineeList.getAwardCategory())
                 .addValue("award_sub_category", nomineeList.getAwardSubCategory())
@@ -70,6 +71,7 @@ public class NomineeListService {
 
             // Successfully inserted, you can handle the result if needed
             System.out.println("Result: " + result);
+            System.out.println("Nomination ID : "+nomineeList.getNominationId());
 
             Map<String, String> response = new HashMap<>();
             response.put("status", "success");
@@ -78,6 +80,7 @@ public class NomineeListService {
         } catch (Exception e) {
             e.printStackTrace(); // Log or handle the exception as needed
             Map<String, String> response = new HashMap<>();
+            System.out.println("Nomination ID : "+nomineeList.getNominationId());
             response.put("status", "error");
             response.put("message", "Error while Inserting Nominee List Details.");
             return response;

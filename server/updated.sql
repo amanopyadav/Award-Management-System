@@ -127,8 +127,8 @@ CREATE TABLE nominee_list (
     nomination_id SERIAL PRIMARY KEY,
 	award_id BIGINT NOT NULL,
 	award_category VARCHAR(100) NOT NULL,
-	award_sub_category VARCHAR(100) NOT NULL,
-	award_sub_category2 VARCHAR(100) NOT NULL,
+	award_sub_category VARCHAR(100),
+	award_sub_category2 VARCHAR(100),
 	
 	
     emp_code VARCHAR(100) NOT NULL,
@@ -161,6 +161,30 @@ CREATE TABLE nominee_list (
 	updated_on TIMESTAMP NOT NULL
 	
 );
+
+CREATE OR REPLACE FUNCTION insert_into_param()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the award_id and nomination_id are provided
+  IF NEW.award_id IS NOT NULL AND NEW.nomination_id IS NOT NULL THEN
+    -- Insert parameters into the parameter table based on award_id
+    INSERT INTO parameter (nomination_id, parameter_id)
+    SELECT NEW.nomination_id, parameter_id
+    FROM m_parameter
+    WHERE award_id = NEW.award_id;
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------TRIGGER-----------------------------
+
+CREATE TRIGGER trigger_insert_into_param
+AFTER INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_param();
+---------------------------------------------------
 
 
 
