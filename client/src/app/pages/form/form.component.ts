@@ -12,6 +12,8 @@
   })
   export class FormComponent implements OnInit {
 
+      private fetchedAwardId: number;
+
       nominationForm: FormGroup;
       EmpForm: FormGroup;
       ProjectForm: FormGroup;
@@ -167,32 +169,6 @@
     
 
 
-    
-
-    onSave() {
-      // Perform your save logic here
-    
-      // Notify user
-      this.notificationService.showNotification('Nomination form filled successfully.');
-    
-      // Reset the forms
-      this.nominationForm.reset();
-      this.EmpForm.reset();
-      this.ProjectForm.reset();
-      this.NominatedByForm.reset();
-      this.OnBehalfOfForm.reset();
-
-        // Set default value for award_category
-  this.nominationForm.get('award_category').setValue('');
-
-  // Update the form status
-  this.updateFormStatus();
-    
-      // Log to console
-      console.log('Form saved and reset successfully.');
-    }
-
-
  
     
 
@@ -229,22 +205,80 @@
     }
 
     onSubmit(): void {
-      if (this.mainForm.valid) {
-        const formData = this.mainForm.value;
-        console.log("FormData:", formData);
-  
-        // Call your service to submit formData
-        this.formService.addNominee(formData).subscribe(
-          (response) => {
-            console.log('Nominee data submitted successfully:', response);
-            // Handle success, such as showing a success message
-          },
-          (error) => {
-            console.error('Error submitting nominee data:', error);
-            // Handle error, such as showing an error message
-          }
-        );
+      const awardId =  this.fetchedAwardId
+      const awardCategory =  this.nominationForm.get('award_category').value
+      const awardSubCategory =  this.nominationForm.get('spot_award_subcategory').value
+      const empCode =  this.EmpForm.get('emp_id').value
+      const empName =  this.EmpForm.get('empName').value
+      const empDesignation =  this.EmpForm.get('empDesignation').value
+      const unit =  this.EmpForm.get('function_name').value
+      const skill =  this.EmpForm.get('primarySkillName').value
+      const mindcraftExpInMonths =  this.EmpForm.get('mindcraftExpMon').value
+      const totalExpInMonths =  this.EmpForm.get('totalExpMon').value
+      const emailId =  this.EmpForm.get('email').value
+      const contactNumber =  this.EmpForm.get('mobileNo').value
+      const dob =  this.EmpForm.get('dob').value
+      const doj =  this.EmpForm.get('joiningDate').value
+      const projectName =  this.ProjectForm.get('project_name').value
+      const projectCode =  this.ProjectForm.get('project_code').value
+      const client =  this.ProjectForm.get('client').value
+      const industryName =  this.ProjectForm.get('industry').value
+      const nominatedBy =  this.NominatedByForm.get('empName').value
+      const nomByDesignation =  this.NominatedByForm.get('empDesignation').value
+      const onbehalfOf =  this.OnBehalfOfForm.get('empName').value
+      const onBehalfDesignation =  this.OnBehalfOfForm.get('empDesignation').value
+      const activeYN =  true
+      const createdBy =  "Admin"
+      const createdOn =  "2023-12-13T12:00:00"
+      const updatedBy = "Admin"
+      const updatedOn = "2023-12-13T12:00:00"
+
+      const formData = {
+        awardId,
+        awardCategory,
+        awardSubCategory,
+        empCode,
+        empName,
+        empDesignation,
+        unit,
+        skill,
+        mindcraftExpInMonths,
+        totalExpInMonths,
+        emailId,
+        contactNumber,
+        dob,
+        doj,
+        projectName,
+        projectCode,
+        client,
+        industryName,
+        nominatedBy,
+        nomByDesignation,
+        onbehalfOf,
+        onBehalfDesignation,
+        activeYN,
+        createdBy,
+        createdOn,
+        updatedBy,
+        updatedOn
       }
+
+      console.log(formData);
+
+      this.formService.addNominee(formData).subscribe(
+        (response) => {
+          window.alert("Done")
+          console.log('Nominee data submitted successfully:', response);
+          // this.onSave()
+          // Handle success, such as showing a success message
+        },
+        (error) => {
+          window.alert("Failed")
+          console.error('Error submitting nominee data:', error);
+          // Handle error, such as showing an error message
+        }
+      );
+
     }
     
 
@@ -288,6 +322,8 @@
       this.formService.getAwardId(awardCategory, spotAwardSubcategory).subscribe(
         (data) => {
           console.log('Fetched award_id:', data);
+          this.fetchedAwardId = data; 
+          console.log("fetchedaward id data : "+this.fetchedAwardId);
           // You can use the fetched award_id as needed
         },
         (error) => {
@@ -298,6 +334,8 @@
       this.formService.getAwardId(awardCategory, halfYearlyAwardSubcategory).subscribe(
         (data) => {
           console.log('Fetched award_id:', data);
+          this.fetchedAwardId = data; 
+          console.log("fetchedaward id data : "+this.fetchedAwardId);
           // You can use the fetched award_id as needed
         },
         (error) => {
@@ -308,6 +346,8 @@
       this.formService.getAwardIdSingle(awardCategory).subscribe(
         (data) => {
           console.log('Fetched award_id:', data);
+          this.fetchedAwardId = data; 
+          console.log("fetchedaward id data : "+this.fetchedAwardId);
           // You can use the fetched award_id as needed
         },
         (error) => {
@@ -558,10 +598,32 @@
         this.NominatedByForm.get('empDesignation').setValue(selectedEmployee.designation);
       }
     }
+
+    onSave() {
+      // Perform your save logic here
+    
+      // Notify user
+      this.notificationService.showNotification('Nomination form filled successfully.');
+    
+      // Reset the forms
+      this.nominationForm.reset();
+      this.EmpForm.reset();
+      this.ProjectForm.reset();
+      this.NominatedByForm.reset();
+      this.OnBehalfOfForm.reset();
+
+        // Set default value for award_category
+      this.nominationForm.get('award_category').setValue('');
+
+      // Update the form status
+      this.updateFormStatus();
+    
+      // Log to console
+      console.log('Form saved and reset successfully.');
+    }
       
     
   }
-function onSave() {
-  throw new Error('Function not implemented.');
-}
+
+
 
