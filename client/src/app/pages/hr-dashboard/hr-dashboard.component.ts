@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HrService } from './hr.service';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -45,6 +46,10 @@ interface EmployeeTableRow {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+
+  constructor( private hrService: HrService){}
+
+
 onScroll() {
 throw new Error('Method not implemented.');
 }
@@ -61,6 +66,8 @@ shortlistData: any;
 restData: any;
 
   ngOnInit() {
+
+    this.fetchNomineeList();
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
@@ -98,40 +105,8 @@ restData: any;
           email: 'christinajosedaya@gmail.com',
           dob: '02/06/2001'
         },
-        {
-          empCode: '3643',
-          name: 'Nelson Amaran',
-          awardNominations: 'Rising Star',
-          previousAwards: '0',
-          doj: '01/09/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Java',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'In-house project',
-          nominatedBy: 'Amisha',
-          contactNumber: '9082121716',
-          email: 'nelson@gmail.com',
-          dob: '14/08/2000'
-        },
-        {
-          empCode: '3646',
-          name: 'Neha Sankhe',
-          awardNominations: 'Quarterly Performance Award',
-          previousAwards: 'Promising Newcomer, Rising Star',
-          doj: '12/08/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Angular & SpringBoot',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'Client Project',
-          nominatedBy: 'Deepti',
-          contactNumber: '93241445632',
-          email: 'neha@gmail.com',
-          dob: '17/09/2000'
-        },
+       
+      
         // Add more employee data as needed
       ]
     };
@@ -147,6 +122,18 @@ restData: any;
       Object.values(row).some(value =>
         value.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
       )
+    );
+  }
+
+  fetchNomineeList() {
+    this.hrService.getNomineeList().subscribe(
+      (data) => {
+        console.log('Nominee List Data:', data);
+        // You can now use the 'data' variable to work with the fetched data
+      },
+      (error) => {
+        console.error('Error fetching nominee list:', error);
+      }
     );
   }
 

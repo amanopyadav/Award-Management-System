@@ -54,5 +54,6 @@ export class FormService {
     
         return this.http.post<string>(this.addNomineeData, nomineeData, httpOptions);
       }
-    
+
+     
 }

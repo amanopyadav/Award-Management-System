@@ -9,6 +9,7 @@ import com.mindcraft.in.pojos.NomineeList;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -81,6 +82,22 @@ public class NomineeListService {
             response.put("message", "Error while Inserting Nominee List Details.");
             return response;
         }
+    }
+
+    public List<Map<String, Object>> getNomineeList() {
+        String sql = "SELECT * FROM nominee_list";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "No NomineeList Found.");
+        } else {
+            response.put("status", "success"); // Change status to "success"
+            response.put("message", "All NomineeList Found.");
+        }
+        return result;
     }
 }
 
