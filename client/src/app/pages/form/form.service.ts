@@ -29,9 +29,13 @@ export class FormService {
 
     getAwardId(awardCategory: string, awardSubCategory: string): Observable<number> {
         const url = `http://localhost:8080/getAwardId?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}`;
-      
         return this.http.get<number>(url);
-      }
+    }
+
+    getAwardIdForSales(awardCategory: string, awardSubCategory: string, awardSubCategory1: string): Observable<number> {
+      const url = `http://localhost:8080/getAwardIdForSales?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}&awardSubCategory1=${awardSubCategory1}`;
+      return this.http.get<number>(url);
+  }
 
     getAwardIdSingle(awardCategory: string): Observable<number> {
         const url = `http://localhost:8080/getAwardId?awardCategory=${awardCategory}`;

@@ -57,7 +57,7 @@
         </form>
 
             <div class="container"  *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award'">
-                <input type="checkbox" class="form-check-input" id="half_yearly_award_isSales" formControlName="half_yearly_award_isSales" name="half_yearly_award_isSales" (click)="handleCheckboxClick()">
+                <input type="checkbox" class="form-check-input" id="half_yearly_award_isSales" formControlName="half_yearly_award_isSales" name="half_yearly_award_isSales" (click)="handleCheckboxClick()" (change)="onAwardCategoryChange()">
                 <label class="form-check-label" for="half_yearly_award_isSales">Sales</label>
             </div>
 

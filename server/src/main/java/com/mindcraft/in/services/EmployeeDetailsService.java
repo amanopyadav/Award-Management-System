@@ -114,6 +114,39 @@ public class EmployeeDetailsService {
 
 
 
+    public Integer getAwardIdForSales(String awardCategory, String awardSubCategory, String awardSubCategory1) {
+        String sql;
+        sql = "SELECT award_id FROM m_award WHERE award_category = ? AND award_sub_category = ? AND award_sub_category2 = ?";
+
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, awardCategory);
+            preparedStatement.setString(2, awardSubCategory);
+            preparedStatement.setString(3, awardSubCategory1);
+
+            System.out.println("cat1: "+awardCategory);
+            System.out.println("cat2: "+awardSubCategory);
+            System.out.println("cat3: "+awardSubCategory1);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    System.out.println("done");
+                    return resultSet.getInt("award_id");
+                } else {
+                    // Handle the case where no result is found
+                    System.out.println("Reached null");
+                    return null; // or throw a custom exception, depending on your requirements
+                }
+            }
+        } catch (SQLException e) {
+            // Handle SQLException
+            throw new RuntimeException("Error executing SQL query", e);
+        }
+    }
+
+
+
 
      public Integer getAwardIdSingle(String awardCategory) {
         String sql;
