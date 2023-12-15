@@ -311,50 +311,64 @@
     onAwardCategoryChange() {
       this.updateFormStatus();
       const awardCategory = this.nominationForm.get('award_category').value;
-    const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
-    const halfYearlyAwardSubcategory = this.nominationForm.get('half_yearly_award_subcategory').value;
+      const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
+      const halfYearlyAwardSubcategory = this.nominationForm.get('half_yearly_award_subcategory').value;
+      const halfYearlyAwardSubcategory1 = this.nominationForm.get('half_yearly_award_isSales').value;
 
-    console.log("Award: ", awardCategory);
-    console.log("Spot award: ", spotAwardSubcategory);
-    console.log("Half yearly: ", halfYearlyAwardSubcategory);
+      console.log("Award: ", awardCategory);
+      console.log("Spot award: ", spotAwardSubcategory);
+      console.log("Half yearly: ", halfYearlyAwardSubcategory);
+      console.log("Half yearly sales: ", halfYearlyAwardSubcategory1);
 
-    if (awardCategory === 'Spot Award' && spotAwardSubcategory) {
-      this.formService.getAwardId(awardCategory, spotAwardSubcategory).subscribe(
-        (data) => {
-          console.log('Fetched award_id:', data);
-          this.fetchedAwardId = data; 
-          console.log("fetchedaward id data : "+this.fetchedAwardId);
-          // You can use the fetched award_id as needed
-        },
-        (error) => {
-          console.error('Error fetching award_id:', error);
-        }
-      );
-    } else if (awardCategory === 'Half Yearly Award' && halfYearlyAwardSubcategory) {
-      this.formService.getAwardId(awardCategory, halfYearlyAwardSubcategory).subscribe(
-        (data) => {
-          console.log('Fetched award_id:', data);
-          this.fetchedAwardId = data; 
-          console.log("fetchedaward id data : "+this.fetchedAwardId);
-          // You can use the fetched award_id as needed
-        },
-        (error) => {
-          console.error('Error fetching award_id:', error);
-        }
-      );
-    } else {
-      this.formService.getAwardIdSingle(awardCategory).subscribe(
-        (data) => {
-          console.log('Fetched award_id:', data);
-          this.fetchedAwardId = data; 
-          console.log("fetchedaward id data : "+this.fetchedAwardId);
-          // You can use the fetched award_id as needed
-        },
-        (error) => {
-          console.error('Error fetching award_id:', error);
-        }
-      );
-    }
+      if (awardCategory === 'Spot Award' && spotAwardSubcategory) {
+        this.formService.getAwardId(awardCategory, spotAwardSubcategory).subscribe(
+          (data) => {
+            console.log('Fetched award_id:', data);
+            this.fetchedAwardId = data; 
+            console.log("fetchedaward id data : "+this.fetchedAwardId);
+            // You can use the fetched award_id as needed
+          },
+          (error) => {
+            console.error('Error fetching award_id:', error);
+          }
+        );
+      } else if (awardCategory === 'Half Yearly Award' && halfYearlyAwardSubcategory && halfYearlyAwardSubcategory1) {
+        this.formService.getAwardIdForSales(awardCategory, halfYearlyAwardSubcategory,halfYearlyAwardSubcategory1).subscribe(
+          (data) => {
+            console.log('Fetched award_id:', data);
+            this.fetchedAwardId = data; 
+            console.log("fetchedaward id data : "+this.fetchedAwardId);
+            // You can use the fetched award_id as needed
+          },
+          (error) => {
+            console.error('Error fetching award_id:', error);
+          }
+        );
+      } else if (awardCategory === 'Half Yearly Award' && halfYearlyAwardSubcategory) {
+        this.formService.getAwardId(awardCategory, halfYearlyAwardSubcategory).subscribe(
+          (data) => {
+            console.log('Fetched award_id:', data);
+            this.fetchedAwardId = data; 
+            console.log("fetchedaward id data : "+this.fetchedAwardId);
+            // You can use the fetched award_id as needed
+          },
+          (error) => {
+            console.error('Error fetching award_id:', error);
+          }
+        );
+      }  else {
+        this.formService.getAwardIdSingle(awardCategory).subscribe(
+          (data) => {
+            console.log('Fetched award_id:', data);
+            this.fetchedAwardId = data; 
+            console.log("fetchedaward id data : "+this.fetchedAwardId);
+            // You can use the fetched award_id as needed
+          },
+          (error) => {
+            console.error('Error fetching award_id:', error);
+          }
+        );
+      }
     }
 
     private disableFormControls(formGroup: FormGroup): void {

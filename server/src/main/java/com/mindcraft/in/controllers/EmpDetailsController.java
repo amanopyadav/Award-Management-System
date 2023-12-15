@@ -48,6 +48,12 @@ public class EmpDetailsController {
         }
     }
 
+    @GetMapping("/getAwardIdForSales")
+    public Integer getAwardIdForSales(@RequestParam String awardCategory, @RequestParam String awardSubCategory, @RequestParam String awardSubCategory1 ) {
+        return employeeDetailsService.getAwardIdForSales(awardCategory, awardSubCategory, awardSubCategory1);
+        
+    }
+
     @GetMapping("/getProjectDetailsByEmployeeCode")
     public List<Map<String, Object>> getProjectDetailsByEmployeeCode(@RequestParam String employeeCode) {
         System.out.println("Received employeeCode: " + employeeCode);
