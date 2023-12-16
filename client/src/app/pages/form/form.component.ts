@@ -207,7 +207,19 @@
     onSubmit(): void {
       const awardId =  this.fetchedAwardId
       const awardCategory =  this.nominationForm.get('award_category').value
-      const awardSubCategory =  this.nominationForm.get('spot_award_subcategory').value
+      let awardSubCategory : String;
+      let awardSubCategory2 : String;
+      if(awardCategory == 'Spot Award'){
+        awardSubCategory =  this.nominationForm.get('spot_award_subcategory').value
+        awardSubCategory2 =  this.nominationForm.get('half_yearly_award_isSales').value
+      }else if(awardCategory == 'Half Yearly Award'){
+        awardSubCategory =  this.nominationForm.get('half_yearly_award_subcategory').value
+        awardSubCategory2 =  this.nominationForm.get('half_yearly_award_isSales').value
+      }else{
+        awardSubCategory =  this.nominationForm.get('half_yearly_award_subcategory').value
+        awardSubCategory2 =  this.nominationForm.get('half_yearly_award_isSales').value
+      }
+
       const empCode =  this.EmpForm.get('emp_id').value
       const empName =  this.EmpForm.get('empName').value
       const empDesignation =  this.EmpForm.get('empDesignation').value
@@ -237,6 +249,7 @@
         awardId,
         awardCategory,
         awardSubCategory,
+        awardSubCategory2,
         empCode,
         empName,
         empDesignation,
@@ -262,6 +275,9 @@
         updatedBy,
         updatedOn
       }
+
+      console.log("My subcategory : "+awardSubCategory2);
+      
 
       console.log(formData);
 
