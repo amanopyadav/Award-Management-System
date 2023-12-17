@@ -129,8 +129,6 @@ CREATE TABLE nominee_list (
 	award_category VARCHAR(100) NOT NULL,
 	award_sub_category VARCHAR(100),
 	award_sub_category2 VARCHAR(100),
-	
-	
     emp_code VARCHAR(100) NOT NULL,
     emp_name VARCHAR(100) NOT NULL,
 	emp_designation VARCHAR(100) NOT NULL,
@@ -142,24 +140,19 @@ CREATE TABLE nominee_list (
 	contact_number BIGINT NOT NULL,
 	dob DATE NOT NULL,
 	doj DATE NOT NULL,
-	
 	project_name VARCHAR(100) NOT NULL,
 	project_code BIGINT NOT NULL,
 	client VARCHAR(100) NOT NULL,
 	industry_name VARCHAR(100) NOT NULL,
-	
 	nominated_by VARCHAR(100) NOT NULL,
 	nom_by_designation VARCHAR(100) NOT NULL,
-	
 	onbehalf_of VARCHAR(100) NOT NULL,
 	on_behalf_designation VARCHAR(100) NOT NULL,
-	
 	active_yn BOOLEAN NOT NULL,
 	created_by VARCHAR(100) NOT NULL,
 	created_on TIMESTAMP NOT NULL,
 	updated_by VARCHAR(100) NOT NULL,
 	updated_on TIMESTAMP NOT NULL
-	
 );
 
 CREATE OR REPLACE FUNCTION insert_into_param()

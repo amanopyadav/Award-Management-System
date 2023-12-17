@@ -374,29 +374,20 @@
               </div>
             </div>
           </div>
-      </form>
+      <!-- </form> -->
     
 
-      <div class="row justify-content-end align-items-end" *ngIf="updateFormStatus() && nominationForm.get('award_category').value !== '' && !showRatingScale">
-        <div class="row">
-          <div class="col-md-6">
-            <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
-          </div>               
-          <div class="col-md-6">
-            <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" >Save</button>
-          </div>
-        </div>
-      </div>
-
-  </form>
 
 
     
 <!-- Parameter table starts here -->
 
+    
+
     <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Half Yearly Award'">
 
       <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
+
       <div class="table-responsive">
         <table class="table">
           <thead class=" text-primary">
@@ -405,11 +396,14 @@
             <th>Rating by Nominator </th>
             
           </thead>
+
           <tbody>
+
+
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'">
               <td>Exceeding Expectations</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="exceedingexpectations" id="exceedingexpectations" name="exceedingexpectations" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -423,7 +417,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Process Oriented</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea class="form-control textarea" formControlName="processoriented" name="processoriented" id="processoriented" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -436,7 +430,7 @@
              
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Time Management</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="timemanagement" name="timemanagement" id="timemanagement" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -450,7 +444,7 @@
 
             <tr  *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Work Efficiency</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="workefficiency" name="workefficiency" id="workefficiency" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -464,7 +458,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Punctuality</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="punctuality" name="punctuality" id="punctuality" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -478,7 +472,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Quick Learner</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="quicklearner" id="quicklearner" name="quicklearner" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -492,7 +486,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award'" >
               <td>Proactiveness</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="proactiveness" id="proactiveness" name="proactiveness" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -507,7 +501,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'">
               <td>Customer Satisfaction</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="customersatisfaction" id="customersatisfaction" name="customersatisfaction" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -521,7 +515,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'">
               <td>Ownership</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="ownership" id="ownership" name="ownership" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -535,7 +529,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Quarterly Award'" >
               <td>Team Player</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="teamplayer" id="teamplayer" name="teamplayer" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -549,7 +543,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales' " >
               <td>Contribution to MindCraft Business</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="contributiontomindcraftbusiness" id="contributiontomindcraftbusiness" name="contributiontomindcraftbusiness" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -563,7 +557,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>People Leadership</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="peopleleadership" id="peopleleadership" name="peopleleadership" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -577,7 +571,7 @@
 
             <tr *ngIf="nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>Customer Relationship & Satisfaction</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="customerrelationshipandsatisfaction" id="customerrelationshipandsatisfaction" name="customerrelationshipandsatisfaction" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -591,7 +585,7 @@
 
             <tr *ngIf=" nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td> Excellence in the core function</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="excellenceinthecorefunction" id="excellenceinthecorefunction" name="excellenceinthecorefunction" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -606,7 +600,7 @@
 
             <tr *ngIf=" nominationForm.get('award_category').value === 'Half Yearly Award' && nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value != 'sales'" >
               <td>Result / Achievement Orientation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="resultorachievementorientations" id="resultorachievementorientations" name="resultorachievementorientations" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -621,7 +615,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td>Order Generation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="ordergeneration" id="ordergeneration" name="ordergeneration" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -635,7 +629,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'"  >
               <td> Customer Connect</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="customerconnect" id="customerconnect" name="customerconnect" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -649,7 +643,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td> Operational Efficiency </td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="operationalefficiency" id="operationalefficiency" name="operationalefficiency" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -663,7 +657,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Lead Award' && nominationForm.get('half_yearly_award_isSales').value === 'sales' && nominationForm.get('award_category').value != 'Promising newcomer' && nominationForm.get('award_category').value != 'Quarterly Award' && nominationForm.get('award_category').value != 'Rising Star Award' && nominationForm.get('award_category').value != 'Spot Award' && nominationForm.get('award_category').value != 'Team Award'" >
               <td>Collection Efficiency</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="collectionefficiency" id="collectionefficiency" name="collectionefficiency" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -677,7 +671,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>Quality & Innovation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="qualityandinnovation" id="qualityandinnovation" name="qualityandinnovation" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -691,7 +685,7 @@
 
             <tr  *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>Ownership & Commitment</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="ownershipandcommitment" id="ownershipandcommitment" name="ownershipandcommitment" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -705,7 +699,7 @@
 
             <tr *ngIf="nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'" >
               <td>People Orientation</td>
-              <td><textarea class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
+              <td><textarea formControlName="peopleorientation" name="peopleorientation" id="peopleorientation" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
                 <select class="form-control" formControlName="ratingByNominator">
                   <option value="1">1</option>
@@ -717,11 +711,31 @@
               </td>
             </tr>
 
+          
+
           </tbody>
         </table>
       </div>
 
+
     </div>
+
+  </form>
+
+
+    
+    <div class="row justify-content-end align-items-end" *ngIf="updateFormStatus() && nominationForm.get('award_category').value !== '' && !showRatingScale">
+      <div class="row">
+        <div class="col-md-6">
+          <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
+        </div>               
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale" >Save</button>
+        </div>
+      </div>
+    </div>
+
+</form>
 <!-- Parameter table ends here -->
 
     </div>

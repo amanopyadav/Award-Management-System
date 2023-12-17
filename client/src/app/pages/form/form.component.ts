@@ -15,6 +15,7 @@
       private fetchedAwardId: number;
 
       nominationForm: FormGroup;
+      parameterForm: FormGroup;
       EmpForm: FormGroup;
       ProjectForm: FormGroup;
       NominatedByForm: FormGroup;
@@ -95,8 +96,35 @@
     
       this.OnBehalfOfForm = this.fb.group({
         empName: ['',{value:''}], // FormControl for OnBehalf of
-        empDesignation: ['']  // FormControl for designation
-      });   
+        empDesignation: [''],  // FormControl for designation
+        exceedingexpectations: [''],
+        processoriented: [''],
+        timemanagement: [''],
+        workefficiency: [''],
+        punctuality: [''],
+        quicklearner: [''],
+        proactiveness: [''],
+        customersatisfaction: [''],
+        ownership: [''],
+        teamplayer: [''],
+        contributiontomindcraftbusiness: [''],
+        peopleleadership: [''],
+        customerrelationshipandsatisfaction: [''],
+        excellenceinthecorefunction: [''],
+        resultorachievementorientations: [''],
+        ordergeneration: [''],
+        customerconnect: [''],
+        operationalefficiency: [''],
+        collectionefficiency: [''],
+        qualityandinnovation: [''],
+        ownershipandcommitment: [''],
+        peopleorientation: [''],
+
+      });
+      
+      this.parameterForm = this.fb.group({
+        exceedingexpectations: [''],
+      })
 
       this.mainForm = this.fb.group({
 
@@ -137,6 +165,10 @@
               empName: [{value:''}], // FormControl for OnBehalf of
               empDesignation: ['']  
             }),
+
+            parameterForm : this.fb.group({
+              exceedingexpectations: [''],
+            })
         
       });
   
@@ -144,15 +176,6 @@
     }
 
     handleCheckboxClick() {
-      // console.log("Clicked this");
-      // console.log("Sales before : "+this.nominationForm.get('half_yearly_award_isSales').value);
-
-      // this.nominationForm.get('half_yearly_award_isSales').setValue('sales');
-
-      // console.log("Sales after : "+this.nominationForm.get('half_yearly_award_isSales').value);
-
-
-       // Check if the checkbox is checked
       if (this.nominationForm.get('half_yearly_award_isSales').value === 'sales') {
         console.log("sales value after uncheck : "+this.nominationForm.get('award_category').value === 'Promising newcomer');
         
@@ -165,12 +188,6 @@
       
     }
 
-
-    
-
-
- 
-    
 
     ngOnInit() {
       
@@ -205,6 +222,7 @@
     }
 
     onSubmit(): void {
+
       const awardId =  this.fetchedAwardId
       const awardCategory =  this.nominationForm.get('award_category').value
       let awardSubCategory : String;
@@ -277,26 +295,126 @@
       }
 
       console.log("My subcategory : "+awardSubCategory2);
-      
+  
 
-      console.log(formData);
+      // this.formService.addNominee(formData).subscribe(
+      //   (response) => {
+      //     window.alert("Done")
+      //     console.log('Nominee data submitted successfully:', response);
+      //     // this.onSave()
+      //     // Handle success, such as showing a success message
+      //   },
+      //   (error) => {
+      //     window.alert("Failed")
+      //     console.error('Error submitting nominee data:', error);
+      //     // Handle error, such as showing an error message
+      //   }
+      // );
+
+
+      // const paramFormData = {
+      //   exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+      //   timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+      //   processoriented : this.OnBehalfOfForm.get('processoriented').value,
+      //   workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+      //   punctuality : this.OnBehalfOfForm.get('punctuality').value,
+      //   proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+      //   quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
+      //   customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
+      //   ownership : this.OnBehalfOfForm.get('ownership').value,
+      //   teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
+      //   contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
+      //   peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
+      //   customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
+      //   excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
+      //   resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
+      //   ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+      //   customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+      //   operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
+      //   collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
+      //   qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
+      //   ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
+      //   peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
+      // }
+
+      //   this.formService.addNomieeParam(paramFormData).subscribe(
+      //   (response) => {
+      //     window.alert("Done")
+      //     console.log('Nominee parameter data submitted successfully:', response);
+      //     // this.onSave()
+      //     // Handle success, such as showing a success message
+      //   },
+      //   (error) => {
+      //     window.alert("Failed")
+      //     console.error('Error submitting nominee parameter data:', error);
+      //     // Handle error, such as showing an error message
+      //   }
+      // );
+      
 
       this.formService.addNominee(formData).subscribe(
         (response) => {
           window.alert("Done")
           console.log('Nominee data submitted successfully:', response);
-          // this.onSave()
-          // Handle success, such as showing a success message
+    
+          // Fetch nominationId and latestAwardId
+          this.formService.getNominationIdAndLatestAwardId(awardCategory, awardSubCategory, awardSubCategory2).subscribe(
+            (data) => {
+              const { nominationId, latestAwardId } = data;
+              console.log("Nomination id: "+nominationId);
+              console.log("Award id: "+latestAwardId);
+              
+              
+              
+              // Add nominee parameter data using the fetched nominationId and latestAwardId
+              // const paramFormData = {
+              // exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+              // timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+              // processoriented : this.OnBehalfOfForm.get('processoriented').value,
+              // workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+              // punctuality : this.OnBehalfOfForm.get('punctuality').value,
+              // proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+              // quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
+              // customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
+              // ownership : this.OnBehalfOfForm.get('ownership').value,
+              // teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
+              // contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
+              // peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
+              // customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
+              // excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
+              // resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
+              // ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+              // customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+              // operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
+              // collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
+              // qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
+              // ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
+              // peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
+              // }
+              
+              // this.formService.addNomieeParam(nominationId, latestAwardId, paramFormData).subscribe(
+              //   (response) => {
+              //     window.alert("Done")
+              //     console.log('Nominee parameter data submitted successfully:', response);
+              //   },
+              //   (error) => {
+              //     window.alert("Failed")
+              //     console.error('Error submitting nominee parameter data:', error);
+              //   }
+              // );
+            },
+            (error) => {
+              console.error('Error fetching nominationId and latestAwardId:', error);
+            }
+          );
         },
         (error) => {
           window.alert("Failed")
           console.error('Error submitting nominee data:', error);
-          // Handle error, such as showing an error message
         }
       );
 
     }
-    
 
 
     updateFormStatus(): boolean {
@@ -323,6 +441,7 @@
 
       return this.setAwardForm;
     }
+
 
     onAwardCategoryChange() {
       this.updateFormStatus();
@@ -387,6 +506,7 @@
       }
     }
 
+
     private disableFormControls(formGroup: FormGroup): void {
       Object.keys(formGroup.controls).forEach((key) => {
         const control = formGroup.get(key);
@@ -395,6 +515,7 @@
       });
     }
 
+
     private enableFormControls(formGroup: FormGroup): void {
       Object.keys(formGroup.controls).forEach((key) => {
         const control = formGroup.get(key);
@@ -402,6 +523,7 @@
         console.log(`${key} is enabled: ${control.enabled}`);
       });
     }
+
 
       openModal() {
           console.log("Emp dialogbox Opened");
@@ -465,18 +587,7 @@
 
 
         }
-
-        // fetchAllProjects() {
-        //   this.formService.getProject().subscribe(
-        //     (data) => {
-        //       this.filteredProjects = data;
-        //       console.log(data);
-        //     },
-        //     (error) => {
-        //       console.error(error);
-        //     }
-        //   );
-        // }
+     
 
         fetchAllExceptFreshers() {
           this.formService.getExceptFreshers().subscribe(
@@ -542,10 +653,6 @@
           };
         
           this.ProjectForm.patchValue(projectFormValues);
-        
-          //console.log("Form values after adding project:", this.nominationForm.value);
-        
-          // Close the modal after adding a project
           this.onCloseHandledforProj();
         }
 
@@ -558,7 +665,6 @@
           empDesignation: selectedEmployee.designation_name,
         };
         this.NominatedByForm.patchValue(nominatedbyFormValues);
-        //this.onCloseHandledforNominatedBy();
       }
     }
     
@@ -573,7 +679,6 @@
           empDesignation: selectedEmployee.designation_name,
         };
         this.OnBehalfOfForm.patchValue(onbehalfFormValues);
-        //this.onCloseHandledforOnBehalf();
       }
     }
     

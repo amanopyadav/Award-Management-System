@@ -33,6 +33,7 @@ public class NomineeListController {
         }
     }
 
+
     @GetMapping("/nomineeList")
     public List<Map<String, Object>> getNomineeList() {
         List<Map<String, Object>> request = nomineeListService.getNomineeList();
