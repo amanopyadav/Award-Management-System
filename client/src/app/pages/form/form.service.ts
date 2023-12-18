@@ -76,9 +76,31 @@ export class FormService {
 
 
 
-      getNominationIdAndLatestAwardId(awardCategory: string, awardSubCategory: String, awardSubCategory2: String): Observable<{ nominationId: number, latestAwardId: number }> {
+      getNominationIdAndLatestAwardId3(awardCategory: string, awardSubCategory: String, awardSubCategory2: String): Observable<{ nominationId: number, latestAwardId: number }> {
 
-        const url = `http://localhost:8080/getNominationIdAndLatestAwardId?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}&awardSubCategory1=${awardSubCategory2}`;
+        const url = `http://localhost:8080/getNominationIdAndLatestAwardId3?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}&awardSubCategory1=${awardSubCategory2}`;
+
+        
+        return this.http.get<{ nominationId: number, latestAwardId: number }>(url);
+      }
+
+
+
+      
+      getNominationIdAndLatestAwardId2(awardCategory: string, awardSubCategory: String): Observable<{ nominationId: number, latestAwardId: number }> {
+
+        const url = `http://localhost:8080/getNominationIdAndLatestAwardId2?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}`;
+
+        
+        return this.http.get<{ nominationId: number, latestAwardId: number }>(url);
+      }
+
+
+
+      
+      getNominationIdAndLatestAwardId1(awardCategory: string): Observable<{ nominationId: number, latestAwardId: number }> {
+
+        const url = `http://localhost:8080/getNominationIdAndLatestAwardId1?awardCategory=${awardCategory}`;
 
         
         return this.http.get<{ nominationId: number, latestAwardId: number }>(url);

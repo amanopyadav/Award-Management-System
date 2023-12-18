@@ -52,6 +52,87 @@ public class ParameterService {
                         .setParameter("parameterId", parameterId);
     
                 switch (parameterId.intValue()) {
+                    case 1:
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        break;
+                    case 2:
+                        updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        break;
+                    case 3:
+                        updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        break;
+                    case 4:
+                        updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        break;
+                    case 5:
+                        updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        break;
+                    case 6:
+                        updateQueryObj.setParameter("description", paramFormData.getQuicklearner());
+                        break;
+                    case 7:
+                        updateQueryObj.setParameter("description", paramFormData.getProactiveness());
+                        break;
+                    case 8:
+                        updateQueryObj.setParameter("description", paramFormData.getCustomerconnect());
+                        break;
+                    case 9:
+                        updateQueryObj.setParameter("description", paramFormData.getOwnership());
+                        break;
+                    case 10:
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        break;
+                    case 11:
+                        updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        break;
+                    case 12:
+                        updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        break;
+                    case 13:
+                        updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        break;
+                    case 14:
+                        updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        break;
+                    case 15:
+                        updateQueryObj.setParameter("description", paramFormData.getTeamplayer());
+                        break;
+                    case 16:
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        break;
+                    case 17:
+                        updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        break;
+                    case 18:
+                        updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        break;
+                    case 19:
+                        updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        break;
+                    case 20:
+                        updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        break;
+                    case 21:
+                        updateQueryObj.setParameter("description", paramFormData.getQuicklearner());
+                        break;
+                    case 22:
+                        updateQueryObj.setParameter("description", paramFormData.getProactiveness());
+                        break;
+                    case 25:
+                        updateQueryObj.setParameter("description", paramFormData.getContributiontomindcraftbusiness());
+                        break;
+                    case 26:
+                        updateQueryObj.setParameter("description", paramFormData.getPeopleleadership());
+                        break;
+                    case 27:
+                        updateQueryObj.setParameter("description", paramFormData.getCustomerrelationshipandsatisfaction());
+                        break;
+                    case 28:
+                        updateQueryObj.setParameter("description", paramFormData.getExcellenceincorefunction());
+                        break;
+                    case 29:
+                        updateQueryObj.setParameter("description", paramFormData.getResultorachievementorientation());
+                        break;
                     case 30:
                         updateQueryObj.setParameter("description", paramFormData.getOrdergeneration());
                         break;
@@ -63,6 +144,21 @@ public class ParameterService {
                         break;
                     case 33:
                         updateQueryObj.setParameter("description", paramFormData.getCollectionefficiency());
+                        break;
+                    case 34:
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        break;
+                    case 35:
+                        updateQueryObj.setParameter("description", paramFormData.getQualityandinnovation());
+                        break;
+                    case 36:
+                        updateQueryObj.setParameter("description", paramFormData.getExcellenceincorefunction());
+                        break;
+                    case 37:
+                        updateQueryObj.setParameter("description", paramFormData.getPeopleorientation());
+                        break;
+                    case 38:
+                        updateQueryObj.setParameter("description", paramFormData.getOwnershipandcommitment());
                         break;
                     // Add more cases as needed
     
@@ -78,13 +174,60 @@ public class ParameterService {
     
 
 
-    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(String awardCategory, String awardSubCategory, String awardSubCategory1) {
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId3(String awardCategory, String awardSubCategory, String awardSubCategory1) {
         String sqlQuery = "SELECT nomination_id, award_id FROM nominee_list " +
                         "WHERE award_category = ? AND award_sub_category = ? " +
                         "AND award_sub_category2 = ? ORDER BY nomination_id DESC LIMIT 1";
 
         try {
             Map<String, Object> result = jdbcTemplate.queryForMap(sqlQuery, awardCategory, awardSubCategory, awardSubCategory1);
+            Number nominationId = (Number) result.get("nomination_id");
+            Number latestAwardId = (Number) result.get("award_id");
+
+            // Assuming NominationAndAwardIdResponse accepts Long parameters
+            return new NominationAndAwardIdResponse(
+                    nominationId != null ? nominationId.longValue() : 0,
+                    latestAwardId != null ? latestAwardId.longValue() : 0
+            );
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where no records are found
+            return new NominationAndAwardIdResponse(0, 0);
+        }
+    }
+
+
+
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId2(String awardCategory, String awardSubCategory) {
+        String sqlQuery = "SELECT nomination_id, award_id FROM nominee_list " +
+                        "WHERE award_category = ? AND award_sub_category = ? " +
+                        "ORDER BY nomination_id DESC LIMIT 1";
+
+        try {
+            Map<String, Object> result = jdbcTemplate.queryForMap(sqlQuery, awardCategory, awardSubCategory);
+            Number nominationId = (Number) result.get("nomination_id");
+            Number latestAwardId = (Number) result.get("award_id");
+
+            // Assuming NominationAndAwardIdResponse accepts Long parameters
+            return new NominationAndAwardIdResponse(
+                    nominationId != null ? nominationId.longValue() : 0,
+                    latestAwardId != null ? latestAwardId.longValue() : 0
+            );
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where no records are found
+            return new NominationAndAwardIdResponse(0, 0);
+        }
+    }
+
+
+
+
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId1(String awardCategory) {
+        String sqlQuery = "SELECT nomination_id, award_id FROM nominee_list " +
+                        "WHERE award_category = ? " +
+                        "ORDER BY nomination_id DESC LIMIT 1";
+
+        try {
+            Map<String, Object> result = jdbcTemplate.queryForMap(sqlQuery, awardCategory);
             Number nominationId = (Number) result.get("nomination_id");
             Number latestAwardId = (Number) result.get("award_id");
 

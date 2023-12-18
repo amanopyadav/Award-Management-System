@@ -45,7 +45,7 @@ public class ParameterController {
     }
 
 
-    @GetMapping("/getNominationIdAndLatestAwardId")
+    @GetMapping("/getNominationIdAndLatestAwardId3")
     public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
             @RequestParam String awardCategory,
             @RequestParam String awardSubCategory,
@@ -54,7 +54,28 @@ public class ParameterController {
                 System.out.println("Award category : "+awardCategory);
                 System.out.println("Award sub category: "+awardSubCategory);
                 System.out.println("Award sub category1: "+awardSubCategory1);
-        return parameterService.getNominationIdAndLatestAwardId(awardCategory, awardSubCategory, awardSubCategory1);
+        return parameterService.getNominationIdAndLatestAwardId3(awardCategory, awardSubCategory, awardSubCategory1);
+    }
+
+
+     @GetMapping("/getNominationIdAndLatestAwardId2")
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
+            @RequestParam String awardCategory,
+            @RequestParam String awardSubCategory) {
+
+                System.out.println("Award category : "+awardCategory);
+                System.out.println("Award sub category: "+awardSubCategory);
+        return parameterService.getNominationIdAndLatestAwardId2(awardCategory, awardSubCategory);
+    }
+
+
+
+     @GetMapping("/getNominationIdAndLatestAwardId1")
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
+            @RequestParam String awardCategory) {
+
+                System.out.println("Award category : "+awardCategory);
+        return parameterService.getNominationIdAndLatestAwardId1(awardCategory);
     }
 
    
