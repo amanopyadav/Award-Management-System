@@ -8,7 +8,8 @@ import { Observable } from "rxjs";
 export class FormService {
 
       private addNomineeData = 'http://localhost:8080/addNomineeList';
-      private addNomineeParamData = 'http://localhost:8080/addNomineeParamData'
+      private addNomineeParamData = 'http://localhost:8080/addNomineeParamData';
+
 
       constructor(private http: HttpClient) {}
 
@@ -76,7 +77,9 @@ export class FormService {
 
 
       getNominationIdAndLatestAwardId(awardCategory: string, awardSubCategory: String, awardSubCategory2: String): Observable<{ nominationId: number, latestAwardId: number }> {
+
         const url = `http://localhost:8080/getNominationIdAndLatestAwardId?awardCategory=${awardCategory}&awardSubCategory=${awardSubCategory}&awardSubCategory1=${awardSubCategory2}`;
+
         
         return this.http.get<{ nominationId: number, latestAwardId: number }>(url);
       }

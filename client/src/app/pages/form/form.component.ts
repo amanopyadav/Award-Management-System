@@ -295,62 +295,6 @@
       }
 
       console.log("My subcategory : "+awardSubCategory2);
-  
-
-      // this.formService.addNominee(formData).subscribe(
-      //   (response) => {
-      //     window.alert("Done")
-      //     console.log('Nominee data submitted successfully:', response);
-      //     // this.onSave()
-      //     // Handle success, such as showing a success message
-      //   },
-      //   (error) => {
-      //     window.alert("Failed")
-      //     console.error('Error submitting nominee data:', error);
-      //     // Handle error, such as showing an error message
-      //   }
-      // );
-
-
-      // const paramFormData = {
-      //   exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
-      //   timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
-      //   processoriented : this.OnBehalfOfForm.get('processoriented').value,
-      //   workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
-      //   punctuality : this.OnBehalfOfForm.get('punctuality').value,
-      //   proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
-      //   quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-      //   customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
-      //   ownership : this.OnBehalfOfForm.get('ownership').value,
-      //   teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
-      //   contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
-      //   peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
-      //   customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
-      //   excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
-      //   resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
-      //   ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
-      //   customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
-      //   operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
-      //   collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
-      //   qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
-      //   ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
-      //   peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
-      // }
-
-      //   this.formService.addNomieeParam(paramFormData).subscribe(
-      //   (response) => {
-      //     window.alert("Done")
-      //     console.log('Nominee parameter data submitted successfully:', response);
-      //     // this.onSave()
-      //     // Handle success, such as showing a success message
-      //   },
-      //   (error) => {
-      //     window.alert("Failed")
-      //     console.error('Error submitting nominee parameter data:', error);
-      //     // Handle error, such as showing an error message
-      //   }
-      // );
-      
 
       this.formService.addNominee(formData).subscribe(
         (response) => {
@@ -390,58 +334,42 @@
               const ownershipandcommitment = this.OnBehalfOfForm.get('ownershipandcommitment').value
               const peopleorientation = this.OnBehalfOfForm.get('peopleorientation').value
               
-              
-              
-              // Add nominee parameter data using the fetched nominationId and latestAwardId
-              // const paramFormData = {
-              // exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
-              // timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
-              // processoriented : this.OnBehalfOfForm.get('processoriented').value,
-              // workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
-              // punctuality : this.OnBehalfOfForm.get('punctuality').value,
-              // proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
-              // quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-              // customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
-              // ownership : this.OnBehalfOfForm.get('ownership').value,
-              // teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
-              // contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
-              // peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
-              // customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
-              // excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
-              // resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
-              // ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
-              // customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
-              // operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
-              // collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
-              // qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
-              // ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
-              // peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
-              // }
 
-              let paramFormData = []
+              // // let paramFormDataArray = []
+              let paramFormDataArray = [];
 
-              if(awardCategory=="Half Yearly Award" && awardSubCategory=="Lead Award" && awardSubCategory2=="sales"){
-                paramFormData = [
-                  ordergeneration,
-                  customerconnect,
-                  operationalefficiency,
-                  collectionefficiency
-                ]
+              if (awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award" && awardSubCategory2 == "sales") {
+                  const paramFormData = {
+                      ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+                      customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+                      operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
+                      collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value
+                  };
+                  paramFormDataArray.push(paramFormData);
+              }
+              
+              else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award"){
+                const paramFormData = {
+                  contributiontomindcraftbusiness,
+                  peopleleadership,
+                  customerrelationshipandsatisfaction,
+                  excellenceinthecorefunction,
+                  resultorachievementorientations
+                };
+                paramFormDataArray.push(paramFormData);
               }
 
-              console.log("Param form data : "+paramFormData);
-              
-              
-              this.formService.addNomieeParam(nominationId, latestAwardId, paramFormData).subscribe(
-                (response) => {
-                  window.alert("Done")
-                  console.log('Nominee parameter data submitted successfully:', response);
-                },
-                (error) => {
-                  window.alert("Failed")
-                  console.error('Error submitting nominee parameter data:', error);
-                }
+              this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
+                  (response) => {
+                      window.alert("Done");
+                      console.log('Nominee parameter data submitted successfully:', response);
+                  },
+                  (error) => {
+                      window.alert("Failed");
+                      console.error('Error submitting nominee parameter data:', error);
+                  }
               );
+
             },
             (error) => {
               console.error('Error fetching nominationId and latestAwardId:', error);

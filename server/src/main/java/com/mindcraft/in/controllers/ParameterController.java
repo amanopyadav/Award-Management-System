@@ -28,18 +28,22 @@ public class ParameterController {
         this.parameterService = parameterService;
     }
 
+
     @PostMapping("/addNomineeParamData/{nominationId}/{latestAwardId}")
     public ResponseEntity<String> addParameters(@RequestBody List<ParameterFormData> paramFormDataList,
-                                               @PathVariable Long nominationId,
-                                               @PathVariable Long latestAwardId) {
+                                                @PathVariable Long nominationId,
+                                                @PathVariable Long latestAwardId) {
         try {
+            // rest of your logic
             parameterService.updateParameters(paramFormDataList, nominationId, latestAwardId);
+            // System.out.println("List of data :"+paramFormDataList);
             return ResponseEntity.ok("Parameters added successfully.");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding parameters.");
         }
     }
+
 
     @GetMapping("/getNominationIdAndLatestAwardId")
     public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
@@ -52,5 +56,7 @@ public class ParameterController {
                 System.out.println("Award sub category1: "+awardSubCategory1);
         return parameterService.getNominationIdAndLatestAwardId(awardCategory, awardSubCategory, awardSubCategory1);
     }
+
+   
 }
 
