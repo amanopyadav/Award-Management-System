@@ -4,6 +4,7 @@
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
   import { ToastrService } from 'ngx-toastr';
+  
 
   @Component({
     selector: 'app-user',
@@ -49,7 +50,8 @@
       setAwardForm: boolean;
       selectedAwardId: number;
       showForm: boolean = false;
-      showRatingScale = false;
+      showRatingScale: boolean = false;
+      
     
 
     constructor(
@@ -160,6 +162,7 @@
       this.updateFormStatus();
       // Log to console
       console.log('Form saved successfully. Fields cleared.');
+      this.showRatingScale = true;
     }
     
 
@@ -188,6 +191,9 @@
         }, 0);
 
       }
+
+
+      
   
   
 
@@ -301,6 +307,7 @@
           (response) => {
             window.alert("Done")
             console.log('Nominee data submitted successfully:', response);
+            onSave()
             // Handle success, such as showing a success message
           },
           (error) => {
