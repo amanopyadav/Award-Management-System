@@ -360,9 +360,35 @@
           // Fetch nominationId and latestAwardId
           this.formService.getNominationIdAndLatestAwardId(awardCategory, awardSubCategory, awardSubCategory2).subscribe(
             (data) => {
+              console.log("Nomination and award id fetched");
+              
               const { nominationId, latestAwardId } = data;
               console.log("Nomination id: "+nominationId);
               console.log("Award id: "+latestAwardId);
+
+
+              const exceedingexpectations = this.OnBehalfOfForm.get('exceedingexpectations').value
+              const timemanagement = this.OnBehalfOfForm.get('timemanagement').value
+              const processoriented = this.OnBehalfOfForm.get('processoriented').value
+              const workefficiency = this.OnBehalfOfForm.get('workefficiency').value
+              const punctuality = this.OnBehalfOfForm.get('punctuality').value
+              const proactiveness = this.OnBehalfOfForm.get('proactiveness').value
+              const quicklearner = this.OnBehalfOfForm.get('quicklearner').value
+              const customersatisfaction = this.OnBehalfOfForm.get('customersatisfaction').value
+              const ownership = this.OnBehalfOfForm.get('ownership').value
+              const teamplayer = this.OnBehalfOfForm.get('teamplayer').value
+              const contributiontomindcraftbusiness = this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value
+              const peopleleadership = this.OnBehalfOfForm.get('peopleleadership').value
+              const customerrelationshipandsatisfaction = this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value
+              const excellenceinthecorefunction = this.OnBehalfOfForm.get('excellenceinthecorefunction').value
+              const resultorachievementorientations = this.OnBehalfOfForm.get('resultorachievementorientations').value
+              const ordergeneration = this.OnBehalfOfForm.get('ordergeneration').value
+              const customerconnect = this.OnBehalfOfForm.get('customerconnect').value
+              const operationalefficiency = this.OnBehalfOfForm.get('operationalefficiency').value
+              const collectionefficiency = this.OnBehalfOfForm.get('collectionefficiency').value
+              const qualityandinnovation = this.OnBehalfOfForm.get('qualityandinnovation').value
+              const ownershipandcommitment = this.OnBehalfOfForm.get('ownershipandcommitment').value
+              const peopleorientation = this.OnBehalfOfForm.get('peopleorientation').value
               
               
               
@@ -391,17 +417,31 @@
               // ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
               // peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
               // }
+
+              let paramFormData = []
+
+              if(awardCategory=="Half Yearly Award" && awardSubCategory=="Lead Award" && awardSubCategory2=="sales"){
+                paramFormData = [
+                  ordergeneration,
+                  customerconnect,
+                  operationalefficiency,
+                  collectionefficiency
+                ]
+              }
+
+              console.log("Param form data : "+paramFormData);
               
-              // this.formService.addNomieeParam(nominationId, latestAwardId, paramFormData).subscribe(
-              //   (response) => {
-              //     window.alert("Done")
-              //     console.log('Nominee parameter data submitted successfully:', response);
-              //   },
-              //   (error) => {
-              //     window.alert("Failed")
-              //     console.error('Error submitting nominee parameter data:', error);
-              //   }
-              // );
+              
+              this.formService.addNomieeParam(nominationId, latestAwardId, paramFormData).subscribe(
+                (response) => {
+                  window.alert("Done")
+                  console.log('Nominee parameter data submitted successfully:', response);
+                },
+                (error) => {
+                  window.alert("Failed")
+                  console.error('Error submitting nominee parameter data:', error);
+                }
+              );
             },
             (error) => {
               console.error('Error fetching nominationId and latestAwardId:', error);

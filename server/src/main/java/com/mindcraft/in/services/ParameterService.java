@@ -30,24 +30,35 @@ public class ParameterService {
 
     @Transactional
     public void updateParameters(List<ParameterFormData> paramFormDataList, Long nominationId, Long latestAwardId) {
-        for (ParameterFormData paramFormData : paramFormDataList) {
-            String parameterName = paramFormData.getName();
+        // Fetch the parameter_ids associated with the latestAwardId
+        String parameterIdsQuery = "SELECT parameter_id FROM m_parameter WHERE award_id = :latestAwardId";
+        Query parameterIdsQueryObj = entityManager.createNativeQuery(parameterIdsQuery)
+                .setParameter("latestAwardId", latestAwardId);
 
-            String updateQuery = "UPDATE parameter " +
-                    "SET description = :description, rating = :rating " +
-                    "WHERE nomination_id = :nominationId AND parameter_id = (SELECT parameter_id FROM m_parameter " +
-                    "WHERE award_id = :latestAwardId AND parameter_name = :parameterName)";
+        List<Long> parameterIds = parameterIdsQueryObj.getResultList();
 
-            Query query = entityManager.createNativeQuery(updateQuery)
-                    .setParameter("description", paramFormData.getDescription())
-                    .setParameter("rating", paramFormData.getRating())
-                    .setParameter("nominationId", nominationId)
-                    .setParameter("latestAwardId", latestAwardId)
-                    .setParameter("parameterName", parameterName);
+        System.out.println("Parameter ID: "+parameterIds);
 
-            query.executeUpdate();
+        // Iterate over the parameter_ids and update the parameter table
+        for (Long parameterId : parameterIds) {
+            for (ParameterFormData paramFormData : paramFormDataList) {
+                String parameterName = paramFormData.getName();
+
+                // Update the parameter table
+                String updateQuery = "UPDATE parameter " +
+                        "SET description = :description" +
+                        "WHERE nomination_id = :nominationId AND parameter_id = :parameterId";
+
+                Query updateQueryObj = entityManager.createNativeQuery(updateQuery)
+                        .setParameter("description", paramFormData.getDescription())
+                        .setParameter("nominationId", nominationId)
+                        .setParameter("parameterId", parameterId);
+
+                updateQueryObj.executeUpdate();
+            }
         }
     }
+
 
 
     public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(String awardCategory, String awardSubCategory, String awardSubCategory1) {
