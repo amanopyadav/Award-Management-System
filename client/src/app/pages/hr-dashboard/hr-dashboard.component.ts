@@ -1,45 +1,50 @@
-
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HrService } from './hr.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 declare interface EmployeeTableData {
   headerRow: string[];
   dataRows: {
+    awardCategory: string;
+    awardSubCategory: string;
+    awardSubCategory2: string;
     empCode: string;
-    name: string;
-    awardNominations: string;
-    previousAwards: string;
-    doj: string;
-    unit: string;
-    skill: string;
-    designation: string;
-    mindCraftExp: string;
-    totalExp: string;
-    clientProject: string;
+    empName: string;
     nominatedBy: string;
-    contactNumber: string;
-    email: string;
-    dob: string;
+    nomByDesignation: string;
+    onbehalfOf: string;
+    onBehalfDesignation: string;
   }[];
 }
 
 interface EmployeeTableRow {
+    awardCategory: string;
+    awardSubCategory: string;
+    awardSubCategory2: string;
+    empCode: string;
+    empName: string;
+    nominatedBy: string;
+    nomByDesignation: string;
+    onbehalfOf: string;
+    onBehalfDesignation: string;
+}
+
+interface EmployeeDetails{
   empCode: string;
-  name: string;
-  awardNominations: string;
-  previousAwards: string;
-  doj: string;
+  empName: string;
+  doj: Date;
   unit: string;
   skill: string;
-  designation: string;
-  mindCraftExp: string;
-  totalExp: string;
-  clientProject: string;
-  nominatedBy: string;
-  contactNumber: string;
-  email: string;
-  dob: string;
+  empDesignation: string;
+  mindcraftExpInMonths: number;
+  totalExpInMonths: number;
+  contactNumber: number;
+  emailId: string;
+  dob: number;
+  projectCode: number;
+  projectName: string;
+  client: string;
+  industryName: string;
 }
 
 @Component({
@@ -48,18 +53,16 @@ interface EmployeeTableRow {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
-  selectedEmployee: EmployeeTableRow;
+
+  EmpForm: FormGroup
+
+  Employees: EmployeeTableRow[];
+  selectedEmployee: EmployeeTableRow;  // Add this line
+  displayEmpModal: boolean = false;
   displayRatingModal: boolean;
   displayDetailsModal: boolean;
-  EmpForm: FormGroup; // Add the form group for Employee Details
 
-
-  constructor(private hrService: HrService, private formBuilder: FormBuilder) {
-    // Initialize the EmpForm in the constructor
-    this.EmpForm = this.formBuilder.group({
-      // Add form controls as needed
-    });
-  }
+  constructor( private hrService: HrService){}
 
 
 onScroll() {
@@ -83,42 +86,18 @@ restData: any;
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
+        'Shortlist',
+        'Award Category',
+        'Award Sub Category',
+        'Award Sub Category2',
         'Emp Code',
-        'Name',
-        'Award Nominations',
-        'Previous Awards',
-        'DOJ',
-        'Unit',
-        'Skill',
+        'Emp Name',
+        'Nominated By Designation',
+        'On Behalf Of',
         'Designation',
-        'MindCraft Exp. in months',
-        'Total Exp. in months',
-        'Client/Project',
-        'Nominated By',
-        'Contact Number',
-        'Email IDs',
-        'DOB'
+        'Actions'
       ],
-      dataRows: [
-        {
-          empCode: '3644',
-          name: 'Christina Manakkal',
-          awardNominations: 'Quarterly Performance Award',
-          previousAwards: 'Promising Newcomer, Rising Star',
-          doj: '01/08/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Angular & SpringBoot',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'In-house project',
-          nominatedBy: 'Amisha',
-          contactNumber: '8108526500',
-          email: 'christinajosedaya@gmail.com',
-          dob: '02/06/2001'
-        },
-       
-      
+      dataRows: [ 
         // Add more employee data as needed
       ]
     };
@@ -141,14 +120,44 @@ restData: any;
     this.hrService.getNomineeList().subscribe(
       (data: any[]) => {
         console.log('Nominee List Data:', data);
-        // ...
+        this.employeeTableData.dataRows = data.map(item => ({
+          awardCategory: item.award_category,
+          awardSubCategory: item.award_sub_category,
+          awardSubCategory2: item.award_sub_category2,
+          empCode: item.emp_code,
+          empName: item.emp_name,
+          nominatedBy: item.nominated_by,
+          nomByDesignation: item.nom_by_designation,
+          onbehalfOf: item.onbehalf_of,
+          onBehalfDesignation: item.on_behalf_designation
+        }));
+        this.filteredEmployeeData = [...this.employeeTableData.dataRows];
       },
       (error) => {
         console.error('Error fetching nominee list:', error);
       }
     );
   }
+
   
+  // openModal(employee: EmployeeTableRow) {
+  //   console.log("Emp dialogbox Opened");
+  //   this.selectedEmployee = employee;  // Set the selectedEmployee
+  //   this.displayEmpModal = true;  // Show the modal
+  // }
+
+  // onCloseHandled() {
+  //   console.log("Emp dialogbox Closed");
+  //   this.displayEmpModal = false;  // Hide the modal
+  //   this.selectedEmployee = null;
+  // }
+
+  // onCloseHandledforRating() {
+  //   console.log("rating dialogbox Closed");
+  //   this.displayRatingModal = false;  // Hide the modal
+  //   this.selectedEmployee = null;
+  // }
+
   viewRatings(employee: EmployeeTableRow) {
     console.log("Rating dialogbox Opened");
     this.selectedEmployee = employee;
@@ -165,7 +174,7 @@ restData: any;
 
 
   onCloseDetailsModal() {
-    console.log("Modal Closed");
+    console.log("Emp Details Modal Closed");
     this.displayRatingModal = false;
     this.displayDetailsModal = false;
     this.selectedEmployee = null;
@@ -173,10 +182,13 @@ restData: any;
   
 
   onCloseHandled() {
-    console.log("Modal Closed");
+    console.log("Rating Model Closed");
     this.displayRatingModal = false;
     this.displayDetailsModal = false;
     this.selectedEmployee = null;
   }
+  
+
+
   
 }
