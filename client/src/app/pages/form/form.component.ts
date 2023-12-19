@@ -393,7 +393,7 @@
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
                 exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
-                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
                 timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
