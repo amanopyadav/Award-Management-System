@@ -394,15 +394,23 @@
       
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
-                (response) => {
-                    window.alert("Done");
-                    console.log('Nominee parameter data submitted successfully:', response);
-                },
-                (error) => {
-                    window.alert("Failed");
-                    console.error('Error submitting nominee parameter data:', error);
-                }
-            );
+              (response: any) => {
+                  console.log('Nominee parameter data submitted successfully:', response);
+          
+                  // Check the status field in the response
+                  if (response && response.status === 'success') {
+                      window.alert('Nominee parameter added');  
+                  } else {
+                      window.alert('Failed to add nominee parameter');  
+                  }
+              },
+              (error) => {
+                  window.alert('Failed');
+                  console.error('Error submitting nominee parameter data:', error);
+                  // Additional error handling if needed
+              }
+          );
+          
 
           },
           (error) => {

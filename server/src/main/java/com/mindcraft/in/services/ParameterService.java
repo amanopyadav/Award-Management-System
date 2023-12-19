@@ -53,7 +53,7 @@ public class ParameterService {
     
                 switch (parameterId.intValue()) {
                     case 1:
-                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
                         break;
                     case 2:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
@@ -80,7 +80,7 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getOwnership());
                         break;
                     case 10:
-                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
                         break;
                     case 11:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
@@ -98,7 +98,7 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getTeamplayer());
                         break;
                     case 16:
-                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
                         break;
                     case 17:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
@@ -128,7 +128,7 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getCustomerrelationshipandsatisfaction());
                         break;
                     case 28:
-                        updateQueryObj.setParameter("description", paramFormData.getExcellenceincorefunction());
+                        updateQueryObj.setParameter("description", paramFormData.getexcellenceinthecorefunction());
                         break;
                     case 29:
                         updateQueryObj.setParameter("description", paramFormData.getResultorachievementorientation());
@@ -146,13 +146,13 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getCollectionefficiency());
                         break;
                     case 34:
-                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectation());
+                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
                         break;
                     case 35:
                         updateQueryObj.setParameter("description", paramFormData.getQualityandinnovation());
                         break;
                     case 36:
-                        updateQueryObj.setParameter("description", paramFormData.getExcellenceincorefunction());
+                        updateQueryObj.setParameter("description", paramFormData.getexcellenceinthecorefunction());
                         break;
                     case 37:
                         updateQueryObj.setParameter("description", paramFormData.getPeopleorientation());

@@ -1,7 +1,7 @@
 package com.mindcraft.in.pojos;
 
 public class ParameterFormData {
-    private String exceedingexpectation;
+    private String exceedingexpectations;
     private String processoriented;
     private String timemanagement;
     private String workefficiency;
@@ -14,8 +14,8 @@ public class ParameterFormData {
     private String contributiontomindcraftbusiness;
     private String peopleleadership;
     private String customerrelationshipandsatisfaction;
-    private String excellenceincorefunction;
-    private String resultorachievementorientation;
+    private String excellenceinthecorefunction;
+    private String resultorachievementorientations;
     private String qualityandinnovation;
     private String peopleorientation;
     private String ownershipandcommitment;
@@ -23,11 +23,12 @@ public class ParameterFormData {
     private String customerconnect;
     private String operationalefficiency;
     private String collectionefficiency;
-    public String getExceedingexpectation() {
-        return exceedingexpectation;
+
+    public String getexceedingexpectations() {
+        return exceedingexpectations;
     }
-    public void setExceedingexpectation(String exceedingexpectation) {
-        this.exceedingexpectation = exceedingexpectation;
+    public void setexceedingexpectations(String exceedingexpectations) {
+        this.exceedingexpectations = exceedingexpectations;
     }
     public String getProcessoriented() {
         return processoriented;
@@ -53,14 +54,14 @@ public class ParameterFormData {
     public void setPunctuality(String punctuality) {
         this.punctuality = punctuality;
     }
-    public ParameterFormData(String exceedingexpectation, String processoriented, String timemanagement,
+    public ParameterFormData(String exceedingexpectations, String processoriented, String timemanagement,
             String workefficiency, String punctuality, String quicklearner, String customersatisfaction,
             String proactiveness, String ownership, String teamplayer, String contributiontomindcraftbusiness,
-            String peopleleadership, String customerrelationshipandsatisfaction, String excellenceincorefunction,
-            String resultorachievementorientation, String qualityandinnovation, String peopleorientation,
+            String peopleleadership, String customerrelationshipandsatisfaction, String excellenceinthecorefunction,
+            String resultorachievementorientations, String qualityandinnovation, String peopleorientation,
             String ownershipandcommitment, String ordergeneration, String customerconnect, String operationalefficiency,
             String collectionefficiency) {
-        this.exceedingexpectation = exceedingexpectation;
+        this.exceedingexpectations = exceedingexpectations;
         this.processoriented = processoriented;
         this.timemanagement = timemanagement;
         this.workefficiency = workefficiency;
@@ -73,8 +74,8 @@ public class ParameterFormData {
         this.contributiontomindcraftbusiness = contributiontomindcraftbusiness;
         this.peopleleadership = peopleleadership;
         this.customerrelationshipandsatisfaction = customerrelationshipandsatisfaction;
-        this.excellenceincorefunction = excellenceincorefunction;
-        this.resultorachievementorientation = resultorachievementorientation;
+        this.excellenceinthecorefunction = excellenceinthecorefunction;
+        this.resultorachievementorientations = resultorachievementorientations;
         this.qualityandinnovation = qualityandinnovation;
         this.peopleorientation = peopleorientation;
         this.ownershipandcommitment = ownershipandcommitment;
@@ -132,17 +133,17 @@ public class ParameterFormData {
     public void setCustomerrelationshipandsatisfaction(String customerrelationshipandsatisfaction) {
         this.customerrelationshipandsatisfaction = customerrelationshipandsatisfaction;
     }
-    public String getExcellenceincorefunction() {
-        return excellenceincorefunction;
+    public String getexcellenceinthecorefunction() {
+        return excellenceinthecorefunction;
     }
-    public void setExcellenceincorefunction(String excellenceincorefunction) {
-        this.excellenceincorefunction = excellenceincorefunction;
+    public void setexcellenceinthecorefunction(String excellenceinthecorefunction) {
+        this.excellenceinthecorefunction = excellenceinthecorefunction;
     }
     public String getResultorachievementorientation() {
-        return resultorachievementorientation;
+        return resultorachievementorientations;
     }
-    public void setResultorachievementorientation(String resultorachievementorientation) {
-        this.resultorachievementorientation = resultorachievementorientation;
+    public void setResultorachievementorientation(String resultorachievementorientations) {
+        this.resultorachievementorientations = resultorachievementorientations;
     }
     public String getQualityandinnovation() {
         return qualityandinnovation;
