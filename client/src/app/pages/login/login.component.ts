@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
                         console.log('Password:', passwordValue);
 
                         if (specificValue == 'ROLE_MANAGER') {
-                            this.router.navigate(['/manager-dashboard']);
+                            this.router.navigate(['/form']);
                         }
                         else if (specificValue == 'ROLE_HR') {
                             this.router.navigate(['/hr-dashboard']);
