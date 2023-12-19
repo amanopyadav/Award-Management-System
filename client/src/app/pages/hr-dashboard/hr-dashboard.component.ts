@@ -1,43 +1,50 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HrService } from './hr.service';
+import { FormGroup } from '@angular/forms';
 
 declare interface EmployeeTableData {
   headerRow: string[];
   dataRows: {
+    awardCategory: string;
+    awardSubCategory: string;
+    awardSubCategory2: string;
     empCode: string;
-    name: string;
-    awardNominations: string;
-    previousAwards: string;
-    doj: string;
-    unit: string;
-    skill: string;
-    designation: string;
-    mindCraftExp: string;
-    totalExp: string;
-    clientProject: string;
+    empName: string;
     nominatedBy: string;
-    contactNumber: string;
-    email: string;
-    dob: string;
+    nomByDesignation: string;
+    onbehalfOf: string;
+    onBehalfDesignation: string;
   }[];
 }
 
 interface EmployeeTableRow {
+    awardCategory: string;
+    awardSubCategory: string;
+    awardSubCategory2: string;
+    empCode: string;
+    empName: string;
+    nominatedBy: string;
+    nomByDesignation: string;
+    onbehalfOf: string;
+    onBehalfDesignation: string;
+}
+
+interface EmployeeDetails{
   empCode: string;
-  name: string;
-  awardNominations: string;
-  previousAwards: string;
-  doj: string;
+  empName: string;
+  doj: Date;
   unit: string;
   skill: string;
-  designation: string;
-  mindCraftExp: string;
-  totalExp: string;
-  clientProject: string;
-  nominatedBy: string;
-  contactNumber: string;
-  email: string;
-  dob: string;
+  empDesignation: string;
+  mindcraftExpInMonths: number;
+  totalExpInMonths: number;
+  contactNumber: number;
+  emailId: string;
+  dob: number;
+  projectCode: number;
+  projectName: string;
+  client: string;
+  industryName: string;
 }
 
 @Component({
@@ -46,6 +53,13 @@ interface EmployeeTableRow {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+
+  EmpForm: FormGroup
+
+  Employees: EmployeeTableRow[];
+  selectedEmployee: EmployeeTableRow;  // Add this line
+  displayEmpModal: boolean = false;
+  displayRatingModal: boolean;
 
   constructor( private hrService: HrService){}
 
@@ -71,42 +85,18 @@ restData: any;
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
+        'Shortlist',
+        'Award Category',
+        'Award Sub Category',
+        'Award Sub Category2',
         'Emp Code',
-        'Name',
-        'Award Nominations',
-        'Previous Awards',
-        'DOJ',
-        'Unit',
-        'Skill',
+        'Emp Name',
+        'Nominated By Designation',
+        'On Behalf Of',
         'Designation',
-        'MindCraft Exp. in months',
-        'Total Exp. in months',
-        'Client/Project',
-        'Nominated By',
-        'Contact Number',
-        'Email IDs',
-        'DOB'
+        'Actions'
       ],
-      dataRows: [
-        {
-          empCode: '3644',
-          name: 'Christina Manakkal',
-          awardNominations: 'Quarterly Performance Award',
-          previousAwards: 'Promising Newcomer, Rising Star',
-          doj: '01/08/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Angular & SpringBoot',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'In-house project',
-          nominatedBy: 'Amisha',
-          contactNumber: '8108526500',
-          email: 'christinajosedaya@gmail.com',
-          dob: '02/06/2001'
-        },
-       
-      
+      dataRows: [ 
         // Add more employee data as needed
       ]
     };
@@ -127,9 +117,20 @@ restData: any;
 
   fetchNomineeList() {
     this.hrService.getNomineeList().subscribe(
-      (data) => {
+      (data: any[]) => {
         console.log('Nominee List Data:', data);
-        // You can now use the 'data' variable to work with the fetched data
+        this.employeeTableData.dataRows = data.map(item => ({
+          awardCategory: item.award_category,
+          awardSubCategory: item.award_sub_category,
+          awardSubCategory2: item.award_sub_category2,
+          empCode: item.emp_code,
+          empName: item.emp_name,
+          nominatedBy: item.nominated_by,
+          nomByDesignation: item.nom_by_designation,
+          onbehalfOf: item.onbehalf_of,
+          onBehalfDesignation: item.on_behalf_designation
+        }));
+        this.filteredEmployeeData = [...this.employeeTableData.dataRows];
       },
       (error) => {
         console.error('Error fetching nominee list:', error);
@@ -137,7 +138,32 @@ restData: any;
     );
   }
 
+  
+  openModal(employee: EmployeeTableRow) {
+    console.log("Emp dialogbox Opened");
+    this.selectedEmployee = employee;  // Set the selectedEmployee
+    this.displayEmpModal = true;  // Show the modal
+  }
+
+  onCloseHandled() {
+    console.log("Emp dialogbox Closed");
+    this.displayEmpModal = false;  // Hide the modal
+    this.selectedEmployee = null;
+  }
+
+  // onCloseHandledforRating() {
+  //   console.log("rating dialogbox Closed");
+  //   this.displayRatingModal = false;  // Hide the modal
+  //   this.selectedEmployee = null;
+  // }
+
+  // viewRatings(employee: EmployeeTableRow) {
+  //   console.log("Rating dialogbox Opened");
+  //   this.selectedEmployee = employee;  // Set the selectedEmployee
+  //   this.displayRatingModal = true;  // Show the modal
+  // }
+  
+
 
   
 }
-
