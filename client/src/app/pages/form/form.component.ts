@@ -97,6 +97,8 @@
       this.OnBehalfOfForm = this.fb.group({
         empName: ['',{value:''}], // FormControl for OnBehalf of
         empDesignation: [''],  // FormControl for designation
+
+        // Description
         exceedingexpectations: [''],
         processoriented: [''],
         timemanagement: [''],
@@ -119,6 +121,31 @@
         qualityandinnovation: [''],
         ownershipandcommitment: [''],
         peopleorientation: [''],
+
+
+        // Rating
+        exceedingexpectationsrating: [''],
+        processorientedrating: [''],
+        timemanagementrating: [''],
+        workefficiencyrating: [''],
+        punctualityrating: [''],
+        quicklearnerrating: [''],
+        proactivenessrating: [''],
+        customersatisfactionrating: [''],
+        ownershiprating: [''],
+        teamplayerrating: [''],
+        contributiontomindcraftbusinessrating: [''],
+        peopleleadershiprating: [''],
+        customerrelationshipandsatisfactionrating: [''],
+        excellenceinthecorefunctionrating: [''],
+        resultorachievementorientationsrating: [''],
+        ordergenerationrating: [''],
+        customerconnectrating: [''],
+        operationalefficiencyrating: [''],
+        collectionefficiencyrating: [''],
+        qualityandinnovationrating: [''],
+        ownershipandcommitmentrating: [''],
+        peopleorientationrating: [''],
 
       });
       
@@ -320,9 +347,13 @@
             if (awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award" && awardSubCategory2 == "sales") {
                 const paramFormData = {
                     ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+                    ordergenerationrating : this.OnBehalfOfForm.get('ordergenerationrating').value,
                     customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+                    customerconnectrating : this.OnBehalfOfForm.get('customerconnectrating').value,
                     operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
-                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value
+                    operationalefficiencyrating : this.OnBehalfOfForm.get('operationalefficiencyrating').value,
+                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
+                    collectionefficiencyrating : this.OnBehalfOfForm.get('collectionefficiencyrating').value
                 };
                 paramFormDataArray.push(paramFormData);
             }
@@ -330,10 +361,15 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award"){
               const paramFormData = {
                 contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
+                contributiontomindcraftbusinessrating : this.OnBehalfOfForm.get('contributiontomindcraftbusinessrating').value,
                 peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
+                peopleleadershiprating : this.OnBehalfOfForm.get('peopleleadershiprating').value,
                 customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
+                customerrelationshipandsatisfactionrating : this.OnBehalfOfForm.get('customerrelationshipandsatisfactionrating').value,
                 excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
-                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value
+                excellenceinthecorefunctionrating : this.OnBehalfOfForm.get('excellenceinthecorefunctionrating').value,
+                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
+                resultorachievementorientationsrating : this.OnBehalfOfForm.get('resultorachievementorientationsrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -341,9 +377,13 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Individual Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
+                qualityandinnovationrating : this.OnBehalfOfForm.get('qualityandinnovationrating').value,
                 ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
+                ownershipandcommitmentrating : this.OnBehalfOfForm.get('ownershipandcommitmentrating').value,
                 peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -351,12 +391,19 @@
             else if(awardCategory == "Promising newcomer"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
                
               };
               paramFormDataArray.push(paramFormData);
@@ -366,13 +413,21 @@
             else if(awardCategory == "Quarterly Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
+                customersatisfactionrating : this.OnBehalfOfForm.get('customersatisfactionrating').value,
                 ownership : this.OnBehalfOfForm.get('ownership').value,
-                teamplayer : this.OnBehalfOfForm.get('teamplayer').value
+                ownershiprating : this.OnBehalfOfForm.get('ownershiprating').value,
+                teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
+                teamplayerrating : this.OnBehalfOfForm.get('teamplayerrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -381,12 +436,19 @@
             else if(awardCategory == "Rising Star Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -436,10 +498,14 @@
 
             if (awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award" && awardSubCategory2 == "sales") {
                 const paramFormData = {
-                    ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+                     ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+                    ordergenerationrating : this.OnBehalfOfForm.get('ordergenerationrating').value,
                     customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+                    customerconnectrating : this.OnBehalfOfForm.get('customerconnectrating').value,
                     operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
-                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value
+                    operationalefficiencyrating : this.OnBehalfOfForm.get('operationalefficiencyrating').value,
+                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
+                    collectionefficiencyrating : this.OnBehalfOfForm.get('collectionefficiencyrating').value
                 };
                 paramFormDataArray.push(paramFormData);
             }
@@ -447,10 +513,15 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award"){
               const paramFormData = {
                 contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
+                contributiontomindcraftbusinessrating : this.OnBehalfOfForm.get('contributiontomindcraftbusinessrating').value,
                 peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
+                peopleleadershiprating : this.OnBehalfOfForm.get('peopleleadershiprating').value,
                 customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
+                customerrelationshipandsatisfactionrating : this.OnBehalfOfForm.get('customerrelationshipandsatisfactionrating').value,
                 excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
-                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value
+                excellenceinthecorefunctionrating : this.OnBehalfOfForm.get('excellenceinthecorefunctionrating').value,
+                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
+                resultorachievementorientationsrating : this.OnBehalfOfForm.get('resultorachievementorientationsrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -458,9 +529,13 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Individual Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
+                qualityandinnovationrating : this.OnBehalfOfForm.get('qualityandinnovationrating').value,
                 ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
+                ownershipandcommitmentrating : this.OnBehalfOfForm.get('ownershipandcommitmentrating').value,
                 peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -468,12 +543,19 @@
             else if(awardCategory == "Promising newcomer"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
                
               };
               paramFormDataArray.push(paramFormData);
@@ -482,14 +564,22 @@
 
             else if(awardCategory == "Quarterly Award"){
               const paramFormData = {
-                exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
+                customersatisfactionrating : this.OnBehalfOfForm.get('customersatisfactionrating').value,
                 ownership : this.OnBehalfOfForm.get('ownership').value,
-                teamplayer : this.OnBehalfOfForm.get('teamplayer').value
+                ownershiprating : this.OnBehalfOfForm.get('ownershiprating').value,
+                teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
+                teamplayerrating : this.OnBehalfOfForm.get('teamplayerrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -498,12 +588,19 @@
             else if(awardCategory == "Rising Star Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -546,9 +643,13 @@
             if (awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award" && awardSubCategory2 == "sales") {
                 const paramFormData = {
                     ordergeneration : this.OnBehalfOfForm.get('ordergeneration').value,
+                    ordergenerationrating : this.OnBehalfOfForm.get('ordergenerationrating').value,
                     customerconnect : this.OnBehalfOfForm.get('customerconnect').value,
+                    customerconnectrating : this.OnBehalfOfForm.get('customerconnectrating').value,
                     operationalefficiency : this.OnBehalfOfForm.get('operationalefficiency').value,
-                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value
+                    operationalefficiencyrating : this.OnBehalfOfForm.get('operationalefficiencyrating').value,
+                    collectionefficiency : this.OnBehalfOfForm.get('collectionefficiency').value,
+                    collectionefficiencyrating : this.OnBehalfOfForm.get('collectionefficiencyrating').value
                 };
                 paramFormDataArray.push(paramFormData);
             }
@@ -556,10 +657,15 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Lead Award"){
               const paramFormData = {
                 contributiontomindcraftbusiness : this.OnBehalfOfForm.get('contributiontomindcraftbusiness').value,
+                contributiontomindcraftbusinessrating : this.OnBehalfOfForm.get('contributiontomindcraftbusinessrating').value,
                 peopleleadership : this.OnBehalfOfForm.get('peopleleadership').value,
+                peopleleadershiprating : this.OnBehalfOfForm.get('peopleleadershiprating').value,
                 customerrelationshipandsatisfaction : this.OnBehalfOfForm.get('customerrelationshipandsatisfaction').value,
+                customerrelationshipandsatisfactionrating : this.OnBehalfOfForm.get('customerrelationshipandsatisfactionrating').value,
                 excellenceinthecorefunction : this.OnBehalfOfForm.get('excellenceinthecorefunction').value,
-                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value
+                excellenceinthecorefunctionrating : this.OnBehalfOfForm.get('excellenceinthecorefunctionrating').value,
+                resultorachievementorientations : this.OnBehalfOfForm.get('resultorachievementorientations').value,
+                resultorachievementorientationsrating : this.OnBehalfOfForm.get('resultorachievementorientationsrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -567,9 +673,13 @@
             else if(awardCategory == "Half Yearly Award" && awardSubCategory == "Individual Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 qualityandinnovation : this.OnBehalfOfForm.get('qualityandinnovation').value,
+                qualityandinnovationrating : this.OnBehalfOfForm.get('qualityandinnovationrating').value,
                 ownershipandcommitment : this.OnBehalfOfForm.get('ownershipandcommitment').value,
+                ownershipandcommitmentrating : this.OnBehalfOfForm.get('ownershipandcommitmentrating').value,
                 peopleorientation : this.OnBehalfOfForm.get('peopleorientation').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -577,12 +687,19 @@
             else if(awardCategory == "Promising newcomer"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
                
               };
               paramFormDataArray.push(paramFormData);
@@ -592,13 +709,21 @@
             else if(awardCategory == "Quarterly Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 customersatisfaction : this.OnBehalfOfForm.get('customersatisfaction').value,
+                customersatisfactionrating : this.OnBehalfOfForm.get('customersatisfactionrating').value,
                 ownership : this.OnBehalfOfForm.get('ownership').value,
-                teamplayer : this.OnBehalfOfForm.get('teamplayer').value
+                ownershiprating : this.OnBehalfOfForm.get('ownershiprating').value,
+                teamplayer : this.OnBehalfOfForm.get('teamplayer').value,
+                teamplayerrating : this.OnBehalfOfForm.get('teamplayerrating').value
               };
               paramFormDataArray.push(paramFormData);
             }
@@ -607,12 +732,19 @@
             else if(awardCategory == "Rising Star Award"){
               const paramFormData = {
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
                 punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
                 quicklearner : this.OnBehalfOfForm.get('quicklearner').value,
-                proactiveness : this.OnBehalfOfForm.get('proactiveness').value
+                quicklearnerrating : this.OnBehalfOfForm.get('quicklearnerrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
               };
               paramFormDataArray.push(paramFormData);
             }

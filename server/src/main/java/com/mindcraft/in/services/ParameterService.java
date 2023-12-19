@@ -44,7 +44,7 @@ public class ParameterService {
         for (Long parameterId : parameterIds) {
             for (ParameterFormData paramFormData : paramFormDataList) {
                 String updateQuery = "UPDATE parameter " +
-                        "SET description = :description " +
+                        "SET description = :description, rating = :rating " +
                         "WHERE nomination_id = :nominationId AND parameter_id = :parameterId";
     
                 Query updateQueryObj = entityManager.createNativeQuery(updateQuery)
@@ -53,112 +53,148 @@ public class ParameterService {
     
                 switch (parameterId.intValue()) {
                     case 1:
-                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectations());
+                        updateQueryObj.setParameter("rating", paramFormData.getExceedingexpectationsrating());
                         break;
                     case 2:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        updateQueryObj.setParameter("rating", paramFormData.getProcessorientedrating());
                         break;
                     case 3:
                         updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        updateQueryObj.setParameter("rating", paramFormData.getTimemanagementrating());
                         break;
                     case 4:
                         updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getWorkefficiencyrating());
                         break;
                     case 5:
                         updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        updateQueryObj.setParameter("rating", paramFormData.getPunctualityrating());
                         break;
                     case 6:
                         updateQueryObj.setParameter("description", paramFormData.getQuicklearner());
+                        updateQueryObj.setParameter("rating", paramFormData.getQuicklearnerrating());
                         break;
                     case 7:
                         updateQueryObj.setParameter("description", paramFormData.getProactiveness());
+                        updateQueryObj.setParameter("rating", paramFormData.getProactivenessrating());
                         break;
                     case 8:
                         updateQueryObj.setParameter("description", paramFormData.getCustomerconnect());
+                        updateQueryObj.setParameter("rating", paramFormData.getCustomerconnectrating());
                         break;
                     case 9:
                         updateQueryObj.setParameter("description", paramFormData.getOwnership());
+                        updateQueryObj.setParameter("rating", paramFormData.getOwnershiprating());
                         break;
                     case 10:
-                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectations());
+                        updateQueryObj.setParameter("rating", paramFormData.getExceedingexpectationsrating());
                         break;
                     case 11:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        updateQueryObj.setParameter("rating", paramFormData.getProcessorientedrating());
                         break;
                     case 12:
                         updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        updateQueryObj.setParameter("rating", paramFormData.getTimemanagementrating());
                         break;
                     case 13:
                         updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getWorkefficiencyrating());
                         break;
                     case 14:
                         updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        updateQueryObj.setParameter("rating", paramFormData.getPunctualityrating());
                         break;
                     case 15:
                         updateQueryObj.setParameter("description", paramFormData.getTeamplayer());
+                        updateQueryObj.setParameter("rating", paramFormData.getTeamplayerrating());
                         break;
                     case 16:
-                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectations());
+                        updateQueryObj.setParameter("rating", paramFormData.getExceedingexpectationsrating());
                         break;
                     case 17:
                         updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        updateQueryObj.setParameter("rating", paramFormData.getProcessorientedrating());
                         break;
                     case 18:
                         updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        updateQueryObj.setParameter("rating", paramFormData.getTimemanagementrating());
                         break;
                     case 19:
                         updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getWorkefficiencyrating());
                         break;
                     case 20:
                         updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        updateQueryObj.setParameter("rating", paramFormData.getPunctualityrating());
                         break;
                     case 21:
                         updateQueryObj.setParameter("description", paramFormData.getQuicklearner());
+                        updateQueryObj.setParameter("rating", paramFormData.getQuicklearnerrating());
                         break;
                     case 22:
                         updateQueryObj.setParameter("description", paramFormData.getProactiveness());
+                        updateQueryObj.setParameter("rating", paramFormData.getProactivenessrating());
                         break;
                     case 25:
                         updateQueryObj.setParameter("description", paramFormData.getContributiontomindcraftbusiness());
+                        updateQueryObj.setParameter("rating", paramFormData.getContributiontomindcraftbusinessrating());
                         break;
                     case 26:
                         updateQueryObj.setParameter("description", paramFormData.getPeopleleadership());
+                        updateQueryObj.setParameter("rating", paramFormData.getPeopleleadershiprating());
                         break;
                     case 27:
                         updateQueryObj.setParameter("description", paramFormData.getCustomerrelationshipandsatisfaction());
+                        updateQueryObj.setParameter("rating", paramFormData.getCustomerrelationshipandsatisfactionrating());
                         break;
                     case 28:
-                        updateQueryObj.setParameter("description", paramFormData.getexcellenceinthecorefunction());
+                        updateQueryObj.setParameter("description", paramFormData.getExcellenceinthecorefunction());
+                        updateQueryObj.setParameter("rating", paramFormData.getExcellenceinthecorefunctionrating());
                         break;
                     case 29:
-                        updateQueryObj.setParameter("description", paramFormData.getResultorachievementorientation());
+                        updateQueryObj.setParameter("description", paramFormData.getResultorachievementorientations());
+                        updateQueryObj.setParameter("rating", paramFormData.getResultorachievementorientationsrating());
                         break;
                     case 30:
                         updateQueryObj.setParameter("description", paramFormData.getOrdergeneration());
+                        updateQueryObj.setParameter("rating", paramFormData.getOrdergenerationrating());
                         break;
                     case 31:
                         updateQueryObj.setParameter("description", paramFormData.getCustomerconnect());
+                        updateQueryObj.setParameter("rating", paramFormData.getCustomerconnectrating());
                         break;
                     case 32:
                         updateQueryObj.setParameter("description", paramFormData.getOperationalefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getOperationalefficiencyrating());
                         break;
                     case 33:
                         updateQueryObj.setParameter("description", paramFormData.getCollectionefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getCollectionefficiencyrating());
                         break;
                     case 34:
-                        updateQueryObj.setParameter("description", paramFormData.getexceedingexpectations());
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectations());
+                        updateQueryObj.setParameter("rating", paramFormData.getExceedingexpectationsrating());
                         break;
                     case 35:
                         updateQueryObj.setParameter("description", paramFormData.getQualityandinnovation());
+                        updateQueryObj.setParameter("rating", paramFormData.getQualityandinnovationrating());
                         break;
                     case 36:
-                        updateQueryObj.setParameter("description", paramFormData.getexcellenceinthecorefunction());
+                        updateQueryObj.setParameter("description", paramFormData.getExcellenceinthecorefunction());
+                        updateQueryObj.setParameter("rating", paramFormData.getExcellenceinthecorefunctionrating());
                         break;
                     case 37:
                         updateQueryObj.setParameter("description", paramFormData.getPeopleorientation());
+                        updateQueryObj.setParameter("rating", paramFormData.getPeopleorientationrating());
                         break;
                     case 38:
                         updateQueryObj.setParameter("description", paramFormData.getOwnershipandcommitment());
+                        updateQueryObj.setParameter("rating", paramFormData.getOwnershipandcommitmentrating());
                         break;
                     // Add more cases as needed
     
