@@ -117,19 +117,18 @@ select * from emp_projects_records;
 -- This will update the emp_projects table with the latest projects details also its add on the new updated project data in emp_projects_records table.
 
 
+--         *****************   Updated date :- 15/12/2023  **********************
 
-
-
--- 2023-12-13
-
-
+select * from nominee_list
+select * from m_employee
 drop table nominee_list
 
 CREATE TABLE nominee_list (
     nomination_id SERIAL PRIMARY KEY,
 	award_id BIGINT NOT NULL,
 	award_category VARCHAR(100) NOT NULL,
-	award_sub_category VARCHAR(100) ,
+	award_sub_category VARCHAR(100),
+	award_sub_category2 VARCHAR(100),
     emp_code VARCHAR(100) NOT NULL,
     emp_name VARCHAR(100) NOT NULL,
 	emp_designation VARCHAR(100) NOT NULL,
@@ -147,12 +146,40 @@ CREATE TABLE nominee_list (
 	industry_name VARCHAR(100) NOT NULL,
 	nominated_by VARCHAR(100) NOT NULL,
 	nom_by_designation VARCHAR(100) NOT NULL,
-	onbehalf_of VARCHAR(100) ,
-	on_behalf_designation VARCHAR(100) ,
+	onbehalf_of VARCHAR(100) NOT NULL,
+	on_behalf_designation VARCHAR(100) NOT NULL,
 	active_yn BOOLEAN NOT NULL,
 	created_by VARCHAR(100) NOT NULL,
 	created_on TIMESTAMP NOT NULL,
 	updated_by VARCHAR(100) NOT NULL,
 	updated_on TIMESTAMP NOT NULL
 );
+
+CREATE OR REPLACE FUNCTION insert_into_param()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the award_id and nomination_id are provided
+  IF NEW.award_id IS NOT NULL AND NEW.nomination_id IS NOT NULL THEN
+    -- Insert parameters into the parameter table based on award_id
+    INSERT INTO parameter (nomination_id, parameter_id)
+    SELECT NEW.nomination_id, parameter_id
+    FROM m_parameter
+    WHERE award_id = NEW.award_id;
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------TRIGGER-----------------------------
+
+CREATE TRIGGER trigger_insert_into_param
+AFTER INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_param();
+---------------------------------------------------
+
+
+
+
 

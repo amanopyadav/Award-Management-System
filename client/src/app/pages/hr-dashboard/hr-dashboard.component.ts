@@ -1,4 +1,7 @@
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HrService } from './hr.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -45,6 +48,20 @@ interface EmployeeTableRow {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+  selectedEmployee: EmployeeTableRow;
+  displayRatingModal: boolean;
+  displayDetailsModal: boolean;
+  EmpForm: FormGroup; // Add the form group for Employee Details
+
+
+  constructor(private hrService: HrService, private formBuilder: FormBuilder) {
+    // Initialize the EmpForm in the constructor
+    this.EmpForm = this.formBuilder.group({
+      // Add form controls as needed
+    });
+  }
+
+
 onScroll() {
 throw new Error('Method not implemented.');
 }
@@ -61,6 +78,8 @@ shortlistData: any;
 restData: any;
 
   ngOnInit() {
+
+    this.fetchNomineeList();
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
@@ -98,40 +117,8 @@ restData: any;
           email: 'christinajosedaya@gmail.com',
           dob: '02/06/2001'
         },
-        {
-          empCode: '3643',
-          name: 'Nelson Amaran',
-          awardNominations: 'Rising Star',
-          previousAwards: '0',
-          doj: '01/09/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Java',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'In-house project',
-          nominatedBy: 'Amisha',
-          contactNumber: '9082121716',
-          email: 'nelson@gmail.com',
-          dob: '14/08/2000'
-        },
-        {
-          empCode: '3646',
-          name: 'Neha Sankhe',
-          awardNominations: 'Quarterly Performance Award',
-          previousAwards: 'Promising Newcomer, Rising Star',
-          doj: '12/08/2023',
-          unit: 'Projects & Managed Services',
-          skill: 'Angular & SpringBoot',
-          designation: 'Associate Consultant',
-          mindCraftExp: '4 months',
-          totalExp: '4 months',
-          clientProject: 'Client Project',
-          nominatedBy: 'Deepti',
-          contactNumber: '93241445632',
-          email: 'neha@gmail.com',
-          dob: '17/09/2000'
-        },
+       
+      
         // Add more employee data as needed
       ]
     };
@@ -150,7 +137,46 @@ restData: any;
     );
   }
 
+  fetchNomineeList() {
+    this.hrService.getNomineeList().subscribe(
+      (data: any[]) => {
+        console.log('Nominee List Data:', data);
+        // ...
+      },
+      (error) => {
+        console.error('Error fetching nominee list:', error);
+      }
+    );
+  }
+  
+  viewRatings(employee: EmployeeTableRow) {
+    console.log("Rating dialogbox Opened");
+    this.selectedEmployee = employee;
+    this.displayRatingModal = true;
+    this.displayDetailsModal = false; // Close the View Details modal
+  }
 
+  viewDetails(employee: EmployeeTableRow) {
+    console.log("Details dialogbox Opened");
+    this.selectedEmployee = employee;
+    this.displayDetailsModal = true;
+    this.displayRatingModal = false; // Close the View Ratings modal
+  }
+
+
+  onCloseDetailsModal() {
+    console.log("Modal Closed");
+    this.displayRatingModal = false;
+    this.displayDetailsModal = false;
+    this.selectedEmployee = null;
+  }
+  
+
+  onCloseHandled() {
+    console.log("Modal Closed");
+    this.displayRatingModal = false;
+    this.displayDetailsModal = false;
+    this.selectedEmployee = null;
+  }
   
 }
-

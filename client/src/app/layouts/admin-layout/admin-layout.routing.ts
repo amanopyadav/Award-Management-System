@@ -12,6 +12,7 @@ import { AddAssetComponent } from 'app/pages/addasset/addasset.component';
 import { HrDashboardComponent } from 'app/pages/hr-dashboard/hr-dashboard.component';
 import { FormComponent } from 'app/pages/form/form.component';
 
+
 export const AdminLayoutRoutes: Routes = [
     { path: 'manager-dashboard',        component: DashboardComponent               },
     { path: 'hr-dashboard',             component: HrDashboardComponent             },
@@ -23,5 +24,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',            component: NotificationsComponent           },
     { path: 'upgrade',                  component: UpgradeComponent                 },
     { path: 'addasset',                 component: AddAssetComponent                },
-    { path: 'form',                       component: FormComponent                    }
+    { path: 'form',                       component: FormComponent                    },
+  
 ];

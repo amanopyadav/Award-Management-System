@@ -9,6 +9,7 @@ import com.mindcraft.in.pojos.NomineeList;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,22 +24,24 @@ public class NomineeListService {
     public Map<String, String> insertNomineeListRecord(NomineeList nomineeList) {
        
         String sql = "INSERT INTO nominee_list " +
-        "(award_id, award_category, award_sub_category, emp_code, emp_name, emp_designation, unit, skill, " +
+        "(award_id, award_category, award_sub_category, award_sub_category2, emp_code, emp_name, emp_designation, unit, skill, " +
         "mindcraft_exp_in_months, total_exp_in_months, email_id, contact_number, dob, doj, project_name, " +
         "project_code, client, industry_name, nominated_by, nom_by_designation, onbehalf_of, " +
         "on_behalf_designation, active_yn, created_by, created_on, updated_by, updated_on) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+         System.out.println("Nomination ID : "+nomineeList.getNominationId());
 
-
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("nominee_list")
-                .usingGeneratedKeyColumns("nomination_id");
+        // SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+        //         .withTableName("nominee_list")
+        //         .usingGeneratedKeyColumns("nomination_id");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource()
+        // .addValue("nomination_id", nomineeList.getNominationId())
                 .addValue("award_id", nomineeList.getAwardId())
                 .addValue("award_category", nomineeList.getAwardCategory())
                 .addValue("award_sub_category", nomineeList.getAwardSubCategory())
+                .addValue("award_sub_category2", nomineeList.getAwardSubCategory2())
                 .addValue("emp_code", nomineeList.getEmpCode())
                 .addValue("emp_name", nomineeList.getEmpName())
                 .addValue("emp_designation", nomineeList.getEmpDesignation())
@@ -69,6 +72,8 @@ public class NomineeListService {
 
             // Successfully inserted, you can handle the result if needed
             System.out.println("Result: " + result);
+            System.out.println("Nomination ID : "+nomineeList.getNominationId());
+            System.out.println("Nomination sub category 2 : "+nomineeList.getAwardSubCategory2());
 
             Map<String, String> response = new HashMap<>();
             response.put("status", "success");
@@ -77,10 +82,28 @@ public class NomineeListService {
         } catch (Exception e) {
             e.printStackTrace(); // Log or handle the exception as needed
             Map<String, String> response = new HashMap<>();
+            System.out.println("Nomination ID : "+nomineeList.getNominationId());
+            System.out.println("Nomination sub category 2 : "+nomineeList.getAwardSubCategory2());
             response.put("status", "error");
             response.put("message", "Error while Inserting Nominee List Details.");
             return response;
         }
+    }
+
+    public List<Map<String, Object>> getNomineeList() {
+        String sql = "SELECT * FROM nominee_list";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "No NomineeList Found.");
+        } else {
+            response.put("status", "success"); // Change status to "success"
+            response.put("message", "All NomineeList Found.");
+        }
+        return result;
     }
 }
 

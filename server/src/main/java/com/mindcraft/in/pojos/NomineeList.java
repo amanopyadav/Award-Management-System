@@ -5,16 +5,18 @@ import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="nominee_list")
 public class NomineeList {
+    
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "nomination_id")
     private long nominationId;
 
@@ -26,6 +28,9 @@ public class NomineeList {
 
     @Column(name = "award_sub_category")
     private String awardSubCategory;
+
+    @Column(name = "award_sub_category2")
+    private String awardSubCategory2;
 
     @Column(name = "emp_code")
     private String empCode;
@@ -102,7 +107,7 @@ public class NomineeList {
      public NomineeList() {
     }
 
-    public NomineeList(long nominationId, long awardId, String awardCategory, String awardSubCategory, String empCode,
+    public NomineeList(long nominationId, long awardId, String awardCategory, String awardSubCategory, String awardSubCategory2, String empCode,
             String empName, String empDesignation, String unit, String skill, long mindcraftExpInMonths,
             long totalExpInMonths, String emailId, long contactNumber, Date dob, Date doj, String projectName,
             long projectCode, String client, String industryName, String nominatedBy, String nomByDesignation,
@@ -112,6 +117,7 @@ public class NomineeList {
         this.awardId = awardId;
         this.awardCategory = awardCategory;
         this.awardSubCategory = awardSubCategory;
+        this.awardSubCategory2 = awardSubCategory2;
         this.empCode = empCode;
         this.empName = empName;
         this.empDesignation = empDesignation;
@@ -168,6 +174,14 @@ public class NomineeList {
 
     public void setAwardSubCategory(String awardSubCategory) {
         this.awardSubCategory = awardSubCategory;
+    }
+
+     public String getAwardSubCategory2() {
+        return awardSubCategory2;
+    }
+
+    public void setAwardSubCategory2(String awardSubCategory2) {
+        this.awardSubCategory2 = awardSubCategory2;
     }
 
     public String getEmpCode() {
