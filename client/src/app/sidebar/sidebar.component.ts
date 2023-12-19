@@ -11,13 +11,13 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/manager-dashboard', title: 'Nomination Form Demo', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
+  // { path: '/manager-dashboard', title: 'Nomination Form Demo1', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
   { path: '/form', title: 'Nomination Form', icon: 'nc-paper', class: '', roles: ['ROLE_MANAGER'] },
   { path: '/hr-dashboard', title: 'Nominee List', icon: 'nc-paper', class: '', roles: ['ROLE_HR'] },
-  { path: '/icons', title: 'Icons', icon: 'nc-diamond', class: '', roles: ['ROLE_MANAGER'] },
-  { path: '/maps', title: 'Maps', icon: 'nc-pin-3', class: '', roles: ['ROLE_MANAGER'] },
-  { path: '/notifications', title: 'Notifications', icon: 'nc-bell-55', class: '', roles: ['ROLE_MANAGER'] },
-  { path: '/user', title: 'User Profile', icon: 'nc-single-02', class: '', roles: ['ROLE_MANAGER'] },
+ 
+  // { path: '/maps', title: 'Maps', icon: 'nc-pin-3', class: '', roles: ['ROLE_MANAGER'] },
+  // { path: '/notifications', title: 'Notifications', icon: 'nc-bell-55', class: '', roles: ['ROLE_MANAGER'] },
+  // { path: '/user', title: 'User Profile', icon: 'nc-single-02', class: '', roles: ['ROLE_MANAGER'] },
   { path: '/table', title: 'Table List', icon: 'nc-tile-56', class: '', roles: ['ROLE_USER'] },
   // { path: '/typography',    title: 'Typography',        icon:'nc-caps-small', class: '' },
   // { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
