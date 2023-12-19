@@ -1,6 +1,8 @@
 package com.mindcraft.in.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,20 +30,28 @@ public class ParameterController {
         this.parameterService = parameterService;
     }
 
+
     @PostMapping("/addNomineeParamData/{nominationId}/{latestAwardId}")
-    public ResponseEntity<String> addParameters(@RequestBody List<ParameterFormData> paramFormDataList,
-                                               @PathVariable Long nominationId,
-                                               @PathVariable Long latestAwardId) {
+    public ResponseEntity<Map<String, String>> addParameters(@RequestBody List<ParameterFormData> paramFormDataList,
+                                                @PathVariable Long nominationId,
+                                                @PathVariable Long latestAwardId) {
+        Map<String, String> response = new HashMap<>();
         try {
+            // rest of your logic
             parameterService.updateParameters(paramFormDataList, nominationId, latestAwardId);
-            return ResponseEntity.ok("Parameters added successfully.");
+            response.put("status", "success");
+            response.put("message", "Parameters added successfully.");
+        return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding parameters.");
+            response.put("status", "error");
+            response.put("message", "Error adding parameters.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
-    @GetMapping("/getNominationIdAndLatestAwardId")
+
+    @GetMapping("/getNominationIdAndLatestAwardId3")
     public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
             @RequestParam String awardCategory,
             @RequestParam String awardSubCategory,
@@ -50,7 +60,30 @@ public class ParameterController {
                 System.out.println("Award category : "+awardCategory);
                 System.out.println("Award sub category: "+awardSubCategory);
                 System.out.println("Award sub category1: "+awardSubCategory1);
-        return parameterService.getNominationIdAndLatestAwardId(awardCategory, awardSubCategory, awardSubCategory1);
+        return parameterService.getNominationIdAndLatestAwardId3(awardCategory, awardSubCategory, awardSubCategory1);
     }
+
+
+     @GetMapping("/getNominationIdAndLatestAwardId2")
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
+            @RequestParam String awardCategory,
+            @RequestParam String awardSubCategory) {
+
+                System.out.println("Award category : "+awardCategory);
+                System.out.println("Award sub category: "+awardSubCategory);
+        return parameterService.getNominationIdAndLatestAwardId2(awardCategory, awardSubCategory);
+    }
+
+
+
+     @GetMapping("/getNominationIdAndLatestAwardId1")
+    public NominationAndAwardIdResponse getNominationIdAndLatestAwardId(
+            @RequestParam String awardCategory) {
+
+                System.out.println("Award category : "+awardCategory);
+        return parameterService.getNominationIdAndLatestAwardId1(awardCategory);
+    }
+
+   
 }
 
