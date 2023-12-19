@@ -74,7 +74,7 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getProactiveness());
                         break;
                     case 8:
-                        updateQueryObj.setParameter("description", paramFormData.getCustomerconnect());
+                        updateQueryObj.setParameter("description", paramFormData.getCustomersatisfaction());
                         break;
                     case 9:
                         updateQueryObj.setParameter("description", paramFormData.getOwnership());
