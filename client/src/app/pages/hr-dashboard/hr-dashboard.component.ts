@@ -60,6 +60,7 @@ export class HrDashboardComponent implements OnInit {
   selectedEmployee: EmployeeTableRow;  // Add this line
   displayEmpModal: boolean = false;
   displayRatingModal: boolean;
+  displayDetailsModal: boolean;
 
   constructor( private hrService: HrService){}
 
@@ -139,17 +140,17 @@ restData: any;
   }
 
   
-  openModal(employee: EmployeeTableRow) {
-    console.log("Emp dialogbox Opened");
-    this.selectedEmployee = employee;  // Set the selectedEmployee
-    this.displayEmpModal = true;  // Show the modal
-  }
+  // openModal(employee: EmployeeTableRow) {
+  //   console.log("Emp dialogbox Opened");
+  //   this.selectedEmployee = employee;  // Set the selectedEmployee
+  //   this.displayEmpModal = true;  // Show the modal
+  // }
 
-  onCloseHandled() {
-    console.log("Emp dialogbox Closed");
-    this.displayEmpModal = false;  // Hide the modal
-    this.selectedEmployee = null;
-  }
+  // onCloseHandled() {
+  //   console.log("Emp dialogbox Closed");
+  //   this.displayEmpModal = false;  // Hide the modal
+  //   this.selectedEmployee = null;
+  // }
 
   // onCloseHandledforRating() {
   //   console.log("rating dialogbox Closed");
@@ -157,11 +158,35 @@ restData: any;
   //   this.selectedEmployee = null;
   // }
 
-  // viewRatings(employee: EmployeeTableRow) {
-  //   console.log("Rating dialogbox Opened");
-  //   this.selectedEmployee = employee;  // Set the selectedEmployee
-  //   this.displayRatingModal = true;  // Show the modal
-  // }
+  viewRatings(employee: EmployeeTableRow) {
+    console.log("Rating dialogbox Opened");
+    this.selectedEmployee = employee;
+    this.displayRatingModal = true;
+    this.displayDetailsModal = false; // Close the View Details modal
+  }
+
+  viewDetails(employee: EmployeeTableRow) {
+    console.log("Details dialogbox Opened");
+    this.selectedEmployee = employee;
+    this.displayDetailsModal = true;
+    this.displayRatingModal = false; // Close the View Ratings modal
+  }
+
+
+  onCloseDetailsModal() {
+    console.log("Emp Details Modal Closed");
+    this.displayRatingModal = false;
+    this.displayDetailsModal = false;
+    this.selectedEmployee = null;
+  }
+  
+
+  onCloseHandled() {
+    console.log("Rating Model Closed");
+    this.displayRatingModal = false;
+    this.displayDetailsModal = false;
+    this.selectedEmployee = null;
+  }
   
 
 

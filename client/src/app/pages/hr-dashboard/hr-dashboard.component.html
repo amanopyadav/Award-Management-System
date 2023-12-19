@@ -1,4 +1,3 @@
-<!-- hr-dashboard.component.html -->
 <div class="row">
   <div class="col-md-12">
     <div class="card">
@@ -47,121 +46,166 @@
                 <td class="align-middle">
                   <!-- View Details Icon -->
                   <li style="list-style: none; cursor: pointer;">
-                    <i class="nc-icon nc-single-copy-04" (click)="openModal(employee)"></i>
+                    <i class="nc-icon nc-single-copy-04" (click)="viewDetails(employee)"></i>
                     <p>View Details</p>
                   </li>
+
+
+                   <!-- View Details Modal -->
+                   <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayDetailsModal ? 'block' : 'none'}">
+                  <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Employee Details</h5>
+                      </div>
+                      <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+                        <!-- Modal body content for details -->
+                        <form [formGroup]="EmpForm">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="card">
+                                
+                                <div class="card-body">
+                                  <div class="details-container">
+                                    <div class="detail-item">
+                                      <span class="detail-label">Emp Code:</span>
+                                      <!-- <span>{{ employeeDetails?.empCode }}</span> -->
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Emp Name:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">DOJ:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Unit:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Skill:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Employee Designation:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Mindcraft Experience(In Months):</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Total Experience(In Months):</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Contact Number:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Email Id:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">DOB:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Project Code:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Project Name:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Client:</span>
+                                      
+                                    </div><br>
+                                    <div class="detail-item">
+                                      <span class="detail-label">Industry Name:</span>
+                                      
+                                    </div><br>
+  
+                                    <!-- Add other details in a similar manner -->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Add other form fields as needed -->
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <!-- Your modal footer content here -->
+                        <button type="button" class="btn btn-danger" (click)="onCloseDetailsModal()">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
                   <!-- View Ratings Icon -->
                   <li style="list-style: none; cursor: pointer;">
                     <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee)"></i>
                     <p>View Ratings</p>
                   </li>
                 </td>
-                
-
               </tr>
-
-              <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': selectedEmployee ? 'block' : 'none'}">
-                <div class="modal-dialog modal-xl" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <!-- Your modal header content here -->
-                      <h4 class="card-title"> Employee Details</h4>
-                    </div>
-                    <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
-                      <!-- Your modal body content here -->
-                      <form [formGroup]="EmpForm" >
-                        
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="card">
-                              
-                              <div class="card-body">
-                                <div class="details-container">
-                                  <div class="detail-item">
-                                    <span class="detail-label">Emp Code:</span>
-                                    <!-- <span>{{ employeeDetails?.empCode }}</span> -->
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Emp Name:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">DOJ:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Unit:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Skill:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Employee Designation:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Mindcraft Experience(In Months):</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Total Experience(In Months):</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Contact Number:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Email Id:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">DOB:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Project Code:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Project Name:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Client:</span>
-                                    
-                                  </div><br>
-                                  <div class="detail-item">
-                                    <span class="detail-label">Industry Name:</span>
-                                    
-                                  </div><br>
-
-                                  <!-- Add other details in a similar manner -->
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Add other form fields as needed -->
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <!-- Your modal footer content here -->
-                      <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-
-              <!--rating -->
-              
             </tbody>
           </table>
         </div>
+
+        <!-- Employee Ratings Modal -->
+        <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayRatingModal ? 'block' : 'none'}">
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Employee Ratings</h5>
+              </div>
+              <div class="modal-body">
+                <!-- Modal body content here -->
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-primary">
+                      <th>Parameter</th>
+                      <th>Performance description with examples</th>
+                      <th>Rating by Nominator</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Exceeding Expectations</td>
+                        <td>
+                          <textarea formControlName="exceedingexpectations" id="exceedingexpectations" name="exceedingexpectations"
+                            class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea>
+                        </td>
+                        <td>
+                          <select class="form-control" formControlName="ratingByNominator">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <!-- Add more rows as needed -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <!-- Your modal footer content here -->
+                <button type="button" class="btn btn-danger" (click)="onCloseHandled()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
