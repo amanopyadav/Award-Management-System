@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,6 +39,23 @@ public class NomineeListController {
     public List<Map<String, Object>> getNomineeList() {
         List<Map<String, Object>> request = nomineeListService.getNomineeList();
         return request;
+    }
+
+    @GetMapping("/latestEmpDialogRecord")
+    public ResponseEntity<Map<String, Object>> getLatestEmpDialogRecord(
+            @RequestParam String empCode,
+            @RequestParam String awardCategory,
+            @RequestParam String awardSubCategory,
+            @RequestParam String awardSubCategory2) {
+
+        Map<String, Object> result = nomineeListService.getLatestEmpDialogRecord(
+                empCode, awardCategory, awardSubCategory, awardSubCategory2);
+
+        if ("success".equals(result.get("status"))) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+        }
     }
 }
 
