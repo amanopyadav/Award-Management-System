@@ -17,6 +17,7 @@
         <div class="table-responsive" #tableContainer>
           <table class="table" style="width: auto; overflow-x: auto;">
             <thead class="text-primary" style="white-space: nowrap;">
+              <th class="align-middle">Shortlist</th>
               <th class="align-middle">Select</th>
               <th class="align-middle">Award Category</th>
               <th class="align-middle">Award Sub Category</th>
@@ -32,7 +33,7 @@
             <tbody>
               <tr *ngFor="let employee of filteredEmployeeData">
                 <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [(ngModel)]="employee.shortlist"></td>
-                
+                <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [(ngModel)]="employee.select"></td>
                 <td class="text-center align-middle">{{ employee.awardCategory }}</td>
                 <td class="text-center align-middle">{{ employee.awardSubCategory !== null && employee.awardSubCategory !== '' ? employee.awardSubCategory : 'None' }}</td>
                 <td class="text-center align-middle">{{ employee.awardSubCategory2 !== null && employee.awardSubCategory2 !== '' ? employee.awardSubCategory2 : 'None' }}</td>
