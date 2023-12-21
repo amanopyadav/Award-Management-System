@@ -3,6 +3,7 @@
   import { DateService } from './date.service';
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
+  import { Route, Router } from '@angular/router';
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -59,7 +60,8 @@
       @Inject(DateService) private dateService: DateService,
       private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
       private formService: FormService,
-      private notificationService: NotificationService
+      private notificationService: NotificationService,
+      private router: Router
     ) {
       this.nominationForm = this.fb.group({
         award_category: ['', Validators.required],
@@ -461,7 +463,9 @@
           
                   // Check the status field in the response
                   if (response && response.status === 'success') {
-                      window.alert('Nominee parameter added');  
+                      // window.alert('Nominee parameter added');  
+                      this.onSave()
+
                   } else {
                       window.alert('Failed to add nominee parameter');  
                   }
@@ -609,7 +613,8 @@
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
-                    window.alert("Done");
+                    // window.alert("Done");
+                    this.onSave();
                     console.log('Nominee parameter data submitted successfully:', response);
                 },
                 (error) => {
@@ -753,7 +758,8 @@
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
-                    window.alert("Done");
+                    // window.alert("Done");
+                    this.onSave();
                     console.log('Nominee parameter data submitted successfully:', response);
                 },
                 (error) => {
@@ -1117,6 +1123,8 @@
 
       // Update the form status
       this.updateFormStatus();
+      this.router.navigate(['/form']);
+
     
       // Log to console
       console.log('Form saved and reset successfully.');
