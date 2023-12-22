@@ -3,6 +3,7 @@
   import { DateService } from './date.service';
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
+  
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -55,6 +56,7 @@
     
 
     constructor(
+      // private toastr: ToastrService,
       private fb: FormBuilder,
       @Inject(DateService) private dateService: DateService,
       private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
@@ -218,6 +220,7 @@
 
     ngOnInit() {
       
+      
       this.fetchAllEmployees();
       this.updateFormStatus();
       this.cdRef.detectChanges();
@@ -325,7 +328,7 @@
 
        this.formService.addNominee(formData).subscribe(
         (response) => {
-          window.alert("Done")
+          // window.alert("Done")
           console.log('Nominee data submitted successfully:', response);
           
 
@@ -461,7 +464,9 @@
           
                   // Check the status field in the response
                   if (response && response.status === 'success') {
-                      window.alert('Nominee parameter added');  
+                      // window.alert('Nominee parameter added');
+                      this.onSave();
+
                   } else {
                       window.alert('Failed to add nominee parameter');  
                   }
@@ -609,8 +614,10 @@
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
-                    window.alert("Done");
+                    // window.alert("Done");
+                    this.onSave()
                     console.log('Nominee parameter data submitted successfully:', response);
+
                 },
                 (error) => {
                     window.alert("Failed");
@@ -753,7 +760,8 @@
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
-                    window.alert("Done");
+                    // window.alert("Done");
+                    this.onSave()
                     console.log('Nominee parameter data submitted successfully:', response);
                 },
                 (error) => {
@@ -1122,6 +1130,8 @@
       console.log('Form saved and reset successfully.');
     }
       
+
+    
     
   }
 
