@@ -3,7 +3,7 @@
   import { DateService } from './date.service';
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
-  
+  import { Route, Router } from '@angular/router';
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -61,7 +61,8 @@
       @Inject(DateService) private dateService: DateService,
       private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
       private formService: FormService,
-      private notificationService: NotificationService
+      private notificationService: NotificationService,
+      private router: Router
     ) {
       this.nominationForm = this.fb.group({
         award_category: ['', Validators.required],
@@ -396,7 +397,7 @@
                 exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
                 exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
                 processoriented : this.OnBehalfOfForm.get('processoriented').value,
-                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
+                processorientedrating : this.OnBehalfOfForm.get('processorientedrating').value,
                 timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
                 timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
                 workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
@@ -464,8 +465,8 @@
           
                   // Check the status field in the response
                   if (response && response.status === 'success') {
-                      // window.alert('Nominee parameter added');
-                      this.onSave();
+                      // window.alert('Nominee parameter added');  
+                      this.onSave()
 
                   } else {
                       window.alert('Failed to add nominee parameter');  
@@ -615,7 +616,7 @@
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
                     // window.alert("Done");
-                    this.onSave()
+                    this.onSave();
                     console.log('Nominee parameter data submitted successfully:', response);
 
                 },
@@ -761,7 +762,7 @@
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(
                 (response) => {
                     // window.alert("Done");
-                    this.onSave()
+                    this.onSave();
                     console.log('Nominee parameter data submitted successfully:', response);
                 },
                 (error) => {
@@ -1125,6 +1126,8 @@
 
       // Update the form status
       this.updateFormStatus();
+      this.router.navigate(['/form']);
+
     
       // Log to console
       console.log('Form saved and reset successfully.');

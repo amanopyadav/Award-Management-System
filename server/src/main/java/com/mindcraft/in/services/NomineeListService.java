@@ -105,5 +105,33 @@ public class NomineeListService {
         }
         return result;
     }
+
+    public Map<String, Object> getLatestEmpDialogRecord(String empCode, String awardCategory, String awardSubCategory, String awardSubCategory2) {
+        String sql = "SELECT * FROM emp_dialog " +
+                     "WHERE emp_code = ? " +
+                     "AND award_category = ? " +
+                     "AND award_sub_category = ? " +
+                     "AND award_sub_category2 = ? " +
+                     "ORDER BY updated_on DESC " +
+                     "LIMIT 1";
+    
+        try {
+            Map<String, Object> result = jdbcTemplate.queryForMap(sql, empCode, awardCategory, awardSubCategory, awardSubCategory2);
+    
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "success");
+            response.put("message", "Latest emp_dialog record found.");
+            response.put("data", result);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log or handle the exception as needed
+    
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "error");
+            response.put("message", "Error while fetching the latest emp_dialog record.");
+            return response;
+        }
+    }
+    
 }
 
