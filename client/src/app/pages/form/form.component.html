@@ -727,7 +727,7 @@
     <div class="row justify-content-end align-items-end" *ngIf="updateFormStatus() && nominationForm.get('award_category').value !== '' && !showRatingScale">
       <div class="row">
         <div class="col-md-6">
-          <button type="reset" class="btn btn-danger" [disabled]="showRatingScale">Cancel</button>
+          <button type="reset" class="btn btn-danger" (click)="cancel()" [disabled]="showRatingScale">Cancel</button>
         </div>               
         <div class="col-md-6">
           <button type="submit" class="btn btn-primary ml-2" [disabled]="showRatingScale">Save</button>

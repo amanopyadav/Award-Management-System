@@ -11,4 +11,8 @@ export class NotificationService {
   showNotification(message: string) {
     this.toastr.success(message, '');
   }
+
+  clearNotification(message: string) {
+    this.toastr.error(message, '');
+  }
 }

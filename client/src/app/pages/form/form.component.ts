@@ -1131,6 +1131,24 @@
     }
       
 
+    cancel(){
+      this.EmpForm.reset();
+      this.ProjectForm.reset();
+      this.NominatedByForm.reset();
+      this.OnBehalfOfForm.reset();
+      this.mainForm.reset();
+
+      this.nominationForm.get('award_category').setValue('choose sample');
+      this.ngOnInit();
+      this.nominationForm.get('spot_award_subcategory').setValue('');
+      this.nominationForm.get('half_yearly_award_subcategory').setValue('');
+      this.nominationForm.get('half_yearly_award_isSales').setValue('');
+
+      this.notificationService.clearNotification('Form reset.');
+      console.log("Form reset successfully");
+      
+    }
+
     
     
   }
