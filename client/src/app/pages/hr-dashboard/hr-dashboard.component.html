@@ -127,7 +127,7 @@
           <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}</h5>
+                <h5 class="modal-title text-primary">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}</h5>
               </div>
               <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <!-- Modal body content for details -->
@@ -137,57 +137,66 @@
                       <div class="card">
 
                         <div class="card-body">
-                          <div class="details-container">
+                          <div class="details-container" style="font-size: medium;">
                             <div class="detail-item">
-                              <span class="detail-label">DOJ:</span>
+                              <span class="detail-label">DOJ : </span>
+                              <span><b>{{employeeDetailsnew?.doj}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Unit:</span>
+                              <span class="detail-label">Unit : </span>
+                              <span><b>{{employeeDetailsnew?.unit}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Skill:</span>
+                              <span class="detail-label">Skill : </span>
+                              <span><b>{{employeeDetailsnew?.skill}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Employee Designation:</span>
+                              <span class="detail-label">Employee Designation : </span>
+                              <span><b>{{employeeDetailsnew?.empDesignation}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Mindcraft Experience(In Months):</span>
+                              <span class="detail-label">Mindcraft Experience(In Months) : </span>
+                              <span><b>{{employeeDetailsnew?.mindcraftExpInMonths}}</b></span>
+                            </div><br>
+                            <div class="detail-item">
+                              <span class="detail-label">Total Experience(In Months) : </span>
+                              <span><b>{{employeeDetailsnew?.totalExpInMonths}}</b></span>
+                            </div><br>
+                            <div class="detail-item">
+                              <span class="detail-label">Contact Number : </span>
+                              <span><b>{{employeeDetailsnew?.contactNumber}}</b></span>
+                            </div><br>
+                            <div class="detail-item">
+                              <span class="detail-label">Email Id : </span>
+                              <span><b>{{employeeDetailsnew?.emailId}}</b></span>
+                            </div><br>
+                            <div class="detail-item">
+                              <span class="detail-label">DOB : </span>
+                              <span><b>{{employeeDetailsnew?.dob}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Total Experience(In Months):</span>
+                              <span class="detail-label">Project Code : </span>
+                              <span><b>{{employeeDetailsnew?.projectCode}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Contact Number:</span>
+                              <span class="detail-label">Project Name : </span>
+                              <span><b>{{employeeDetailsnew?.projectName}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">Email Id:</span>
+                              <span class="detail-label">Client : </span>
+                              <span><b>{{employeeDetailsnew?.client}}</b></span>
 
                             </div><br>
                             <div class="detail-item">
-                              <span class="detail-label">DOB:</span>
-
-                            </div><br>
-                            <div class="detail-item">
-                              <span class="detail-label">Project Code:</span>
-
-                            </div><br>
-                            <div class="detail-item">
-                              <span class="detail-label">Project Name:</span>
-
-                            </div><br>
-                            <div class="detail-item">
-                              <span class="detail-label">Client:</span>
-
-                            </div><br>
-                            <div class="detail-item">
-                              <span class="detail-label">Industry Name:</span>
+                              <span class="detail-label">Industry Name : </span>
+                              <span><b>{{employeeDetailsnew?.industryName}}</b></span>
 
                             </div><br>
 
