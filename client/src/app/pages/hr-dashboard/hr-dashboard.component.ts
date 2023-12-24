@@ -18,18 +18,18 @@ declare interface EmployeeTableData {
 }
 
 interface EmployeeTableRow {
-    awardCategory: string;
-    awardSubCategory: string;
-    awardSubCategory2: string;
-    empCode: string;
-    empName: string;
-    nominatedBy: string;
-    nomByDesignation: string;
-    onbehalfOf: string;
-    onBehalfDesignation: string;
+  awardCategory: string;
+  awardSubCategory: string;
+  awardSubCategory2: string;
+  empCode: string;
+  empName: string;
+  nominatedBy: string;
+  nomByDesignation: string;
+  onbehalfOf: string;
+  onBehalfDesignation: string;
 }
 
-interface EmployeeDetails{
+interface EmployeeDetails {
   empCode: string;
   empName: string;
   doj: Date;
@@ -40,7 +40,27 @@ interface EmployeeDetails{
   totalExpInMonths: number;
   contactNumber: number;
   emailId: string;
-  dob: number;
+  dob: Date;
+  projectCode: number;
+  projectName: string;
+  client: string;
+  industryName: string;
+}
+
+
+
+interface EmployeeDetailsNew {
+  empCode: string;
+  empName: string;
+  doj: Date;
+  unit: string;
+  skill: string;
+  empDesignation: string;
+  mindcraftExpInMonths: number;
+  totalExpInMonths: number;
+  contactNumber: number;
+  emailId: string;
+  dob: Date;
   projectCode: number;
   projectName: string;
   client: string;
@@ -58,16 +78,18 @@ export class HrDashboardComponent implements OnInit {
 
   Employees: EmployeeTableRow[];
   selectedEmployee: EmployeeTableRow;  // Add this line
+  employeeDetails: EmployeeDetails;
+  employeeDetailsnew: EmployeeDetailsNew;
   displayEmpModal: boolean = false;
   displayRatingModal: boolean;
   displayDetailsModal: boolean;
 
-  constructor( private hrService: HrService){}
+  constructor(private hrService: HrService) { }
 
 
-onScroll() {
-throw new Error('Method not implemented.');
-}
+  onScroll() {
+    throw new Error('Method not implemented.');
+  }
   public employeeTableData: EmployeeTableData;
   public filteredEmployeeData: EmployeeTableRow[];
   public searchTerm: string = '';
@@ -76,9 +98,9 @@ throw new Error('Method not implemented.');
   @ViewChild('shortlistColumn') shortlistColumn: ElementRef;
   @ViewChild('selectColumn') selectColumn: ElementRef;
   @ViewChild('tableContainer') tableContainer: ElementRef;
-selectData: any;
-shortlistData: any;
-restData: any;
+  selectData: any;
+  shortlistData: any;
+  restData: any;
 
   ngOnInit() {
 
@@ -97,7 +119,7 @@ restData: any;
         'Designation',
         'Actions'
       ],
-      dataRows: [ 
+      dataRows: [
         // Add more employee data as needed
       ]
     };
@@ -105,7 +127,7 @@ restData: any;
 
     // Add a scroll event listener to the tableContainer
     this.tableContainer.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
-  
+
   }
 
   applyFilter() {
@@ -139,7 +161,7 @@ restData: any;
     );
   }
 
-  
+
   // openModal(employee: EmployeeTableRow) {
   //   console.log("Emp dialogbox Opened");
   //   this.selectedEmployee = employee;  // Set the selectedEmployee
@@ -167,7 +189,28 @@ restData: any;
 
   viewDetails(employee: EmployeeTableRow) {
     console.log("Details dialogbox Opened");
-    this.selectedEmployee = employee;
+
+    // Fetch detailed information for the selected employee
+    this.hrService.getEmployeeDetails(employee.empCode).subscribe(
+      (details: EmployeeDetailsNew) => {
+        console.log("Yes fetched");
+
+
+
+        this.employeeDetailsnew = details;
+        console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
+
+
+        // Open the details modal after fetching the details
+        this.displayDetailsModal = true;
+        this.displayRatingModal = false; // Close the View Ratings modal
+      },
+      (error) => {
+        console.error('Error fetching employee details:', error);
+      }
+    );
+
+    // this.selectedEmployee = employee;
     this.displayDetailsModal = true;
     this.displayRatingModal = false; // Close the View Ratings modal
   }
@@ -179,7 +222,7 @@ restData: any;
     this.displayDetailsModal = false;
     this.selectedEmployee = null;
   }
-  
+
 
   onCloseHandled() {
     console.log("Rating Model Closed");
@@ -187,8 +230,8 @@ restData: any;
     this.displayDetailsModal = false;
     this.selectedEmployee = null;
   }
-  
 
 
-  
+
+
 }

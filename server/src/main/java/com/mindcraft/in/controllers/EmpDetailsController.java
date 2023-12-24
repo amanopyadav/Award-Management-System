@@ -4,20 +4,26 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mindcraft.in.pojos.EmployeeDetails;
 import com.mindcraft.in.services.EmployeeDetailsService;
+import com.mindcraft.in.services.NomineeListService;
 
 @RestController
 public class EmpDetailsController {
     private final EmployeeDetailsService employeeDetailsService;
+    private final NomineeListService nomineeListService;
 
     @Autowired
-    public EmpDetailsController(EmployeeDetailsService employeeDetailsService) {
+    public EmpDetailsController(EmployeeDetailsService employeeDetailsService,NomineeListService nomineeListService) {
         this.employeeDetailsService = employeeDetailsService;
+        this.nomineeListService = nomineeListService;
     }
 
     @GetMapping("/allEmployees")
@@ -54,16 +60,19 @@ public class EmpDetailsController {
         
     }
 
-    @GetMapping("/getProjectDetailsByEmployeeCode")
-    public List<Map<String, Object>> getProjectDetailsByEmployeeCode(@RequestParam String employeeCode) {
-        System.out.println("Received employeeCode: " + employeeCode);
+    // New method to get employee details
+    @GetMapping("/employeeDetails/{empCode}")
+    public ResponseEntity<EmployeeDetails> getEmployeeDetails(@PathVariable String empCode) {
+        System.out.println("Also reached here");
+        EmployeeDetails employeeDetails = nomineeListService.getEmployeeDetails(empCode);
 
-        List<Map<String, Object>> result = employeeDetailsService.getProjectDetailsByEmployeeCode(employeeCode);
-
-        System.out.println("Result from service: " + result);
-
-        return result;
+        if (employeeDetails != null) {
+            return ResponseEntity.ok(employeeDetails);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
 
 
 

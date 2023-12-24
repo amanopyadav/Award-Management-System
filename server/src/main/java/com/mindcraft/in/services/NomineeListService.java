@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 
+import com.mindcraft.in.pojos.EmployeeDetails;
 import com.mindcraft.in.pojos.NomineeList;
 
 import java.sql.Timestamp;
@@ -132,6 +133,40 @@ public class NomineeListService {
             return response;
         }
     }
+
+
+
+    public EmployeeDetails getEmployeeDetails(String empCode) {
+        String sql = "SELECT * FROM emp_projects WHERE emp_code = ?";
+        
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{empCode}, (rs, rowNum) -> {
+                EmployeeDetails employeeDetails = new EmployeeDetails();
+                employeeDetails.setEmpCode(rs.getString("emp_code"));
+                employeeDetails.setEmpName(rs.getString("emp_name"));
+                employeeDetails.setDoj(rs.getDate("joining_date"));
+                employeeDetails.setUnit(rs.getString("function_name"));
+                employeeDetails.setSkill(rs.getString("primary_skill_name"));
+                employeeDetails.setEmpDesignation(rs.getString("designation_name"));
+                employeeDetails.setMindcraftExpInMonths(rs.getInt("mindcraft_exp_mon"));
+                employeeDetails.setTotalExpInMonths(rs.getInt("total_exp_mon"));
+                employeeDetails.setContactNumber(rs.getLong("mobileno"));
+                employeeDetails.setEmailId(rs.getString("email"));
+                employeeDetails.setDob(rs.getDate("dob"));
+                employeeDetails.setProjectCode(rs.getString("project_code"));
+                employeeDetails.setProjectName(rs.getString("project_desc"));
+                employeeDetails.setClient(rs.getString("client_name"));
+                employeeDetails.setIndustryName(rs.getString("indstry_name"));
+                // Add more fields as needed
+
+                return employeeDetails;
+            });
+        } catch (Exception e) {
+            e.printStackTrace(); // Log or handle the exception as needed
+            return null;
+        }
+    }
+
     
 }
 
