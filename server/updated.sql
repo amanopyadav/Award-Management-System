@@ -182,4 +182,30 @@ EXECUTE FUNCTION insert_into_param();
 
 
 
+-- -----------------------------  24/12/2023 ---------------------------------
+
+-- creating view to display employee with rating
+
+CREATE OR REPLACE VIEW emp_ratings AS
+SELECT
+    p.id AS id,
+    mp.parameter_name AS parameter_name,
+    p.nomination_id AS nomination_id,
+    p.description AS description,
+    p.rating AS rating
+FROM
+    parameter p
+JOIN
+    m_parameters mp ON p.parameter_id = mp.parameter_id;
+
+
+select * from emp_ratings;
+
+-- -----------------------------------------------------------------------------
+
+
+
+
+
+
 
