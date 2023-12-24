@@ -73,41 +73,34 @@
         <!-- Employee Ratings Modal -->
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayRatingModal ? 'block' : 'none'}">
           <div class="modal-dialog modal-xl" role="document">
+
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Employee Ratings</h5>
               </div>
               <div class="modal-body">
                 <!-- Modal body content here -->
+
                 <div class="table-responsive">
                   <table class="table">
-                    <thead class="text-primary">
-                      <th>Parameter</th>
-                      <th>Performance description with examples</th>
-                      <th>Rating by Nominator</th>
+                    <thead class=" text-primary">
+                      <th>Parameter name</th>
+                      <th>Description</th>
+                      <th>Rating</th>
                     </thead>
+
                     <tbody>
+
                       <tr>
-                        <td>Exceeding Expectations</td>
-                        <td>
-                          <textarea formControlName="exceedingexpectations" id="exceedingexpectations"
-                            name="exceedingexpectations" class="form-control textarea"
-                            placeholder="Ex. Give Performance description....."></textarea>
-                        </td>
-                        <td>
-                          <select class="form-control" formControlName="ratingByNominator">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                          </select>
-                        </td>
+                        <td>Order Generation</td>
+                        <td>Test1</td>
+                        <td>3</td>
                       </tr>
-                      <!-- Add more rows as needed -->
+                    
                     </tbody>
                   </table>
                 </div>
+
               </div>
               <div class="modal-footer">
                 <!-- Your modal footer content here -->
