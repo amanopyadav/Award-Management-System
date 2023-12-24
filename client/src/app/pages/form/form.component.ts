@@ -65,7 +65,7 @@
       private router: Router
     ) {
       this.nominationForm = this.fb.group({
-        award_category: ['', Validators.required],
+        award_category: ['choose sample', Validators.required],
         spot_award_subcategory: [''],
         half_yearly_award_subcategory: [''],
         half_yearly_award_isSales: ['']
@@ -1110,24 +1110,21 @@
 
     onSave() {
       // Perform your save logic here
-    
-      // Notify user
-      this.notificationService.showNotification('Nomination form filled successfully.');
-    
-      // Reset the forms
-      this.nominationForm.reset();
+      // this.nominationForm.reset();
       this.EmpForm.reset();
       this.ProjectForm.reset();
       this.NominatedByForm.reset();
       this.OnBehalfOfForm.reset();
+      this.mainForm.reset();
 
-        // Set default value for award_category
-      this.nominationForm.get('award_category').setValue('');
-
-      // Update the form status
-      this.updateFormStatus();
-      this.router.navigate(['/form']);
-
+      this.nominationForm.get('award_category').setValue('choose sample');
+      this.ngOnInit();
+      this.nominationForm.get('spot_award_subcategory').setValue('');
+      this.nominationForm.get('half_yearly_award_subcategory').setValue('');
+      this.nominationForm.get('half_yearly_award_isSales').setValue('');
+    
+      // Notify user
+      this.notificationService.showNotification('Nomination form filled successfully.');
     
       // Log to console
       console.log('Form saved and reset successfully.');

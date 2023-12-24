@@ -17,7 +17,7 @@
                     <label>Award Category</label>
                     <select class="form-control" id="award_category" name="award_category" formControlName="award_category"
                     (change)="onAwardCategoryChange()" required>
-                      <option value="" selected>Choose Award Category</option>
+                      <option value="choose sample" selected>Choose Award Category</option>
                       <option value="Promising newcomer">Promising Newcomer</option>
                       <option value="Quarterly Award">Quarterly Award</option>
                       <option value="Rising Star Award">Rising Star Award</option>
@@ -62,14 +62,14 @@
             </div>
 
 
-            <div *ngIf="!updateFormStatus() && nominationForm.get('award_category').value !== ''" class="alert alert-danger alert-dismissible fade show">
+            <!-- <div *ngIf="!updateFormStatus() && nominationForm.get('award_category').value !== ''" class="alert alert-danger alert-dismissible fade show">
               <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                 <i class="nc-icon nc-simple-remove"></i>
               </button>
               <span>
                 <b> Nomination Period Is Over! </b> 
               </span>
-            </div>
+            </div> -->
             
 
 
