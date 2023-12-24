@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HrService } from './hr.service';
 import { FormGroup } from '@angular/forms';
+import { NgZone } from '@angular/core';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -83,13 +84,11 @@ export class HrDashboardComponent implements OnInit {
   displayEmpModal: boolean = false;
   displayRatingModal: boolean;
   displayDetailsModal: boolean;
+  dataLoaded: boolean = false;
 
-  constructor(private hrService: HrService) { }
+  constructor(private hrService: HrService, private ngZone: NgZone) { }
 
 
-  onScroll() {
-    throw new Error('Method not implemented.');
-  }
   public employeeTableData: EmployeeTableData;
   public filteredEmployeeData: EmployeeTableRow[];
   public searchTerm: string = '';
@@ -124,9 +123,8 @@ export class HrDashboardComponent implements OnInit {
       ]
     };
     this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+    this.dataLoaded = true;
 
-    // Add a scroll event listener to the tableContainer
-    this.tableContainer.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
 
   }
 
@@ -141,44 +139,29 @@ export class HrDashboardComponent implements OnInit {
   fetchNomineeList() {
     this.hrService.getNomineeList().subscribe(
       (data: any[]) => {
-        console.log('Nominee List Data:', data);
-        this.employeeTableData.dataRows = data.map(item => ({
-          awardCategory: item.award_category,
-          awardSubCategory: item.award_sub_category,
-          awardSubCategory2: item.award_sub_category2,
-          empCode: item.emp_code,
-          empName: item.emp_name,
-          nominatedBy: item.nominated_by,
-          nomByDesignation: item.nom_by_designation,
-          onbehalfOf: item.onbehalf_of,
-          onBehalfDesignation: item.on_behalf_designation
-        }));
-        this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+        this.ngZone.run(() => {
+          console.log('Nominee List Data:', data);
+          this.employeeTableData.dataRows = data.map(item => ({
+            awardCategory: item.award_category,
+            awardSubCategory: item.award_sub_category,
+            awardSubCategory2: item.award_sub_category2,
+            empCode: item.emp_code,
+            empName: item.emp_name,
+            nominatedBy: item.nominated_by,
+            nomByDesignation: item.nom_by_designation,
+            onbehalfOf: item.onbehalf_of,
+            onBehalfDesignation: item.on_behalf_designation
+          }));
+          this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+          this.dataLoaded = true;
+        });
       },
       (error) => {
         console.error('Error fetching nominee list:', error);
       }
     );
   }
-
-
-  // openModal(employee: EmployeeTableRow) {
-  //   console.log("Emp dialogbox Opened");
-  //   this.selectedEmployee = employee;  // Set the selectedEmployee
-  //   this.displayEmpModal = true;  // Show the modal
-  // }
-
-  // onCloseHandled() {
-  //   console.log("Emp dialogbox Closed");
-  //   this.displayEmpModal = false;  // Hide the modal
-  //   this.selectedEmployee = null;
-  // }
-
-  // onCloseHandledforRating() {
-  //   console.log("rating dialogbox Closed");
-  //   this.displayRatingModal = false;  // Hide the modal
-  //   this.selectedEmployee = null;
-  // }
+  
 
   viewRatings(employee: EmployeeTableRow) {
     console.log("Rating dialogbox Opened");
@@ -187,33 +170,29 @@ export class HrDashboardComponent implements OnInit {
     this.displayDetailsModal = false; // Close the View Details modal
   }
 
-  viewDetails(employee: EmployeeTableRow) {
-    console.log("Details dialogbox Opened");
-
+  viewDetails(empCode: string) {
+    console.log("Details dialogbox Opened for empCode: ", empCode);
+  
     // Fetch detailed information for the selected employee
-    this.hrService.getEmployeeDetails(employee.empCode).subscribe(
-      (details: EmployeeDetailsNew) => {
-        console.log("Yes fetched");
-
-
-
-        this.employeeDetailsnew = details;
-        console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
-
-
-        // Open the details modal after fetching the details
-        this.displayDetailsModal = true;
-        this.displayRatingModal = false; // Close the View Ratings modal
-      },
-      (error) => {
-        console.error('Error fetching employee details:', error);
-      }
-    );
-
-    // this.selectedEmployee = employee;
-    this.displayDetailsModal = true;
-    this.displayRatingModal = false; // Close the View Ratings modal
+    if (this.dataLoaded) {
+      this.hrService.getEmployeeDetails(empCode).subscribe(
+        (details: EmployeeDetailsNew) => {
+          console.log("Employee details fetched: ", details);
+  
+          this.employeeDetailsnew = details;
+          console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
+  
+          // Open the details modal after fetching the details
+          this.displayDetailsModal = true;
+          this.displayRatingModal = false; // Close the View Ratings modal
+        },
+        (error) => {
+          console.error('Error fetching employee details:', error);
+        }
+      );
+    }
   }
+  
 
 
   onCloseDetailsModal() {
