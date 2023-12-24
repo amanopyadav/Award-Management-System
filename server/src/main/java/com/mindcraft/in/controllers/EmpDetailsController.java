@@ -75,5 +75,19 @@ public class EmpDetailsController {
 
 
 
+    @GetMapping("/getProjectDetailsByEmployeeCode")
+    public List<Map<String, Object>> getProjectDetailsByEmployeeCode(@RequestParam String employeeCode) {
+        System.out.println("Received employeeCode: " + employeeCode);
+
+        List<Map<String, Object>> result = employeeDetailsService.getProjectDetailsByEmployeeCode(employeeCode);
+
+        System.out.println("Result from service: " + result);
+
+        return result;
+    }
+
+
+
+
 
 }
