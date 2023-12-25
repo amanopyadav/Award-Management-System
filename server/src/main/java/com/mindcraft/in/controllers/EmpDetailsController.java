@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.mindcraft.in.pojos.EmployeeDetails;
 import com.mindcraft.in.services.EmployeeDetailsService;
 import com.mindcraft.in.services.NomineeListService;
@@ -63,7 +62,6 @@ public class EmpDetailsController {
     // New method to get employee details
     @GetMapping("/employeeDetails/{empCode}")
     public ResponseEntity<EmployeeDetails> getEmployeeDetails(@PathVariable String empCode) {
-        System.out.println("Also reached here");
         EmployeeDetails employeeDetails = nomineeListService.getEmployeeDetails(empCode);
 
         if (employeeDetails != null) {
@@ -85,6 +83,35 @@ public class EmpDetailsController {
 
         return result;
     }
+
+    // for 1 categories
+    @GetMapping("/getRatingNominationIdOne/{empCode}/{awardCategory}")
+    public Long getNominationIDOne(@PathVariable String empCode,@PathVariable String awardCategory){
+        return employeeDetailsService.getRatingNominationIdOne(empCode, awardCategory);
+    }
+
+    // for 2 categories
+    @GetMapping("/getRatingNominationIdTwo/{empCode}/{awardCategory}/{awardSubCategory}")
+    public Long getNominationIDTwo(@PathVariable String empCode,@PathVariable String awardCategory,@PathVariable String awardSubCategory){
+        // System.out.println("Reached here");
+        System.out.println("Employee code for two : "+empCode);
+        System.out.println("Employee Category for two : "+awardCategory);
+        System.out.println("Employee sub category for two : "+awardSubCategory);
+        return employeeDetailsService.getRatingNominationIdTwo(empCode, awardCategory, awardSubCategory);
+    }
+
+    // For 3 categories
+    @GetMapping("/getRatingNominationIdThree/{empCode}/{awardCategory}/{awardSubCategory}/{awardSubCategory2}")
+    public Long getNominationIDThree(@PathVariable String empCode,@PathVariable String awardCategory,@PathVariable String awardSubCategory,@PathVariable String awardSubCategory2){
+        return employeeDetailsService.getRatingNominationIdThree(empCode, awardCategory, awardSubCategory, awardSubCategory2);
+    }
+
+
+    @GetMapping("/getRatingDetails/{nominationID}")
+    public List<Map<String, Object>> getRatingDetails(@PathVariable Long nominationID){
+        return employeeDetailsService.getRatingDetails(nominationID);
+    }
+    
 
 
 

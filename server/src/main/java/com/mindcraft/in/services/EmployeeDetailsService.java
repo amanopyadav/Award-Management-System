@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import com.mindcraft.in.pojos.EmployeeDetails;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -174,6 +176,106 @@ public class EmployeeDetailsService {
     }
 
 
+    // For one categories
+    public Long getRatingNominationIdOne(String empCode,String awardCategory){
+        String sql;
+        sql = "SELECT nomination_id FROM nominee_list WHERE emp_code=? AND award_category=?";
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                preparedStatement.setString(1, empCode);
+                preparedStatement.setString(2, awardCategory);
+
+                try (ResultSet rset = preparedStatement.executeQuery()){
+                    if(rset.next()){
+                        System.out.println("Fetched rating nomination ID : "+rset.getLong("nomination_id"));
+                        return rset.getLong("nomination_id");
+                    }else{
+                        System.out.println("Not found rating nomination id");
+                        return null;
+                    }
+                }
+            }   catch(SQLException e){
+                throw new RuntimeException("Error executing SQL query", e);
+            }
+    }
+
+    // For two categories
+    public Long getRatingNominationIdTwo(String empCode,String awardCategory,String awardSubCategory){
+        String sql;
+        sql = "SELECT nomination_id FROM nominee_list WHERE emp_code=? AND award_category=? AND award_sub_category=?";
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                preparedStatement.setString(1, empCode);
+                preparedStatement.setString(2, awardCategory);
+                preparedStatement.setString(3, awardSubCategory);
+
+                try (ResultSet rset = preparedStatement.executeQuery()){
+                    if(rset.next()){
+                        System.out.println("Fetched rating nomination ID : "+rset.getLong("nomination_id"));
+                        return rset.getLong("nomination_id");
+                    }else{
+                        System.out.println("Not found rating nomination id");
+                        return null;
+                    }
+                }
+            }   catch(SQLException e){
+                throw new RuntimeException("Error executing SQL query", e);
+            }
+    }
+
+
+    // For three categories
+    public Long getRatingNominationIdThree(String empCode,String awardCategory,String awardSubCategory,String awardSubCategory2){
+        String sql;
+        System.out.println("Empcode for three: "+empCode);
+        System.out.println("Emp category for three: "+awardCategory);
+        System.out.println("Emp sub category for three: "+awardSubCategory);
+        System.out.println("Emp sub category 2 for three: "+awardSubCategory2);
+        sql = "SELECT nomination_id FROM nominee_list WHERE emp_code=? AND award_category=? AND award_sub_category=? AND award_sub_category2=?";
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                preparedStatement.setString(1, empCode);
+                preparedStatement.setString(2, awardCategory);
+                preparedStatement.setString(3, awardSubCategory);
+                preparedStatement.setString(4, awardSubCategory2);
+
+                try (ResultSet rset = preparedStatement.executeQuery()){
+                    if(rset.next()){
+                        System.out.println("Fetched rating nomination ID : "+rset.getLong("nomination_id"));
+                        return rset.getLong("nomination_id");
+                    }else{
+                        System.out.println("Not found rating nomination id");
+                        return null;
+                    }
+                }
+            }   catch(SQLException e){
+                throw new RuntimeException("Error executing SQL query", e);
+            }
+    }
+
+
+
+
+    public List<Map<String, Object>> getRatingDetails(Long nominationID) {
+        String sql = "select parameter_name,description,rating from emp_ratings where nomination_id=?";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, nominationID);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "No ratings found");
+        } else {
+            response.put("status", "error");
+            response.put("message", "All rating found.");
+        }
+
+        return result;
+    }
+
 
 
     public List<Map<String, Object>> getProjectDetailsByEmployeeCode(String employeeCode) {
@@ -181,6 +283,8 @@ public class EmployeeDetailsService {
     
         return jdbcTemplate.queryForList(sql, employeeCode);
     }
+
+
     
     
     

@@ -23,7 +23,30 @@ export class HrService {
 
     getLatestEmpDialogRecord(empCode: string, awardCategory: string, awardSubCategory: string, awardSubCategory2: string): Observable<any> {
         return this.http.get<any>(`http://localhost:8080/latestEmpDialogRecord=${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
-      }
+    }
+
+
+    fetchNominationIDOne(empCode: string,awardCategory: string):  Observable<number>{
+      return this.http.get<number>(`http://localhost:8080/getRatingNominationIdOne/${empCode}/${awardCategory}`);
+    }
+
+    fetchNominationIDTwo(empCode: string,awardCategory: string,awardSubCategory: string):  Observable<number>{
+      console.log("Empcode for two: "+empCode);
+      console.log("Emp category for two: "+awardCategory);
+      console.log("Emp sub category for two: "+awardSubCategory);
+      
+      return this.http.get<number>(`http://localhost:8080/getRatingNominationIdTwo/${empCode}/${awardCategory}/${awardSubCategory}`);
+    }
+
+    fetchNominationIDThree(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string):  Observable<number>{
+      return this.http.get<number>(`http://localhost:8080/getRatingNominationIdThree/${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
+    }
+
+    getRatingDetails(nominationID: number): Observable<any[]> {
+      return this.http.get<any[]>(`http://localhost:8080/getRatingDetails/${nominationID}`);
+    }
+
+
     
 }
 

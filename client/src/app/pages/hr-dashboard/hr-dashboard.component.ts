@@ -78,6 +78,7 @@ export class HrDashboardComponent implements OnInit {
   EmpForm: FormGroup
 
   Employees: EmployeeTableRow[];
+  EmployeeRatings: any[]=[];
   selectedEmployee: EmployeeTableRow;  // Add this line
   employeeDetails: EmployeeDetails;
   employeeDetailsnew: EmployeeDetailsNew;
@@ -163,15 +164,88 @@ export class HrDashboardComponent implements OnInit {
   }
   
 
-  viewRatings(employee: EmployeeTableRow) {
+  viewRatings(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string) {
     console.log("Rating dialogbox Opened");
-    this.selectedEmployee = employee;
+
+    console.log("Empcode : ", empCode);
+    console.log("AwardCategory : ", awardCategory);
+    console.log("AwardSubCategory : ", awardSubCategory);
+    console.log("AwardSubCategory2 : ", awardSubCategory2);
+
+    if(this.dataLoaded){
+
+      if(awardCategory != '' && awardSubCategory != '' && awardSubCategory2 != ''){
+        this.hrService.fetchNominationIDThree(empCode,awardCategory,awardSubCategory,awardSubCategory2).subscribe(
+          (res)=>{
+            console.log("Nomination Id: ",res);
+            this.hrService.getRatingDetails(res).subscribe(
+              (data) => {
+                this.EmployeeRatings = data; 
+                console.log("Employee rating data : ",this.EmployeeRatings);
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+            
+          },
+          (err)=>{
+            console.error("Errro fetching nominee details: ",err);
+          }
+        )
+      }
+      else if(awardCategory != '' && awardSubCategory != ''){
+        this.hrService.fetchNominationIDTwo(empCode,awardCategory,awardSubCategory).subscribe(
+          (res)=>{
+            console.log("Nomination Id: ",res);
+            this.hrService.getRatingDetails(res).subscribe(
+              (data) => {
+                this.EmployeeRatings = data; 
+                console.log("Employee rating data : ",this.EmployeeRatings);
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+            
+          },
+          (err)=>{
+            console.error("Errro fetching nominee details: ",err);
+          }
+        )
+      }
+      else if(awardCategory != ''){
+        console.log("hey this is me");
+        
+        this.hrService.fetchNominationIDOne(empCode,awardCategory).subscribe(
+          (res)=>{
+            console.log("Nomination Id: ",res);
+            this.hrService.getRatingDetails(res).subscribe(
+              (data) => {
+                this.EmployeeRatings = data; 
+                console.log("Employee rating data : ",this.EmployeeRatings);
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+            
+          },
+          (err)=>{
+            console.error("Errro fetching nominee details: ",err);
+          }
+        )
+      }
+    }
+
+    // this.selectedEmployee = employee;
     this.displayRatingModal = true;
     this.displayDetailsModal = false; // Close the View Details modal
   }
 
   viewDetails(empCode: string) {
-    console.log("Details dialogbox Opened for empCode: ", empCode);
+    console.log("Empcode : ", empCode);
+
   
     // Fetch detailed information for the selected employee
     if (this.dataLoaded) {

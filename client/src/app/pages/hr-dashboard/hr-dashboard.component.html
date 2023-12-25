@@ -60,7 +60,7 @@
 
                   <!-- View Ratings Icon -->
                   <li style="list-style: none; cursor: pointer;">
-                    <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee)"></i>
+                    <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee.empCode,employee.awardCategory,employee.awardSubCategory,employee.awardSubCategory2)"></i>
                     <p>View Ratings</p>
                   </li>
 
@@ -91,10 +91,10 @@
 
                     <tbody>
 
-                      <tr>
-                        <td>Order Generation</td>
-                        <td>Test1</td>
-                        <td>3</td>
+                      <tr *ngFor="let rating of EmployeeRatings">
+                        <td>{{rating.parameter_name}}</td>
+                        <td>{{rating.description}}</td>
+                        <td>{{rating.rating}}</td>
                       </tr>
                     
                     </tbody>
