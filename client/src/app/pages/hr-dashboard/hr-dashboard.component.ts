@@ -48,6 +48,11 @@ interface EmployeeDetails {
   industryName: string;
 }
 
+interface EmpratingData{
+  empCode : string;
+  empName : string
+}
+
 
 
 interface EmployeeDetailsNew {
@@ -75,7 +80,13 @@ interface EmployeeDetailsNew {
 })
 export class HrDashboardComponent implements OnInit {
 
+
   EmpForm: FormGroup
+  // EmpRand: EmpratingData;
+  EmpRand = {
+    empCode : {},
+    empName : {}
+  }
 
   Employees: EmployeeTableRow[];
   EmployeeRatings: any[]=[];
@@ -86,6 +97,7 @@ export class HrDashboardComponent implements OnInit {
   displayRatingModal: boolean;
   displayDetailsModal: boolean;
   dataLoaded: boolean = false;
+
 
   constructor(private hrService: HrService, private ngZone: NgZone) { }
 
@@ -164,10 +176,11 @@ export class HrDashboardComponent implements OnInit {
   }
   
 
-  viewRatings(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string) {
+  viewRatings(empCode: string,empName: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string) {
     console.log("Rating dialogbox Opened");
 
     console.log("Empcode : ", empCode);
+    console.log("EmpName : ", empName);
     console.log("AwardCategory : ", awardCategory);
     console.log("AwardSubCategory : ", awardSubCategory);
     console.log("AwardSubCategory2 : ", awardSubCategory2);
@@ -181,6 +194,8 @@ export class HrDashboardComponent implements OnInit {
             this.hrService.getRatingDetails(res).subscribe(
               (data) => {
                 this.EmployeeRatings = data; 
+                this.EmpRand.empCode = empCode
+                this.EmpRand.empName = empName;
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
               (error) => {
@@ -201,6 +216,8 @@ export class HrDashboardComponent implements OnInit {
             this.hrService.getRatingDetails(res).subscribe(
               (data) => {
                 this.EmployeeRatings = data; 
+                this.EmpRand.empCode = empCode
+                this.EmpRand.empName = empName;
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
               (error) => {
@@ -223,6 +240,9 @@ export class HrDashboardComponent implements OnInit {
             this.hrService.getRatingDetails(res).subscribe(
               (data) => {
                 this.EmployeeRatings = data; 
+                this.EmpRand.empCode = empCode
+                this.EmpRand.empName = empName;
+                
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
               (error) => {

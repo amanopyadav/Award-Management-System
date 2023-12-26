@@ -60,7 +60,7 @@
 
                   <!-- View Ratings Icon -->
                   <li style="list-style: none; cursor: pointer;">
-                    <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee.empCode,employee.awardCategory,employee.awardSubCategory,employee.awardSubCategory2)"></i>
+                    <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee.empCode,employee.empName,employee.awardCategory,employee.awardSubCategory,employee.awardSubCategory2)"></i>
                     <p>View Ratings</p>
                   </li>
 
@@ -76,7 +76,7 @@
 
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Employee Ratings</h5>
+                <h5 class="modal-title text-primary">{{EmpRand.empName}} : {{EmpRand.empCode}}</h5>
               </div>
               <div class="modal-body">
                 <!-- Modal body content here -->
