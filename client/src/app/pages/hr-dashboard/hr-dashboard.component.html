@@ -1,25 +1,86 @@
 <div class="row">
   <div class="col-md-12">
-
     <div class="card">
-
-
-      <div class="card-header">
-        <h4 class="card-title">Nominee List</h4>
+      <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="col-md-4 pr-1">
+          <h4 class="card-title">Nominee List</h4>
+        </div>
+        <div class="col-md-4 px-1">
+          <!-- Add any content for the middle column if needed -->
+        </div>
+        <div class="col-md-4 pl-1">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+            <input class="form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()">
+          </div>
+        </div>
       </div>
 
       <div class="card-body">
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fa fa-search"></i>
-            </span>
+        <!-- Form for Filters -->
+        <div class="row">
+          <div class="col-md-3 pr-1">
+            <div class="form-group">
+              <label for="award_category">Award Category</label>
+              <select class="form-control" id="award_category" name="award_category">
+                <option value="" selected>Choose Award Category</option>
+                <option value="Promising newcomer">Promising Newcomer</option>
+                <option value="Quarterly Award">Quarterly Award</option>
+                <option value="Rising Star Award">Rising Star Award</option>
+                <option value="Spot Award">Spot Award</option>
+                <option value="Half Yearly Award">Half Yearly Award</option>
+                <option value="Team Award">Team Award</option>
+              </select>
+            </div>
           </div>
-          <input class="col-md-3 form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()">
+
+          <div class="col-md-3 px-1">
+            <div class="form-group">
+              <label>Award Subcategory</label>
+              <select class="form-control" id="spot_award_subcategory" name="spot_award_subcategory">
+                <option value="" selected>Choose Subcategory</option>
+                <option value="In Recognition Of">In Recognition Of</option>
+                <option value="Going Extra Mile">Going Extra Mile</option>
+                <option value="Lead Award">Lead Award</option>
+                <option value="Individual Award">Individual Award</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4 pl-1 d-flex align-items-end">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox">
+                <span class="form-check-sign"></span> Sales
+              </label>
+            </div>
+          </div>
+
+          <!-- Add other filters as needed -->
+
+          <div class="col-md-3 pr-1">
+            <div class="form-group">
+              <label for="dob">Start Date</label>
+              <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY">
+            </div>
+          </div>
+
+          <div class="col-md-3 px-1">
+            <div class="form-group">
+              <label for="joiningDate">End Date</label>
+              <input type="date" class="form-control" placeholder="Ex. DD/MM/YYYY">
+            </div>
+          </div>
         </div>
 
+        <!-- Table -->
         <div class="table-responsive" #tableContainer>
           <table class="table" style="width: auto; overflow-x: auto;">
+            <!-- Table headers and body -->
             <thead class="text-primary" style="white-space: nowrap;">
               <th class="align-middle">Shortlist</th>
               <th class="align-middle">Select</th>
@@ -35,6 +96,7 @@
               <th class="align-middle">Actions</th>
             </thead>
             <tbody>
+              <!-- Add ngFor loop for table rows -->
               <tr *ngFor="let employee of filteredEmployeeData">
                 <td class="text-center align-middle"><input class="form-check-input" type="checkbox"
                     [(ngModel)]="employee.shortlist"></td>
@@ -60,10 +122,10 @@
 
                   <!-- View Ratings Icon -->
                   <li style="list-style: none; cursor: pointer;">
-                    <i class="nc-icon nc-single-copy-04" (click)="viewRatings(employee.empCode,employee.awardCategory,employee.awardSubCategory,employee.awardSubCategory2)"></i>
+                    <i class="nc-icon nc-single-copy-04"
+                      (click)="viewRatings(employee.empCode,employee.awardCategory,employee.awardSubCategory,employee.awardSubCategory2)"></i>
                     <p>View Ratings</p>
                   </li>
-
                 </td>
               </tr>
             </tbody>
@@ -73,14 +135,12 @@
         <!-- Employee Ratings Modal -->
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayRatingModal ? 'block' : 'none'}">
           <div class="modal-dialog modal-xl" role="document">
-
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Employee Ratings</h5>
               </div>
               <div class="modal-body">
                 <!-- Modal body content here -->
-
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
@@ -88,19 +148,15 @@
                       <th>Description</th>
                       <th>Rating</th>
                     </thead>
-
                     <tbody>
-
                       <tr *ngFor="let rating of EmployeeRatings">
                         <td>{{rating.parameter_name}}</td>
                         <td>{{rating.description}}</td>
                         <td>{{rating.rating}}</td>
                       </tr>
-                    
                     </tbody>
                   </table>
                 </div>
-
               </div>
               <div class="modal-footer">
                 <!-- Your modal footer content here -->
@@ -110,17 +166,13 @@
           </div>
         </div>
 
-
-
-
-
-
         <!-- View Details Modal -->
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayDetailsModal ? 'block' : 'none'}">
           <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title text-primary">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}</h5>
+                <h5 class="modal-title text-primary">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}
+                </h5>
               </div>
               <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <!-- Modal body content for details -->
@@ -128,28 +180,23 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="card">
-
                         <div class="card-body">
                           <div class="details-container" style="font-size: medium;">
                             <div class="detail-item">
                               <span class="detail-label">DOJ : </span>
                               <span><b>{{employeeDetailsnew?.doj}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Unit : </span>
                               <span><b>{{employeeDetailsnew?.unit}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Skill : </span>
                               <span><b>{{employeeDetailsnew?.skill}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Employee Designation : </span>
                               <span><b>{{employeeDetailsnew?.empDesignation}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Mindcraft Experience(In Months) : </span>
@@ -170,29 +217,23 @@
                             <div class="detail-item">
                               <span class="detail-label">DOB : </span>
                               <span><b>{{employeeDetailsnew?.dob}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Project Code : </span>
                               <span><b>{{employeeDetailsnew?.projectCode}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Project Name : </span>
                               <span><b>{{employeeDetailsnew?.projectName}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Client : </span>
                               <span><b>{{employeeDetailsnew?.client}}</b></span>
-
                             </div><br>
                             <div class="detail-item">
                               <span class="detail-label">Industry Name : </span>
                               <span><b>{{employeeDetailsnew?.industryName}}</b></span>
-
                             </div><br>
-
                             <!-- Add other details in a similar manner -->
                           </div>
                         </div>
@@ -209,11 +250,7 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
       </div>
     </div>
+  </div>
+</div>
