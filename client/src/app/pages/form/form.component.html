@@ -331,7 +331,7 @@
                       <!-- Your specified icon inside the input group -->
                       <div class="input-group-prepend">
                         <span class="input-group-text cursor-pointer">
-                          <i (click)="openModalforproj(EmpForm.get('emp_id').value)" class="nc-icon nc-bullet-list-67"></i>
+                          <i (click)="openModalToFetchAllProjects()" class="nc-icon nc-bullet-list-67"></i>
                         </span>
                       </div>
                       
@@ -361,11 +361,11 @@
                                               <th>Actions</th>
                                             </thead>
                                             <tbody>
-                                              <tr *ngFor="let project of filteredProjects"> 
+                                              <tr *ngFor="let project of FetchAllProjectsForTeam"> 
                                                 <td>{{project.project_code}}</td>
-                                                <td>{{project.project_name}}</td>
+                                                <td>{{project.project_desc}}</td>
                                                 <td>
-                                                  <button class="btn btn-primary" (click)="addProject(project)">
+                                                  <button class="btn btn-primary" (click)="addTeamProject(project)">
                                                     Add
                                                   </button>
                                                 </td>

@@ -105,6 +105,12 @@ export class FormService {
         
         return this.http.get<{ nominationId: number, latestAwardId: number }>(url);
       }
+
+
+
+      getAllProjectsDetails() : Observable <any[]> {
+        return this.http.get<any[]>('http://localhost:8080/projects/AllProjectsDetails')
+      }
       
 
      

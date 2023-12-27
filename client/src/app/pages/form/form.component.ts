@@ -25,6 +25,10 @@
 
       filteredEmployees: any[] = [];
       filteredProjects: any[]=[];
+      
+
+      FetchAllProjectsForTeam: any[] = [];
+
       filteredNominatedBy: any[]=[];
       filteredOnBehalf: any[]=[];
       displayEmpModal: string = 'none';
@@ -52,6 +56,11 @@
       selectedAwardId: number;
       showForm: boolean = false;
       showRatingScale = false;
+
+      FetchAllProjectsData = {
+        project_code : {},
+        project_desc : {},
+      }
 
     
 
@@ -227,6 +236,7 @@
       this.cdRef.detectChanges();
       this.fetchNominatedBy();
       this.fetchBehalfOf();
+      this.fetchAllProjectsForTeam();
     
     }
 
@@ -324,6 +334,7 @@
         updatedBy,
         updatedOn
       }
+
 
       console.log("My subcategory : "+awardSubCategory2);
 
@@ -927,6 +938,12 @@
           this.displayProjModal = "block";
         
         }
+
+        // Fetch all projects for team awards
+        openModalToFetchAllProjects(){
+          this.fetchAllProjectsForTeam();
+          this.displayProjModal = "block";
+        }
         
       
 
@@ -970,6 +987,21 @@
           )
 
 
+        }
+
+
+
+        fetchAllProjectsForTeam() {
+          this.formService.getAllProjectsDetails().subscribe(
+            (data) => {
+              console.log("All Projects Data : ", data);
+              this.FetchAllProjectsForTeam = data; 
+              console.log("Team data : ", this.FetchAllProjectsForTeam);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
         }
      
 
@@ -1038,6 +1070,22 @@
         
           this.ProjectForm.patchValue(projectFormValues);
           this.onCloseHandledforProj();
+        }
+
+
+        addTeamProject(project: any){
+          console.log("Adding team projects");
+
+          const projectFormValues = {
+            project_code: project.project_code,
+            project_name: project.project_desc,
+            client: project.client_name,
+            industry: project.indstry_name,
+          };
+
+          this.ProjectForm.patchValue(projectFormValues)
+          this.onCloseHandledforProj();
+          
         }
 
     addNominatedBy(selectedEmpName: string) {

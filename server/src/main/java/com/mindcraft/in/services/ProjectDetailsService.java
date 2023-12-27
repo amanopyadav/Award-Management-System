@@ -53,6 +53,26 @@ public class ProjectDetailsService {
         return result;
     }
 
+
+
+    public List<Map<String, Object>> getAllProjectDetails() {
+        String sql = "SELECT * FROM allprojects";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "Error to find projects");
+        } else {
+            response.put("status", "success");
+            response.put("message", "All projects found");
+            response.put("result", result);
+        }
+
+        return result;
+    }
+
     // Additional methods for CRUD operations can be added as needed
 }
 
