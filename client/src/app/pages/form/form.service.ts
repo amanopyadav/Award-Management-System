@@ -111,6 +111,10 @@ export class FormService {
       getAllProjectsDetails() : Observable <any[]> {
         return this.http.get<any[]>('http://localhost:8080/projects/AllProjectsDetails')
       }
+
+      fetchTeamMembersForProjects(projCode: string) : Observable <any[]> {
+        return this.http.get<any[]>(`http://localhost:8080/projects/fetchTeamMembersOfProjects/${projCode}`)
+      }
       
 
      

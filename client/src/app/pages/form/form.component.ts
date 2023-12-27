@@ -28,6 +28,7 @@
       
 
       FetchAllProjectsForTeam: any[] = [];
+      TeamMembersOfProjects: any[] = [];
 
       filteredNominatedBy: any[]=[];
       filteredOnBehalf: any[]=[];
@@ -237,6 +238,7 @@
       this.fetchNominatedBy();
       this.fetchBehalfOf();
       this.fetchAllProjectsForTeam();
+      // this.fetchTeamMembersForProjects(this.ProjectForm['project_code'].value)
     
     }
 
@@ -955,8 +957,20 @@
     }
 
         onCloseHandledforProj(){
+          // this.fetchTeamMembersForProjects(this.ProjectForm['project_code'].value);
           console.log("close proj dialog box");
+          // this.ngOnInit();
           this.displayProjModal = "none";
+          // this.searchData = ''; 
+        }
+
+        onCloseHandledforProjTeam(){
+          // this.fetchTeamMembersForProjects(projCode);
+          // this.ngOnInit()
+          console.log("close proj dialog box");
+          // this.ngOnInit();
+          this.displayProjModal = "none";
+          this.ngOnInit()
           // this.searchData = ''; 
         }
 
@@ -1002,6 +1016,23 @@
               console.error(error);
             }
           );
+        }
+
+        fetchTeamMembersForProjects(projCode: string){
+          this.formService.fetchTeamMembersForProjects(projCode).subscribe(
+            (data) => {
+              console.log("All team members of projects: ",data);
+              this.TeamMembersOfProjects = data;
+              this.ngOnInit()
+              console.log("Team members : ",this.TeamMembersOfProjects);
+
+              this.onCloseHandledforProjTeam()
+              
+            },
+            (error) => {
+              console.error(error);
+            }
+          )
         }
      
 
@@ -1069,6 +1100,7 @@
           };
         
           this.ProjectForm.patchValue(projectFormValues);
+
           this.onCloseHandledforProj();
         }
 
@@ -1084,7 +1116,9 @@
           };
 
           this.ProjectForm.patchValue(projectFormValues)
-          this.onCloseHandledforProj();
+          this.fetchTeamMembersForProjects(projectFormValues.project_code);
+          this.onCloseHandledforProjTeam();
+          // this.fetchTeamMembersForProjects(projectFormValues.project_code);
           
         }
 

@@ -41,6 +41,14 @@ public class ProjectDetailsController {
 
         return requestForAllProjects;
     }
+
+
+    @GetMapping("/fetchTeamMembersOfProjects/{projCode}")
+    public List<Map<String,Object>> getTeamMemberOfProject(@PathVariable String projCode){
+        List<Map<String, Object>> requestForAllTeamMembers = projectDetailsService.getAllTeamMember(projCode);
+
+        return requestForAllTeamMembers;
+    }
     
 
     // Additional methods for CRUD operations can be added as needed

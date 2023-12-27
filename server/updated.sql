@@ -209,8 +209,10 @@ select * from emp_ratings;
 
 -- Creating view to display all projects 
 
-CREATE OR REPLACE VIEW allprojects AS SELECT project_code,project_type,client_id,project_desc,start_date,
-end_date from m_project_code;
+CREATE OR REPLACE VIEW allprojects AS
+SELECT project_code, project_desc, client_name, indstry_name 
+FROM emp_projects
+WHERE project_code IS NOT NULL;
 
 
 

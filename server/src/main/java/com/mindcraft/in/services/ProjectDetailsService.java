@@ -73,6 +73,26 @@ public class ProjectDetailsService {
         return result;
     }
 
+
+
+    public List<Map<String, Object>> getAllTeamMember(String projCode) {
+        String sql = "SELECT * FROM all_team_members WHERE project_code = ?";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,projCode);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "Error to find team members");
+        } else {
+            response.put("status", "success");
+            response.put("message", "All Team members found");
+            response.put("result", result);
+        }
+
+        return result;
+    }
+
     // Additional methods for CRUD operations can be added as needed
 }
 
