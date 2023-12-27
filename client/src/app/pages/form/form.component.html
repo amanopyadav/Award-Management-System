@@ -73,7 +73,7 @@
             
 
 
-      <form [formGroup]="EmpForm" *ngIf="updateFormStatus()">
+      <form [formGroup]="EmpForm" *ngIf="updateFormStatus() && !checkIfItsTeamWard()">
           <h5 class="card-title">Nominee Details</h5>
           <div class="row">
               <div class="col-md-3 px-1">
@@ -223,7 +223,7 @@
           </form>
 
    
-    <form [formGroup]="ProjectForm" *ngIf="updateFormStatus()">
+    <form [formGroup]="ProjectForm" *ngIf="updateFormStatus() && !checkIfItsTeamWard()">
         <h5 class="card-title">Nominee Project Details</h5>
             <div class="row">
                 <div class="col-md-3 px-1">
@@ -317,6 +317,106 @@
               
     </form>
 
+
+
+
+    <!-- Nominee's projects details -->
+    <form [formGroup]="ProjectForm" *ngIf="updateFormStatus() && checkIfItsTeamWard()">
+      <h5 class="card-title">Team Project Details</h5>
+          <div class="row">
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Project Name</label>
+                  <div class="input-group">
+                      <!-- Your specified icon inside the input group -->
+                      <div class="input-group-prepend">
+                        <span class="input-group-text cursor-pointer">
+                          <i (click)="openModalforproj(EmpForm.get('emp_id').value)" class="nc-icon nc-bullet-list-67"></i>
+                        </span>
+                      </div>
+                      
+                      <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayProjModal}">
+                          <div class="modal-dialog modal-xl" role="document"> 
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                
+                          
+  
+                                
+                              </div>
+  
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="card">
+                                      <div class="card-header">
+                                        <h4 class="card-title"> Project Details</h4>
+                                      </div>
+                                      <div class="card-body">
+                                        <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                          <table class="table">
+                                            <thead class="text-primary">
+                                              <th>Project ID</th>
+                                              <th>Project Name</th>
+                                              <th>Actions</th>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let project of filteredProjects"> 
+                                                <td>{{project.project_code}}</td>
+                                                <td>{{project.project_name}}</td>
+                                                <td>
+                                                  <button class="btn btn-primary" (click)="addProject(project)">
+                                                    Add
+                                                  </button>
+                                                </td>
+                                              </tr>
+  
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+  
+  
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" (click)="onCloseHandledforProj()">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  <input type="text" class="form-control" placeholder="Ex. AMS" [value]="ProjectForm.get('project_name').value" >
+                </div>
+              </div></div>
+
+              <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Project Code</label>
+                    <input type="text" class="form-control" placeholder="Ex. 10010" [value]="ProjectForm.get('project_code').value" readonly>
+                  </div>
+              </div>
+
+              <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Client</label>
+                    <input type="text" class="form-control" placeholder="Ex. SBI" [value]="ProjectForm.get('client').value" readonly>
+                  </div>
+              </div>
+              
+              <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label>Project Description</label>
+                    <input type="text" class="form-control" placeholder="Enter Description..." [value]="ProjectForm.get('industry').value" readonly>
+                  </div>
+              </div>
+              </div>
+            
+  </form>
+
+ 
+
    
     <form [formGroup]="NominatedByForm" *ngIf="updateFormStatus()">
       <div class="row">
@@ -375,6 +475,119 @@
             </div>
           </div>
       <!-- </form> -->
+
+
+
+
+      <!-- Team award members list -->
+      <div class="col-md-12" *ngIf="checkIfItsTeamWard()">
+        <div class="card card-plain">
+          <div class="card-header">
+            <h4 class="card-title"> Team Members </h4>
+          </div>
+          <div class="card-body">
+    
+    
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Code
+                  </th>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Function 
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Dakota Rice
+                    </td>
+                    <td>
+                      Niger
+                    </td>
+                    <td>
+                      Oud-Turnhout
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Minerva Hooper
+                    </td>
+                    <td>
+                      Curaçao
+                    </td>
+                    <td>
+                      Sinaai-Waas
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Sage Rodriguez
+                    </td>
+                    <td>
+                      Netherlands
+                    </td>
+                    <td>
+                      Baileux
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Philip Chaney
+                    </td>
+                    <td>
+                      Korea, South
+                    </td>
+                    <td>
+                      Overland Park
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Doris Greene
+                    </td>
+                    <td>
+                      Malawi
+                    </td>
+                    <td>
+                      Feldkirchen in Kärnten
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Mason Porter
+                    </td>
+                    <td>
+                      Chile
+                    </td>
+                    <td>
+                      Gloucester
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Jon Porter
+                    </td>
+                    <td>
+                      Portugal
+                    </td>
+                    <td>
+                      Gloucester
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+    
+    
+    
+          </div>
+        </div>
+      </div>
     
 
 
@@ -384,7 +597,7 @@
 
     
 
-    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Half Yearly Award'">
+    <div class="col-md-12 pr-1" *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Half Yearly Award' || nominationForm.get('award_category').value === 'Team Award'">
 
       <h5 class="card-title">Rating Scale: 1-5 (1- Lowest & 5- Highest)</h5>
 
@@ -401,7 +614,7 @@
 
 
 
-            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award'">
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('half_yearly_award_subcategory').value === 'Individual Award' || nominationForm.get('award_category').value === 'Team Award'">
               <td>Exceeding Expectations</td>
               <td><textarea formControlName="exceedingexpectations" id="exceedingexpectations" name="exceedingexpectations" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -415,7 +628,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Team Award'" >
               <td>Process Oriented</td>
               <td><textarea class="form-control textarea" formControlName="processoriented" name="processoriented" id="processoriented" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -428,7 +641,7 @@
                 </select>
               </td>
              
-            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Team Award'" >
               <td>Time Management</td>
               <td><textarea formControlName="timemanagement" name="timemanagement" id="timemanagement" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -442,7 +655,7 @@
               </td> 
             </tr>
 
-            <tr  *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
+            <tr  *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Team Award'" >
               <td>Work Efficiency</td>
               <td><textarea formControlName="workefficiency" name="workefficiency" id="workefficiency" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -456,7 +669,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Quarterly Award' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Team Award'" >
               <td>Punctuality</td>
               <td><textarea formControlName="punctuality" name="punctuality" id="punctuality" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>
@@ -484,7 +697,7 @@
               </td>
             </tr>
 
-            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award'" >
+            <tr *ngIf="nominationForm.get('award_category').value === 'Promising newcomer' || nominationForm.get('award_category').value === 'Rising Star Award' || nominationForm.get('award_category').value === 'Team Award'" >
               <td>Proactiveness</td>
               <td><textarea formControlName="proactiveness" id="proactiveness" name="proactiveness" class="form-control textarea" placeholder="Ex. Give Performance description....."></textarea></td>
               <td>

@@ -205,6 +205,16 @@ select * from emp_ratings;
 
 
 
+-- ------------------------------- 27/12/2023 -----------------------------------
+
+-- Creating view to display all projects 
+
+CREATE OR REPLACE VIEW allprojects AS SELECT project_code,project_type,client_id,project_desc,start_date,
+end_date from m_project_code;
+
+
+
+
 
 
 

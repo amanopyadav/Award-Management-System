@@ -817,6 +817,16 @@
     }
 
 
+    checkIfItsTeamWard(): boolean {
+      const award_category = this.nominationForm.get('award_category').value;
+      if(award_category == "Team Award"){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+
     onAwardCategoryChange() {
       this.updateFormStatus();
       const awardCategory = this.nominationForm.get('award_category').value;
