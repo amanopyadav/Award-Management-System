@@ -215,6 +215,15 @@ FROM emp_projects
 WHERE project_code IS NOT NULL;
 
 
+-- Creating a view to display all team members of projects
+
+CREATE OR REPLACE VIEW all_team_members AS SELECT project_code,emp_code,emp_name,function_name from emp_projects
+WHERE project_code IS NOT NULL;
+
+
+-- -------------------------------------------------------------------------------
+
+
 
 
 
