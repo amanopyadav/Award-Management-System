@@ -111,10 +111,25 @@ public class EmpDetailsController {
     public List<Map<String, Object>> getRatingDetails(@PathVariable Long nominationID){
         return employeeDetailsService.getRatingDetails(nominationID);
     }
+
+    // For 1
+    @GetMapping("/getNominationDetails1/{empCode}/{awardCategory}")
+    public List<Map<String, Object>> getNominationDetails1(@PathVariable String empCode,@PathVariable String awardCategory){
+        return employeeDetailsService.getNominationDetails1(empCode,awardCategory);
+    }
+
+    // For 2
+    @GetMapping("/getNominationDetails2/{empCode}/{awardCategory}/{awardSubCategory}")
+    public List<Map<String, Object>> getNominationDetails2(@PathVariable String empCode,@PathVariable String awardCategory,@PathVariable String awardSubCategory){
+        return employeeDetailsService.getNominationDetails2(empCode,awardCategory,awardSubCategory);
+    }
+
+    // For 3
+    @GetMapping("/getNominationDetails3/{empCode}/{awardCategory}/{awardSubCategory}/{awardSubCategory2}")
+    public List<Map<String, Object>> getNominationDetails3(@PathVariable String empCode,@PathVariable String awardCategory,@PathVariable String awardSubCategory,@PathVariable String awardSubCategory2){
+        return employeeDetailsService.getNominationDetails3(empCode,awardCategory,awardSubCategory,awardSubCategory2);
+    }
     
-
-
-
 
 
 }

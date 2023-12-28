@@ -21,6 +21,12 @@ export class HrService {
       return this.http.get<EmployeeDetails>(`http://localhost:8080/employeeDetails/${empCode}`);
     }
 
+    getEmployeeDetails1(empCode: string): Observable<EmployeeDetails> {
+      console.log("reached here");
+      
+      return this.http.get<EmployeeDetails>(`http://localhost:8080/employeeDetails/${empCode}`);
+    }
+
     getLatestEmpDialogRecord(empCode: string, awardCategory: string, awardSubCategory: string, awardSubCategory2: string): Observable<any> {
         return this.http.get<any>(`http://localhost:8080/latestEmpDialogRecord=${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
     }
@@ -44,6 +50,23 @@ export class HrService {
 
     getRatingDetails(nominationID: number): Observable<any[]> {
       return this.http.get<any[]>(`http://localhost:8080/getRatingDetails/${nominationID}`);
+    }
+
+
+    // Get employee nomination details - 1
+    getNominationDetails1(empCode: string,awardCategory: string): Observable<any[]>{
+      return this.http.get<any[]>(`http://localhost:8080/getNominationDetails1/${empCode}/${awardCategory}`);
+    }
+
+
+    // // Get employee nomination details - 2
+    getNominationDetails2(empCode: string,awardCategory: string,awardSubCategory: string): Observable<any[]>{
+      return this.http.get<any[]>(`http://localhost:8080/getNominationDetails2/${empCode}/${awardCategory}/${awardSubCategory}`);
+    }
+
+    // Get employee nomination details - 3
+    getNominationDetails3(empCode: string, awardCategory: string,awardSubCategory: string,awardSubCategory2: string): Observable<any[]>{
+      return this.http.get<any[]>(`http://localhost:8080/getNominationDetails3/${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
     }
 
 

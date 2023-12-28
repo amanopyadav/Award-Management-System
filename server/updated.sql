@@ -223,6 +223,14 @@ WHERE project_code IS NOT NULL;
 
 -- -------------------------------------------------------------------------------
 
+---------------------------------------28/12/2023------------------------------------------
+
+CREATE OR REPLACE VIEW nomination_details AS
+SELECT award_category, award_sub_category,award_sub_category2, emp_code,nominated_by, nom_by_designation, onbehalf_of, on_behalf_designation 
+FROM nominee_list
+
+select * from nomination_details
+
 
 
 

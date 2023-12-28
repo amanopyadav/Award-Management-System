@@ -284,11 +284,27 @@ public class EmployeeDetailsService {
         return jdbcTemplate.queryForList(sql, employeeCode);
     }
 
+    // For 1
+    public List<Map<String, Object>> getNominationDetails1(String empCode,String awardCategory) {
+        String sql = "select * from nomination_details where emp_code = ? AND award_category=?";
 
-    
-    
-    
+        return jdbcTemplate.queryForList(sql, empCode,awardCategory);
+    }
 
+
+    // For 2
+    public List<Map<String, Object>> getNominationDetails2(String empCode,String awardCategory,String awardSubCategory) {
+        String sql = "select * from nomination_details where emp_code=? AND award_category=? AND award_sub_category=?";
+
+        return jdbcTemplate.queryForList(sql, empCode,awardCategory,awardSubCategory);
+    }
+
+    // For 3
+    public List<Map<String, Object>> getNominationDetails3(String empCode,String awardCategory,String awardSubCategory,String awardSubCategory2) {
+        String sql = "select * from nomination_details where emp_code=? AND award_category=? AND award_sub_category=? AND award_sub_category2=?";
+
+        return jdbcTemplate.queryForList(sql, empCode,awardCategory,awardSubCategory,awardSubCategory2);
+    }
     
 
 }
