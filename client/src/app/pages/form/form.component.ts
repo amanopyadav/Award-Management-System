@@ -770,6 +770,25 @@
               paramFormDataArray.push(paramFormData);
             }
 
+
+            else if(awardCategory == "Team Award"){
+              const paramFormData = {
+                exceedingexpectations : this.OnBehalfOfForm.get('exceedingexpectations').value,
+                exceedingexpectationsrating : this.OnBehalfOfForm.get('exceedingexpectationsrating').value,
+                processoriented : this.OnBehalfOfForm.get('processoriented').value,
+                peopleorientationrating : this.OnBehalfOfForm.get('peopleorientationrating').value,
+                timemanagement : this.OnBehalfOfForm.get('timemanagement').value,
+                timemanagementrating : this.OnBehalfOfForm.get('timemanagementrating').value,
+                workefficiency : this.OnBehalfOfForm.get('workefficiency').value,
+                workefficiencyrating : this.OnBehalfOfForm.get('workefficiencyrating').value,
+                punctuality : this.OnBehalfOfForm.get('punctuality').value,
+                punctualityrating : this.OnBehalfOfForm.get('punctualityrating').value,
+                proactiveness : this.OnBehalfOfForm.get('proactiveness').value,
+                proactivenessrating : this.OnBehalfOfForm.get('proactivenessrating').value
+              };
+              paramFormDataArray.push(paramFormData);
+            }
+
       
 
             this.formService.addNomieeParam(nominationId, latestAwardId, paramFormDataArray).subscribe(

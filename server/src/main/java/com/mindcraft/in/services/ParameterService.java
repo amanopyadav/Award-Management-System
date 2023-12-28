@@ -196,6 +196,30 @@ public class ParameterService {
                         updateQueryObj.setParameter("description", paramFormData.getOwnershipandcommitment());
                         updateQueryObj.setParameter("rating", paramFormData.getOwnershipandcommitmentrating());
                         break;
+                    case 39:
+                        updateQueryObj.setParameter("description", paramFormData.getExceedingexpectations());
+                        updateQueryObj.setParameter("rating", paramFormData.getExceedingexpectationsrating());
+                        break;
+                    case 40:
+                        updateQueryObj.setParameter("description", paramFormData.getProcessoriented());
+                        updateQueryObj.setParameter("rating", paramFormData.getProcessorientedrating());
+                        break;
+                    case 41:
+                        updateQueryObj.setParameter("description", paramFormData.getTimemanagement());
+                        updateQueryObj.setParameter("rating", paramFormData.getTimemanagementrating());
+                        break;
+                    case 42:
+                        updateQueryObj.setParameter("description", paramFormData.getWorkefficiency());
+                        updateQueryObj.setParameter("rating", paramFormData.getWorkefficiencyrating());
+                        break;
+                    case 43:
+                        updateQueryObj.setParameter("description", paramFormData.getPunctuality());
+                        updateQueryObj.setParameter("rating", paramFormData.getPunctualityrating());
+                        break;
+                    case 44:
+                        updateQueryObj.setParameter("description", paramFormData.getProactiveness());
+                        updateQueryObj.setParameter("rating", paramFormData.getProactivenessrating());
+                        break;
                     // Add more cases as needed
     
                     default:
