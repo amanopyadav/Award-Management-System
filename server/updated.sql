@@ -235,6 +235,94 @@ select * from nomination_details
 
 
 
+-- ----------------------------- 28/12/2023 ------------------------------------------
+
+-- Nominee List
+
+
+CREATE TABLE nominee_list (
+    nomination_id SERIAL PRIMARY KEY,
+	award_id BIGINT NOT NULL,
+	award_category VARCHAR(100) NOT NULL,
+	award_sub_category VARCHAR(100),
+	award_sub_category2 VARCHAR(100),
+    emp_code VARCHAR(100),
+    emp_name VARCHAR(100),
+	emp_designation VARCHAR(100),
+	unit VARCHAR(100),
+	skill VARCHAR(100),
+	mindcraft_exp_in_months BIGINT,
+	total_exp_in_months BIGINT,
+	email_id VARCHAR(100),
+	contact_number BIGINT,
+	dob DATE,
+	doj DATE,
+	project_name VARCHAR(100),
+	project_code BIGINT,
+	client VARCHAR(100),
+	industry_name VARCHAR(100),
+	nominated_by VARCHAR(100),
+	nom_by_designation VARCHAR(100),
+	onbehalf_of VARCHAR(100),
+	on_behalf_designation VARCHAR(100),
+	active_yn BOOLEAN,
+	created_by VARCHAR(100),
+	created_on TIMESTAMP,
+	updated_by VARCHAR(100),
+	updated_on TIMESTAMP
+);
+
+
+
+CREATE OR REPLACE FUNCTION insert_into_param()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the award_id and nomination_id are provided
+  IF NEW.award_id IS NOT NULL AND NEW.nomination_id IS NOT NULL THEN
+    -- Insert parameters into the parameter table based on award_id
+    INSERT INTO parameter (nomination_id, parameter_id)
+    SELECT NEW.nomination_id, parameter_id
+    FROM m_parameter
+    WHERE award_id = NEW.award_id;
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------TRIGGER-----------------------------
+
+CREATE TRIGGER trigger_insert_into_param
+AFTER INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_param();
+
+
+-- Emp rating view
+
+CREATE OR REPLACE VIEW emp_ratings AS
+SELECT
+    p.id AS id,
+    mp.parameter_name AS parameter_name,
+    p.nomination_id AS nomination_id,
+    p.description AS description,
+    p.rating AS rating
+FROM
+    parameter p
+JOIN
+    m_parameters mp ON p.parameter_id = mp.parameter_id;
+
+
+select * from emp_ratings;
+
+
+-- ------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
 
 
