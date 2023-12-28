@@ -79,6 +79,17 @@ interface EmployeeDetailsNew {
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+  selectedSubcategory: string = ''; // Property to store the selected subcategory
+  isCheckboxEnabled: boolean = false; // Property to control the checkbox state
+  checkboxChecked: boolean = false; // Property to track the checkbox state
+
+  toggleCheckbox() {
+    // Enable the checkbox only when "Lead Award" is selected as the subcategory
+    this.isCheckboxEnabled = this.selectedSubcategory === 'Lead Award';
+
+    // Set the checkbox state to unchecked
+    this.checkboxChecked = false;
+  }
 
 
   EmpForm: FormGroup
@@ -99,7 +110,9 @@ export class HrDashboardComponent implements OnInit {
   dataLoaded: boolean = false;
 
 
-  constructor(private hrService: HrService, private ngZone: NgZone) { }
+  constructor(private hrService: HrService, private ngZone: NgZone) {
+    this.isCheckboxEnabled = false;
+   }
 
 
   public employeeTableData: EmployeeTableData;
