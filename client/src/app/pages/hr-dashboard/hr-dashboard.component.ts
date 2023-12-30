@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HrService } from './hr.service';
 import { FormGroup } from '@angular/forms';
 import { NgZone } from '@angular/core';
-import { forkJoin } from 'rxjs';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -429,41 +428,6 @@ export class HrDashboardComponent implements OnInit {
       );
     }
   }
-
-
-
-  // viewDetails(empCode: string) {
-  //   console.log("Empcode : ", empCode);
-  
-  //   // Fetch detailed information for the selected employee
-  //   if (this.dataLoaded) {
-  //     // Use forkJoin to make multiple requests in parallel
-  //     forkJoin([
-  //       this.hrService.getEmployeeDetails(empCode),
-  //       // this.hrService.getNominationDetails(empCode)
-  //     ]).subscribe(
-  //       (results: [EmployeeDetailsNew, EmployeeDetailsNew1]) => {
-  //         console.log("Employee details fetched: ", results[0]);
-  //         console.log("Employee details fetched 1: ", results[1]);
-  
-  //         this.employeeDetailsnew = results[0];
-  //         this.employeeDetailsnew1 = results[1];
-  
-  //         console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
-  
-  //         // Open the details modal after fetching the details
-  //         this.displayDetailsModal = true;
-  //         this.displayRatingModal = false; // Close the View Ratings modal
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching employee details:', error);
-  //       }
-  //     );
-  //   }
-  // }
-  
-  
-
 
   onCloseDetailsModal() {
     console.log("Emp Details Modal Closed");
