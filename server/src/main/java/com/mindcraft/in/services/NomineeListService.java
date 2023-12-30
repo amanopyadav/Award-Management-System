@@ -92,7 +92,7 @@ public class NomineeListService {
     }
 
     public List<Map<String, Object>> getNomineeList() {
-        String sql = "SELECT * FROM nominee_list";
+        String sql = "SELECT * FROM nominee_list ORDER BY created_on DESC";
 
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         Map<String, Object> response = new HashMap<>();
