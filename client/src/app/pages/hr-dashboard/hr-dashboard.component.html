@@ -21,6 +21,7 @@
 
       <div class="card-body">
         <div class="row">
+
           <div class="col-md-3 pr-1">
             <div class="form-group">
               <label for="award_category">Award Category</label>
@@ -121,14 +122,14 @@
 
                     <li *ngIf="dataLoaded" style="list-style: none; cursor: pointer;">
                       <i class="nc-icon nc-single-copy-04"
-                        (click)="viewDetails(employee.empCode,employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2)"></i>
+                        (click)="viewDetails(employee.empCode,employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2, employee.project_code)"></i>
                       <p>View Details</p>
                     </li>
 
                     <li *ngIf="shouldShowViewRatings(employee.awardCategory)"
                       style="list-style: none; cursor: pointer;">
                       <i class="nc-icon nc-single-copy-04"
-                        (click)="viewRatings(employee.empCode, employee.empName, employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2)"></i>
+                        (click)="viewRatings(employee.empCode, employee.empName, employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2,employee.project_code)"></i>
                       <p>View Ratings</p>
                     </li>
 
@@ -312,6 +313,171 @@
             </div>
           </div>
           <!-- View details modal ends here -->
+
+
+
+
+
+          <!-- Team Details Modal start here -->
+          <div class="modal" tabindex="-1" role="dialog"
+            [ngStyle]="{'display': displayTeamDetailsModal ? 'block' : 'none'}">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-primary">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}
+                  </h5>
+
+                  <div class="col-md-6 pr-1">
+                    <div class="form-group">
+                      <label for="award_category">Select team member</label>
+                      <select class="form-control form-control-sm" id="award_category" name="award_category">
+                        <option value="" selected>Choose Award Category</option>
+                        <option value="Promising newcomer">Promising Newcomer</option>
+                        <option value="Quarterly Award">Quarterly Award</option>
+                        <option value="Rising Star Award">Rising Star Award</option>
+                        <option value="Spot Award">Spot Award</option>
+                        <option value="Half Yearly Award">Half Yearly Award</option>
+                        <option value="Team Award">Team Award</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+
+                
+
+                <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+
+                  <!-- Nomination details modal starts here -->
+                  <form [formGroup]="EmpForm">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="details-container" style="font-size: medium;">
+                              <h5 style="text-decoration: underline;">Nomination Details</h5>
+
+
+                              <div class="detail-item">
+                                <span class="detail-label">Award Category : </span>
+                                <span><b>{{employeeDetailsnew1?.award_category ? employeeDetailsnew1?.award_category :
+                                    'none'}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Award SubCategory : </span>
+                                <span><b>{{employeeDetailsnew1?.award_sub_category ?
+                                    employeeDetailsnew1?.award_sub_category : 'none'}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Award SubCategory2 : </span>
+                                <span><b>{{employeeDetailsnew1?.award_sub_category2 ?
+                                    employeeDetailsnew1?.award_sub_category2 : 'none'}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Nominated By : </span>
+                                <span><b>{{employeeDetailsnew1?.nominated_by}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Nominated By Designation : </span>
+                                <span><b>{{employeeDetailsnew1?.nom_by_designation}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">On Behalf Of : </span>
+                                <span><b>{{employeeDetailsnew1?.onbehalf_of}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">On Behalf Of Designation : </span>
+                                <span><b>{{employeeDetailsnew1?.on_behalf_designation}}</b></span>
+                              </div><br>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- Nomination detials modal ends here -->
+
+
+
+                  <!-- Employee details starts here -->
+                  <form [formGroup]="EmpForm">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="details-container" style="font-size: medium;">
+                              <h5 style="text-decoration: underline;">Employee Details</h5>
+                              <div class="detail-item">
+                                <span class="detail-label">DOJ : </span>
+                                <span><b>{{employeeDetailsnew?.doj}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Unit : </span>
+                                <span><b>{{employeeDetailsnew?.unit}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Skill : </span>
+                                <span><b>{{employeeDetailsnew?.skill}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Employee Designation : </span>
+                                <span><b>{{employeeDetailsnew?.empDesignation}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Mindcraft Experience(In Months) : </span>
+                                <span><b>{{employeeDetailsnew?.mindcraftExpInMonths}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Total Experience(In Months) : </span>
+                                <span><b>{{employeeDetailsnew?.totalExpInMonths}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Contact Number : </span>
+                                <span><b>{{employeeDetailsnew?.contactNumber}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Email Id : </span>
+                                <span><b>{{employeeDetailsnew?.emailId}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">DOB : </span>
+                                <span><b>{{employeeDetailsnew?.dob}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Project Code : </span>
+                                <span><b>{{employeeDetailsnew?.projectCode}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Project Name : </span>
+                                <span><b>{{employeeDetailsnew?.projectName}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Client : </span>
+                                <span><b>{{employeeDetailsnew?.client}}</b></span>
+                              </div><br>
+                              <div class="detail-item">
+                                <span class="detail-label">Industry Name : </span>
+                                <span><b>{{employeeDetailsnew?.industryName}}</b></span>
+                              </div><br>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- Employee details ends here -->
+
+                </div>
+                <div class="modal-footer">
+                  <!-- Your modal footer content here -->
+                  <button type="button" class="btn btn-danger" (click)="onCloseTeamDetailsModal()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Team details modal ends here -->
+
+
 
         </div>
       </div>

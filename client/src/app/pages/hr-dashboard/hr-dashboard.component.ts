@@ -142,6 +142,7 @@ export class HrDashboardComponent implements OnInit {
   displayEmpModal: boolean = false;
   displayRatingModal: boolean;
   displayDetailsModal: boolean;
+  displayTeamDetailsModal: boolean;
   dataLoaded: boolean = false;
 
 
@@ -236,7 +237,7 @@ export class HrDashboardComponent implements OnInit {
   }
   
 
-  viewRatings(empCode: string,empName: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string) {
+  viewRatings(empCode: string,empName: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string,projectCode: number) {
     console.log("Rating dialogbox Opened");
 
     console.log("Empcode : ", empCode);
@@ -244,6 +245,8 @@ export class HrDashboardComponent implements OnInit {
     console.log("AwardCategory : ", awardCategory);
     console.log("AwardSubCategory : ", awardSubCategory);
     console.log("AwardSubCategory2 : ", awardSubCategory2);
+    console.log("PProject Code: ",projectCode);
+    
 
     if(this.dataLoaded){
 
@@ -269,6 +272,31 @@ export class HrDashboardComponent implements OnInit {
           }
         )
       }
+
+      else if(awardCategory == 'Team Award'){
+        this.hrService.fetchNominationIDTeam(projectCode,awardCategory).subscribe(
+          (res)=>{
+            console.log("Nomination Id: ",res);
+            this.hrService.getRatingDetails(res).subscribe(
+              (data) => {
+                this.EmployeeRatings = data; 
+                this.EmpRand.empCode = empCode
+                this.EmpRand.empName = empName;
+                
+                console.log("Employee rating data : ",this.EmployeeRatings);
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+            
+          },
+          (err)=>{
+            console.error("Errro fetching nominee details: ",err);
+          }
+        )
+      }
+
       else if(awardCategory != '' && awardSubCategory != ''){
         this.hrService.fetchNominationIDTwo(empCode,awardCategory,awardSubCategory).subscribe(
           (res)=>{
@@ -323,109 +351,123 @@ export class HrDashboardComponent implements OnInit {
     this.displayDetailsModal = false; // Close the View Details modal
   }
 
-  viewDetails(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string) {
+  viewDetails(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string,project_code: string) {
     console.log("Empcode : ", empCode);
     console.log("AwardCategory : ", awardCategory);
     console.log("AwardSubCategory : ", awardSubCategory);
     console.log("AwardSubCategory2 : ", awardSubCategory2);
+    console.log("Project Code : ", project_code);
+    
 
   
     // Fetch detailed information for the selected employee
     if (this.dataLoaded) {
-      this.hrService.getEmployeeDetails(empCode).subscribe(
-        (details: EmployeeDetailsNew) => {
-          console.log("Employee details fetched: ", details);
+
+      if(awardCategory == 'Team Award'){
+
+        this.displayTeamDetailsModal = true;
+        
+      }
+      else{
+
+        this.hrService.getEmployeeDetails(empCode).subscribe(
+          (details: EmployeeDetailsNew) => {
+            console.log("Employee details fetched: ", details);
+    
+            this.employeeDetailsnew = details;
+            console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
   
-          this.employeeDetailsnew = details;
-          console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsnew));
-
-
-          // for 1
-          if(awardSubCategory == '' && awardSubCategory2 == ''){
-            this.hrService.getNominationDetails1(empCode,awardCategory).subscribe(
-              (data) => {
-                console.log("data : ",data);
-                const firstElement = data[0];
-
-                this.employeeDetailsnew1 = {
-                  award_category: firstElement.award_category,
-                  award_sub_category: firstElement.award_sub_category,
-                  award_sub_category2: firstElement.award_sub_category2,
-                  nominated_by: firstElement.nominated_by,
-                  nom_by_designation: firstElement.nom_by_designation,
-                  onbehalf_of: firstElement.onbehalf_of,
-                  on_behalf_designation: firstElement.on_behalf_designation,
-                };
-
-                console.log("Form data : ",this.employeeDetailsnew1);
-
-              },
-              (err)=>{
-                console.error("Error fetching nominee details",err)
-              }
-            )
-          }
-
-          // for 2
-          else if(awardSubCategory2 == ''){
-            this.hrService.getNominationDetails2(empCode,awardCategory,awardSubCategory).subscribe(
-              (data) => {
-                console.log("data : ",data);
-
-                const firstElement = data[0];
-
-                this.employeeDetailsnew1 = {
-                  award_category: firstElement.award_category,
-                  award_sub_category: firstElement.award_sub_category,
-                  award_sub_category2: firstElement.award_sub_category2,
-                  nominated_by: firstElement.nominated_by,
-                  nom_by_designation: firstElement.nom_by_designation,
-                  onbehalf_of: firstElement.onbehalf_of,
-                  on_behalf_designation: firstElement.on_behalf_designation,
-                };
-
-                console.log("Form data : ",this.employeeDetailsnew1);
-              },
-              (err)=>{
-                console.error("Error fetching nominee details",err)
-              }
-            )
-          }
-
-          // for 3
-          else if(awardSubCategory != '' && awardSubCategory2 != ''){
-            this.hrService.getNominationDetails3(empCode,awardCategory,awardSubCategory,awardSubCategory2).subscribe(
-              (data) => {
-                console.log("data : ",data);
-
-                const firstElement = data[0];
-
-                this.employeeDetailsnew1 = {
-                  award_category: firstElement.award_category,
-                  award_sub_category: firstElement.award_sub_category,
-                  award_sub_category2: firstElement.award_sub_category2,
-                  nominated_by: firstElement.nominated_by,
-                  nom_by_designation: firstElement.nom_by_designation,
-                  onbehalf_of: firstElement.onbehalf_of,
-                  on_behalf_designation: firstElement.on_behalf_designation,
-                };
-
-                console.log("Form data : ",this.employeeDetailsnew1);
-              },
-              (err)=>{
-                console.error("Error fetching nominee details",err)
-              }
-            )
-          }
   
-          // Open the details modal after fetching the details
-          this.displayDetailsModal = true;
-          this.displayRatingModal = false; // Close the View Ratings modal
-        },
-        (error) => {
-          console.error('Error fetching employee details:', error);
-        }
-      );
+            // for 1
+            if(awardSubCategory == '' && awardSubCategory2 == ''){
+              this.hrService.getNominationDetails1(empCode,awardCategory).subscribe(
+                (data) => {
+                  console.log("data : ",data);
+                  const firstElement = data[0];
+  
+                  this.employeeDetailsnew1 = {
+                    award_category: firstElement.award_category,
+                    award_sub_category: firstElement.award_sub_category,
+                    award_sub_category2: firstElement.award_sub_category2,
+                    nominated_by: firstElement.nominated_by,
+                    nom_by_designation: firstElement.nom_by_designation,
+                    onbehalf_of: firstElement.onbehalf_of,
+                    on_behalf_designation: firstElement.on_behalf_designation,
+                  };
+  
+                  console.log("Form data : ",this.employeeDetailsnew1);
+  
+                },
+                (err)=>{
+                  console.error("Error fetching nominee details",err)
+                }
+              )
+            }
+  
+            // for 2
+            else if(awardSubCategory2 == ''){
+              this.hrService.getNominationDetails2(empCode,awardCategory,awardSubCategory).subscribe(
+                (data) => {
+                  console.log("data : ",data);
+  
+                  const firstElement = data[0];
+  
+                  this.employeeDetailsnew1 = {
+                    award_category: firstElement.award_category,
+                    award_sub_category: firstElement.award_sub_category,
+                    award_sub_category2: firstElement.award_sub_category2,
+                    nominated_by: firstElement.nominated_by,
+                    nom_by_designation: firstElement.nom_by_designation,
+                    onbehalf_of: firstElement.onbehalf_of,
+                    on_behalf_designation: firstElement.on_behalf_designation,
+                  };
+  
+                  console.log("Form data : ",this.employeeDetailsnew1);
+                },
+                (err)=>{
+                  console.error("Error fetching nominee details",err)
+                }
+              )
+            }
+  
+            // for 3
+            else if(awardSubCategory != '' && awardSubCategory2 != ''){
+              this.hrService.getNominationDetails3(empCode,awardCategory,awardSubCategory,awardSubCategory2).subscribe(
+                (data) => {
+                  console.log("data : ",data);
+  
+                  const firstElement = data[0];
+  
+                  this.employeeDetailsnew1 = {
+                    award_category: firstElement.award_category,
+                    award_sub_category: firstElement.award_sub_category,
+                    award_sub_category2: firstElement.award_sub_category2,
+                    nominated_by: firstElement.nominated_by,
+                    nom_by_designation: firstElement.nom_by_designation,
+                    onbehalf_of: firstElement.onbehalf_of,
+                    on_behalf_designation: firstElement.on_behalf_designation,
+                  };
+  
+                  console.log("Form data : ",this.employeeDetailsnew1);
+                },
+                (err)=>{
+                  console.error("Error fetching nominee details",err)
+                }
+              )
+            }
+    
+            // Open the details modal after fetching the details
+            this.displayDetailsModal = true;
+            this.displayRatingModal = false; // Close the View Ratings modal
+          },
+          (error) => {
+            console.error('Error fetching employee details:', error);
+          }
+        );
+
+      }
+
+      
     }
   }
 
@@ -434,6 +476,11 @@ export class HrDashboardComponent implements OnInit {
     this.displayRatingModal = false;
     this.displayDetailsModal = false;
     this.selectedEmployee = null;
+  }
+
+  onCloseTeamDetailsModal() {
+    console.log("Emp Details Modal Closed");
+    this.displayTeamDetailsModal = false;
   }
 
 

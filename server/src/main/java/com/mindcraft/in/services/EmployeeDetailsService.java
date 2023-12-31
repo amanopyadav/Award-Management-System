@@ -200,6 +200,29 @@ public class EmployeeDetailsService {
             }
     }
 
+    public Long getRatingNominationIdTeam(String awardCategory,Long projectCode){
+        String sql;
+        sql = "SELECT nomination_id FROM nominee_list WHERE award_category=? AND project_code=? ";
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+                preparedStatement.setString(1, awardCategory);
+                preparedStatement.setLong(2, projectCode);
+
+                try (ResultSet rset = preparedStatement.executeQuery()){
+                    if(rset.next()){
+                        System.out.println("Fetched rating nomination ID : "+rset.getLong("nomination_id"));
+                        return rset.getLong("nomination_id");
+                    }else{
+                        System.out.println("Not found rating nomination id");
+                        return null;
+                    }
+                }
+            }   catch(SQLException e){
+                throw new RuntimeException("Error executing SQL query", e);
+            }
+    }
+
     // For two categories
     public Long getRatingNominationIdTwo(String empCode,String awardCategory,String awardSubCategory){
         String sql;

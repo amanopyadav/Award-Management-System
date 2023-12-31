@@ -85,6 +85,12 @@ public class EmpDetailsController {
     }
 
     // for 1 categories
+
+    @GetMapping("/getRatingNominationIdTeam/{projectCode}/{awardCategory}")
+    public Long getNominationIDTeam(@PathVariable Long projectCode,@PathVariable String awardCategory){
+        return employeeDetailsService.getRatingNominationIdTeam(awardCategory,projectCode);
+    }
+
     @GetMapping("/getRatingNominationIdOne/{empCode}/{awardCategory}")
     public Long getNominationIDOne(@PathVariable String empCode,@PathVariable String awardCategory){
         return employeeDetailsService.getRatingNominationIdOne(empCode, awardCategory);

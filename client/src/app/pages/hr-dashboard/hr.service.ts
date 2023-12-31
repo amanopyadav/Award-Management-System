@@ -33,8 +33,16 @@ export class HrService {
 
 
     fetchNominationIDOne(empCode: string,awardCategory: string):  Observable<number>{
+      // if(empCode == ''){
+      //   return this.http.get<number>(`http://localhost:8080/getRatingNominationIdOne/${awardCategory}`);
+      // }
       return this.http.get<number>(`http://localhost:8080/getRatingNominationIdOne/${empCode}/${awardCategory}`);
     }
+
+    fetchNominationIDTeam(projectCode: number,awardCategory: string){
+      return this.http.get<number>(`http://localhost:8080/getRatingNominationIdTeam/${projectCode}/${awardCategory}`);
+    }
+
 
     fetchNominationIDTwo(empCode: string,awardCategory: string,awardSubCategory: string):  Observable<number>{
       console.log("Empcode for two: "+empCode);
