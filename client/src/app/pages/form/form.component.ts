@@ -832,12 +832,12 @@
       // Check if the selected category is spot_award or its subcategories
       if (
         awardCategory === 'Spot Award' ||
-        (awardCategory === 'Promising newcomer' && [4, 7, 10, 12].includes(currentMonth)) ||
-        (awardCategory === 'Quarterly Award' && [4, 7, 10, 12].includes(currentMonth)) ||
-        (awardCategory === 'Rising Star Award' && [4, 7, 10, 12].includes(currentMonth)) ||
-        (awardCategory === 'Spot Award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
-        (awardCategory === 'Half Yearly Award' && [7, 12].includes(currentMonth)) ||
-        (awardCategory === 'Team Award' && [7, 12].includes(currentMonth))
+        (awardCategory === 'Promising newcomer') ||
+        (awardCategory === 'Quarterly Award') ||
+        (awardCategory === 'Rising Star Award') ||
+        (awardCategory === 'Spot Award') ||
+        (awardCategory === 'Half Yearly Award') ||
+        (awardCategory === 'Team Award')
         
       ) {
         this.setAwardForm = true;
