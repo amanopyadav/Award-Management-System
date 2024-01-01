@@ -126,6 +126,8 @@ export class HrDashboardComponent implements OnInit {
   Employees: EmployeeTableRow[];
   
   EmployeeRatings: any[]=[];
+  TeamMembersOfProjects: any[] = [];
+
   // nom1: EmployeeDetailsNew1;
   selectedEmployee: EmployeeTableRow;  // Add this line
   employeeDetails: EmployeeDetails;
@@ -249,6 +251,23 @@ export class HrDashboardComponent implements OnInit {
         console.error('Error fetching nominee list:', error);
       }
     );
+  }
+
+  fetchTeamMembersForProjects(projCode: string){
+    this.hrService.fetchTeamMembersForProjects(projCode).subscribe(
+      (data) => {
+        console.log("All team members of projects: ",data);
+        this.TeamMembersOfProjects = data;
+        this.ngOnInit();
+        console.log("Team members : ",this.TeamMembersOfProjects);
+
+        // this.onCloseHandledforProjTeam()
+        
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
   }
   
 
@@ -397,12 +416,15 @@ export class HrDashboardComponent implements OnInit {
     this.displayDetailsModal = false; // Close the View Details modal
   }
 
+
   viewDetails(empCode: string,awardCategory: string,awardSubCategory: string,awardSubCategory2: string,project_code: string) {
     console.log("Empcode : ", empCode);
     console.log("AwardCategory : ", awardCategory);
     console.log("AwardSubCategory : ", awardSubCategory);
     console.log("AwardSubCategory2 : ", awardSubCategory2);
     console.log("Project Code : ", project_code);
+
+    
     
 
   
@@ -411,7 +433,34 @@ export class HrDashboardComponent implements OnInit {
 
       if(awardCategory == 'Team Award'){
 
+        this.hrService.getTeamProjectName(awardCategory, parseInt(project_code)).subscribe(
+          (response: any) => {
+            // Access the 'body' property to get the actual data
+            this.teamRand.projName = response;
+            console.log("Team project name: ", this.teamRand.projName);
+          },
+          (error) => {
+            console.error("Failed to fetch team project name: ", error);
+          }
+        );
+
+        this.hrService.getTeamCount(parseInt(project_code)).subscribe(
+          (data)=>{
+            this.teamRand.teamCount = data;
+            console.log("Team count: ",this.teamRand.teamCount);
+            
+          },
+          (error)=>{
+            console.error("failed to fetch team count")
+          }
+        )
+
+        this.checkIfItsTeam = true
+        this.fetchTeamMembersForProjects(project_code);
         this.displayTeamDetailsModal = true;
+
+        console.log("Team members of projects : ",this.TeamMembersOfProjects);
+        
         
       }
       else{

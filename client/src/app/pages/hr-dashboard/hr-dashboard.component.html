@@ -328,20 +328,17 @@
             <div class="modal-dialog modal-xl" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title text-primary">{{employeeDetailsnew?.empName}} : {{employeeDetailsnew?.empCode}}
+                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == true">{{stringifyTeamProjName()}} : {{teamRand.teamCount}} members
                   </h5>
 
                   <div class="col-md-6 pr-1">
                     <div class="form-group">
-                      <label for="award_category">Select team member</label>
-                      <select class="form-control form-control-sm" id="award_category" name="award_category">
-                        <option value="" selected>Choose Award Category</option>
-                        <option value="Promising newcomer">Promising Newcomer</option>
-                        <option value="Quarterly Award">Quarterly Award</option>
-                        <option value="Rising Star Award">Rising Star Award</option>
-                        <option value="Spot Award">Spot Award</option>
-                        <option value="Half Yearly Award">Half Yearly Award</option>
-                        <option value="Team Award">Team Award</option>
+                      <label for="teamMember">Select team member</label>
+                      <select class="form-control form-control-sm" id="teamMember" name="teamMember">
+                        <option value="" selected>Choose Team Member</option>
+                        <option *ngFor="let single_member of TeamMembersOfProjects"  [value]="single_member.emp_name">
+                          {{ single_member.emp_name }}
+                        </option>
                       </select>
                     </div>
                   </div>

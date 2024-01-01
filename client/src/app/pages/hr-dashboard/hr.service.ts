@@ -86,6 +86,10 @@ export class HrService {
       return this.http.get<number>(`http://localhost:8080/fetchCountOfTeamMember/${projectCode}`);
     }
 
+    fetchTeamMembersForProjects(projCode: string) : Observable <any[]> {
+      return this.http.get<any[]>(`http://localhost:8080/projects/fetchTeamMembersOfProjects/${projCode}`)
+    }
+
 
     
 }
