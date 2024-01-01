@@ -107,6 +107,44 @@ public class NomineeListService {
         return result;
     }
 
+    // Fetch team project name:
+    public String getTeamProjectName(String awardCategory,Long projCode){
+        String sql = "SELECT project_name from nominee_list WHERE award_category = ? AND project_code = ?";
+        String data = jdbcTemplate.queryForObject(sql, new Object[]{awardCategory, projCode}, String.class);
+        Map<String, Object> response = new HashMap<>();
+
+        if(data.isEmpty()){
+            response.put("status", "error");
+            response.put("message", "No project found");
+        }else{
+            response.put("status", "success");
+            response.put("message", "Project fetched successfully");
+        }
+
+        return data;
+
+    }
+
+
+    // fetch count of team member
+    public List<Map<String, Object>> getAllTeamMember(String projCode) {
+        String sql = "SELECT * FROM all_team_members WHERE project_code = ?";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,projCode);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "Error to find team members");
+        } else {
+            response.put("status", "success");
+            response.put("message", "All Team members found");
+            // response.put("result", result);
+        }
+
+        return result;
+    }
+
     public Map<String, Object> getLatestEmpDialogRecord(String empCode, String awardCategory, String awardSubCategory, String awardSubCategory2) {
         String sql = "SELECT * FROM emp_dialog " +
                      "WHERE emp_code = ? " +

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,32 @@ public class NomineeListController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
+    }
+
+    // @GetMapping("/fetchTeamProjectName/{awardCategory}/{projCode}")
+    // public String getTeamProjectName(@PathVariable String awardCategory,@PathVariable Long projCode){
+    //     String projName = nomineeListService.getTeamProjectName(awardCategory,projCode);
+    //     System.out.println("Project name from backend : "+projName);
+
+    //     return projName;
+    // }
+
+    @GetMapping("/fetchTeamProjectName/{awardCategory}/{projCode}")
+    public ResponseEntity<Map<String, String>> getTeamProjectName(@PathVariable String awardCategory, @PathVariable Long projCode) {
+        String projName = nomineeListService.getTeamProjectName(awardCategory, projCode);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("projectName", projName);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/fetchCountOfTeamMember/{projCode}")
+    public int getTeamMemberOfProject(@PathVariable String projCode){
+        List<Map<String, Object>> requestForAllTeamMembers = nomineeListService.getAllTeamMember(projCode);
+        int sizeOfTeam = requestForAllTeamMembers.size();
+
+        return sizeOfTeam;
     }
 
 

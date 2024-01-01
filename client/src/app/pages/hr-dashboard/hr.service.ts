@@ -77,6 +77,15 @@ export class HrService {
       return this.http.get<any[]>(`http://localhost:8080/getNominationDetails3/${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
     }
 
+    getTeamProjectName(awardCategory: string, projectCode: number): Observable<string> {
+      return this.http.get<string>(`http://localhost:8080/fetchTeamProjectName/${awardCategory}/${projectCode}`);
+    }
+    
+
+    getTeamCount(projectCode: number): Observable<number>{
+      return this.http.get<number>(`http://localhost:8080/fetchCountOfTeamMember/${projectCode}`);
+    }
+
 
     
 }

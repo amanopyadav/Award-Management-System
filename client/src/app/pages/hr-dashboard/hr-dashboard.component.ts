@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HrService } from './hr.service';
 import { FormGroup } from '@angular/forms';
 import { NgZone } from '@angular/core';
+import { error } from 'protractor';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -145,6 +146,13 @@ export class HrDashboardComponent implements OnInit {
   displayTeamDetailsModal: boolean;
   dataLoaded: boolean = false;
 
+  checkIfItsTeam: boolean = false;
+
+  teamRand = {
+    projName : {},
+    teamCount : 0
+  }
+
 
   constructor(private hrService: HrService, private ngZone: NgZone) {
     this.isCheckboxEnabled = false;
@@ -194,6 +202,13 @@ export class HrDashboardComponent implements OnInit {
 
 
   }
+
+  stringifyTeamProjName(): string {
+    const jsonString = JSON.stringify(this.teamRand.projName['projectName']);
+    return jsonString.replace(/"/g, '');
+  }
+  
+  
 
   applyFilter() {
     this.filteredEmployeeData = this.employeeTableData.dataRows.filter(row =>
@@ -259,6 +274,7 @@ export class HrDashboardComponent implements OnInit {
                 this.EmployeeRatings = data; 
                 this.EmpRand.empCode = empCode
                 this.EmpRand.empName = empName;
+                this.checkIfItsTeam = false;
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
               (error) => {
@@ -282,6 +298,34 @@ export class HrDashboardComponent implements OnInit {
                 this.EmployeeRatings = data; 
                 this.EmpRand.empCode = empCode
                 this.EmpRand.empName = empName;
+                this.checkIfItsTeam = true;
+
+                this.hrService.getTeamProjectName(awardCategory, projectCode).subscribe(
+                  (response: any) => {
+                    // Access the 'body' property to get the actual data
+                    this.teamRand.projName = response;
+                    console.log("Team project name: ", this.teamRand.projName);
+                  },
+                  (error) => {
+                    console.error("Failed to fetch team project name: ", error);
+                  }
+                );
+
+                this.hrService.getTeamCount(projectCode).subscribe(
+                  (data)=>{
+                    this.teamRand.teamCount = data;
+                    console.log("Team count: ",this.teamRand.teamCount);
+                    
+                  },
+                  (error)=>{
+                    console.error("failed to fetch team count")
+                  }
+                )
+
+                // console.log("Team project name: ",this.teamRand.projName);
+                // console.log("Team count: ",this.teamRand.teamCount);
+                
+                
                 
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
@@ -306,6 +350,7 @@ export class HrDashboardComponent implements OnInit {
                 this.EmployeeRatings = data; 
                 this.EmpRand.empCode = empCode
                 this.EmpRand.empName = empName;
+                this.checkIfItsTeam = false;
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
               (error) => {
@@ -330,6 +375,7 @@ export class HrDashboardComponent implements OnInit {
                 this.EmployeeRatings = data; 
                 this.EmpRand.empCode = empCode
                 this.EmpRand.empName = empName;
+                this.checkIfItsTeam = false;
                 
                 console.log("Employee rating data : ",this.EmployeeRatings);
               },
