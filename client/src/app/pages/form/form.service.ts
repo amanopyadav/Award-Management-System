@@ -95,7 +95,7 @@ export class FormService {
         return this.http.get<{ nominationId: number, latestAwardId: number }>(url);
       }
 
-
+        
 
       
       getNominationIdAndLatestAwardId1(awardCategory: string): Observable<{ nominationId: number, latestAwardId: number }> {
