@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mindcraft.in.pojos.EmpNominationDetails;
 import com.mindcraft.in.pojos.EmployeeDetails;
 import com.mindcraft.in.services.EmployeeDetailsService;
 import com.mindcraft.in.services.NomineeListService;
@@ -59,10 +61,32 @@ public class EmpDetailsController {
         
     }
 
+
     // New method to get employee details
     @GetMapping("/employeeDetails/{empCode}")
     public ResponseEntity<EmployeeDetails> getEmployeeDetails(@PathVariable String empCode) {
         EmployeeDetails employeeDetails = nomineeListService.getEmployeeDetails(empCode);
+
+        if (employeeDetails != null) {
+            return ResponseEntity.ok(employeeDetails);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+    // Get project code for team
+    @GetMapping("/getProjectCode/{empCode}")
+    public String getProjectCode(@PathVariable String empCode) {
+        return employeeDetailsService.getProjectCode(empCode);
+    }
+
+    // Get individual member data for team
+    @GetMapping("/employeeNominationForTeam/{awardCategory}/{empCode}")
+    public ResponseEntity<EmpNominationDetails> getNominationDetailsOfTeamMember(@PathVariable String awardCategory,@PathVariable String empCode) {
+
+        Long ProjCode = Long.parseLong(empCode);
+        EmpNominationDetails employeeDetails = nomineeListService.getNominationDetailsOfTeamMember(awardCategory,ProjCode);
 
         if (employeeDetails != null) {
             return ResponseEntity.ok(employeeDetails);

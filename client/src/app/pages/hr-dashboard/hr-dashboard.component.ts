@@ -86,6 +86,33 @@ interface EmployeeDetailsNew {
   industryName: string;
 }
 
+interface EmployeeDetailsForTeam{
+  empCode: string;
+  empName: string;
+  doj: Date;
+  unit: string;
+  skill: string;
+  empDesignation: string;
+  mindcraftExpInMonths: number;
+  totalExpInMonths: number;
+  contactNumber: number;
+  emailId: string;
+  dob: Date;
+  projectCode: number;
+  projectName: string;
+  client: string;
+  industryName: string;
+}
+
+interface EmployeeNominationForTeam{
+  award_category: string;
+  nominated_by: string;
+  nom_by_designation: string;
+  onbehalf_of: string;
+  on_behalf_designation: string;
+}
+
+
 interface EmployeeDetailsNew1{
   award_category: string;
   award_sub_category: string;
@@ -132,7 +159,8 @@ export class HrDashboardComponent implements OnInit {
   selectedEmployee: EmployeeTableRow;  // Add this line
   employeeDetails: EmployeeDetails;
   employeeDetailsnew: EmployeeDetailsNew;
-  // employeeDetailsnew1: EmployeeDetailsNew1;
+  employeeDetailsForteam : EmployeeDetailsForTeam;
+  EmployeeNominationForteam : EmployeeNominationForTeam;
   employeeDetailsnew1 = {
     award_category: {},
     award_sub_category: {},
@@ -208,6 +236,56 @@ export class HrDashboardComponent implements OnInit {
   stringifyTeamProjName(): string {
     const jsonString = JSON.stringify(this.teamRand.projName['projectName']);
     return jsonString.replace(/"/g, '');
+  }
+
+  stringifyTeamNominationDetails(empDetail: string){
+    const jsonString = JSON.stringify(empDetail);
+    return jsonString.replace(/"/g,'');
+  }
+
+  fetchSingleMemberOfProject(empCode: string){
+
+    let projCode : string;
+    console.log("Single member code: ",empCode);
+
+    // fetch employee of team details
+    this.hrService.getEmployeeDetails(empCode).subscribe(
+      (details: EmployeeDetailsForTeam) => {
+        console.log("Employee details fetched: ", details);
+
+        this.employeeDetailsForteam = details;
+        console.log("Emp data fetched: " + JSON.stringify(this.employeeDetailsForteam));
+      },
+      (err) => {
+        console.error("Failed to fetch employee team details")
+      });
+
+    // fetch project code
+    this.hrService.getProjectCode(empCode).subscribe(
+      (data)=>{
+        console.log("data: ",data);
+        projCode = data;
+        console.log("Project Code: ",projCode);
+
+        this.hrService.getNominationDetailsOfTeamMember('Team Award',projCode).subscribe(
+          (data: EmployeeNominationForTeam) => {
+            this.EmployeeNominationForteam = data;
+            console.log("Employee details fetched for team: ",this.EmployeeNominationForteam);
+    
+          },
+          (err)=>{
+            console.error("Failed to fetch member details for team")
+          }
+        )
+        
+      },
+      (error)=>{
+        console.error("Failed to fetch project code")
+      }
+    )
+
+    
+
   }
   
   

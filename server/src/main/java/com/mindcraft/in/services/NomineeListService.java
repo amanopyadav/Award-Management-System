@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
 
+import com.mindcraft.in.pojos.EmpNominationDetails;
 import com.mindcraft.in.pojos.EmployeeDetails;
 import com.mindcraft.in.pojos.NomineeList;
 
@@ -204,6 +205,28 @@ public class NomineeListService {
             return null;
         }
     }
+
+
+    public EmpNominationDetails getNominationDetailsOfTeamMember(String awardCategory, Long projCode) {
+        String sql = "SELECT award_category, nominated_by, nom_by_designation, onBehalf_of, on_behalf_designation FROM nominee_list WHERE award_category = ? AND project_code = ?";
+    
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{awardCategory, projCode}, (rs, rowNum) -> {
+                EmpNominationDetails employeeDetails = new EmpNominationDetails();
+                employeeDetails.setAward_category(rs.getString("award_category"));
+                employeeDetails.setNominated_by(rs.getString("nominated_by"));
+                employeeDetails.setNom_by_designation(rs.getString("nom_by_designation"));
+                employeeDetails.setOnbehalf_of(rs.getString("onBehalf_of"));
+                employeeDetails.setOn_behalf_designation(rs.getString("on_behalf_designation"));
+    
+                return employeeDetails;
+            });
+        } catch (Exception e) {
+            e.printStackTrace(); // Log or handle the exception as needed
+            return null;
+        }
+    }
+    
 
     
 }

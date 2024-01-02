@@ -21,11 +21,21 @@ export class HrService {
       return this.http.get<EmployeeDetails>(`http://localhost:8080/employeeDetails/${empCode}`);
     }
 
-    getEmployeeDetails1(empCode: string): Observable<EmployeeDetails> {
+    getProjectCode(empCode: string): Observable<string> {
+      return this.http.get<string>(`http://localhost:8080/getProjectCode/${empCode}`)
+    }
+
+    getNominationDetailsOfTeamMember(awardCategory: string,projCode: string): Observable<EmployeeNominationForTeam> {
       console.log("reached here");
       
-      return this.http.get<EmployeeDetails>(`http://localhost:8080/employeeDetails/${empCode}`);
+      return this.http.get<EmployeeNominationForTeam>(`http://localhost:8080/employeeNominationForTeam/${awardCategory}/${projCode}`);
     }
+
+    // getEmployeeDetails1(empCode: string): Observable<EmployeeDetails> {
+    //   console.log("reached here");
+      
+    //   return this.http.get<EmployeeDetails>(`http://localhost:8080/employeeDetails/${empCode}`);
+    // }
 
     getLatestEmpDialogRecord(empCode: string, awardCategory: string, awardSubCategory: string, awardSubCategory2: string): Observable<any> {
         return this.http.get<any>(`http://localhost:8080/latestEmpDialogRecord=${empCode}/${awardCategory}/${awardSubCategory}/${awardSubCategory2}`);
@@ -110,4 +120,12 @@ interface EmployeeDetails {
   projectName: string;
   client: string;
   industryName: string;
+}
+
+interface EmployeeNominationForTeam{
+  award_category: string;
+  nominated_by: string;
+  nom_by_designation: string;
+  onbehalf_of: string;
+  on_behalf_designation: string;
 }

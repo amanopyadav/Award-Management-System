@@ -149,6 +149,36 @@ public class EmployeeDetailsService {
 
 
 
+    public String getProjectCode(String empCode) {
+        String sql;
+        System.out.println("Empcode for team: "+empCode);
+        sql = "SELECT project_code FROM emp_projects WHERE emp_code=?";
+
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, empCode);
+            
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                System.out.println("Reched team level");
+                if (resultSet.next()) {
+                    System.out.println("done");
+                    return Long.toString(resultSet.getLong("project_code"));
+                } else {
+                    // Handle the case where no result is found
+                    System.out.println("Reached null");
+                    return null; // or throw a custom exception, depending on your requirements
+                }
+            }
+        } catch (SQLException e) {
+            // Handle SQLException
+            throw new RuntimeException("Error executing SQL query", e);
+        }
+    }
+
+
+
 
      public Integer getAwardIdSingle(String awardCategory) {
         String sql;
