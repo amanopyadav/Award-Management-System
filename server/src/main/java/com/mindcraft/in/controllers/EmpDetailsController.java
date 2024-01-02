@@ -37,6 +37,11 @@ public class EmpDetailsController {
         return request;
     }
 
+    @GetMapping("/getEmployeesByAwardId/{awardId}")
+    public List<Map<String, Object>> getEmployeesByAwardId(@PathVariable Long awardId) {
+        return employeeDetailsService.getEmployeesByAwardId(awardId);
+    }
+
      @GetMapping("/allExceptFreshers")
     public List<Map<String, Object>> getAllExceptFreshers() {
         List<Map<String, Object>> request = employeeDetailsService.getAllExceptFreshers();

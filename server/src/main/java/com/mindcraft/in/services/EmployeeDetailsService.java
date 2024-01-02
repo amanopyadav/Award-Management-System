@@ -50,6 +50,54 @@ public class EmployeeDetailsService {
         return result;
     }
 
+    public List<Map<String, Object>> getEmployeesByAwardId(Long awardId) {
+        String sql;
+        switch (awardId.intValue()) {
+            case 1:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 ";
+                break;
+            case 2:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon >= 10 ";
+                break;
+            case 3:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6";
+                break;
+            case 4:
+                sql = "SELECT * FROM emp_details ";
+                break;
+            case 5:
+                sql = "SELECT * FROM emp_details ";
+                break;
+            case 6:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                break;
+            case 7:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                break;
+            case 8:
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                break;
+            case 9:
+                sql = "SELECT * FROM emp_details";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid award ID: " + awardId);
+        }
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        Map<String, Object> response = new HashMap<>();
+
+        if (result.isEmpty()) {
+            response.put("status", "error");
+            response.put("message", "No Employees Found for the specified award ID.");
+        } else {
+            response.put("status", "success");
+            response.put("message", "Employees Found for the specified award ID.");
+        }
+        // You might want to return the response map or modify the method signature based on your needs
+        return result;
+    }
+
     public List<Map<String, Object>> getAllEmployees(Long empId) {
         String sql = "SELECT * FROM emp_details where emp_id=?";
 

@@ -4,6 +4,7 @@
   import { FormService } from './form.service';
   import { NotificationService } from './notification.service'; 
   import { Route, Router } from '@angular/router';
+import { error } from 'console';
   // import { forkJoin } from 'rxjs';
 
   @Component({
@@ -57,6 +58,7 @@
       selectedAwardId: number;
       showForm: boolean = false;
       showRatingScale = false;
+      
 
       FetchAllProjectsData = {
         project_code : {},
@@ -232,7 +234,8 @@
     ngOnInit() {
       
       
-      this.fetchAllEmployees();
+      //this.fetchAllEmployees();
+      this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
       this.updateFormStatus();
       this.cdRef.detectChanges();
       this.fetchNominatedBy();
@@ -877,6 +880,8 @@
             console.log('Fetched award_id:', data);
             this.fetchedAwardId = data; 
             console.log("fetchedaward id data : "+this.fetchedAwardId);
+            this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
+            this.filteredEmployees = this.Employees;
             // You can use the fetched award_id as needed
           },
           (error) => {
@@ -886,9 +891,11 @@
       } else if (awardCategory === 'Half Yearly Award' && halfYearlyAwardSubcategory && halfYearlyAwardSubcategory1) {
         this.formService.getAwardIdForSales(awardCategory, halfYearlyAwardSubcategory,halfYearlyAwardSubcategory1).subscribe(
           (data) => {
-            console.log('Fetched award_id:', data);
+            console.log('Fetched award_id for sales:', data);
             this.fetchedAwardId = data; 
             console.log("fetchedaward id data : "+this.fetchedAwardId);
+            this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
+            this.filteredEmployees = this.Employees;
             // You can use the fetched award_id as needed
           },
           (error) => {
@@ -901,6 +908,8 @@
             console.log('Fetched award_id:', data);
             this.fetchedAwardId = data; 
             console.log("fetchedaward id data : "+this.fetchedAwardId);
+            this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
+            this.filteredEmployees = this.Employees;
             // You can use the fetched award_id as needed
           },
           (error) => {
@@ -913,6 +922,8 @@
             console.log('Fetched award_id:', data);
             this.fetchedAwardId = data; 
             console.log("fetchedaward id data : "+this.fetchedAwardId);
+            this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
+            this.filteredEmployees = this.Employees;
             // You can use the fetched award_id as needed
           },
           (error) => {
@@ -920,6 +931,7 @@
           }
         );
       }
+      
     }
 
 
@@ -944,7 +956,8 @@
       openModal() {
           console.log("Emp dialogbox Opened");
           
-          this.fetchAllEmployees();
+          //this.fetchAllEmployees();
+          this.fetchEmployeesByAwardCategory(this.fetchedAwardId);
           // Initialize filteredEmployees with all employees when opening the dialog
           this.filteredEmployees = this.Employees;
           this.displayEmpModal = "block";
@@ -1004,6 +1017,18 @@
               console.error(error);
             }
           );
+        }
+
+        fetchEmployeesByAwardCategory(fetchedAwardId: number){
+          this.formService.getEmployeesByAwardId(fetchedAwardId).subscribe(
+            (data) => {
+              this.Employees = data;
+              console.log("Employees according to Category",data);
+            },
+            (error) => {
+              console.error(error);
+            }
+          )
         }
 
         fetchSpecificProjects(empId: string){

@@ -17,6 +17,10 @@ export class FormService {
           return this.http.get<any[]>(`http://localhost:8080/allEmployees`);
       } 
 
+      getEmployeesByAwardId(awardId:number): Observable<any[]>{
+        return this.http.get<any[]>(`http://localhost:8080/getEmployeesByAwardId/${awardId}`);
+      }
+
       getEmployeesDetails(id: any): Observable<any[]> {
           return this.http.get<any[]>(`http://localhost:8080/allEmployees/${id}`);
       } 
