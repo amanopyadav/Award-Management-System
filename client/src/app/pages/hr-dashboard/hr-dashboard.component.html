@@ -341,7 +341,7 @@
                       <label for="teamMember">Select team member</label>
                       <select class="form-control form-control-sm"
                         (change)="fetchSingleMemberOfProject($event.target.value)" id="teamMember" name="teamMember">
-                        <option value="" selected>Choose Team Member</option>
+                        <option value="ChooseTeamMember" selected>Choose Team Member</option>
                         <option *ngFor="let single_member of TeamMembersOfProjects" [value]="single_member.emp_code">
                           {{ single_member.emp_name }} - {{single_member.emp_code}}
                         </option>
@@ -357,7 +357,7 @@
 
                   <!-- Nomination details modal starts here -->
                   <form [formGroup]="EmpForm">
-                    <div class="row">
+                    <div *ngIf="selectedTeamMember" class="row">
                       <div class="col-md-12">
                         <div class="card">
                           <div class="card-body">
@@ -407,7 +407,7 @@
 
                   <!-- Employee details starts here -->
                   <form [formGroup]="EmpForm">
-                    <div class="row">
+                    <div *ngIf="selectedTeamMember" class="row">
                       <div class="col-md-12">
                         <div class="card">
                           <div class="card-body">
