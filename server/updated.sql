@@ -413,7 +413,30 @@ LEFT JOIN
 select * from emp_details;
 
 
+-----Function for not allowing duplicate entries in nominee list
+CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the combination of emp_code and award_id already exists
+    IF EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
+    END IF;
+    
+    -- If no duplicate, allow the insertion
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+
+-----Trigger----
+CREATE TRIGGER before_insert_prevent_duplicate_nomination
+BEFORE INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION prevent_duplicate_nomination();
 
 
 

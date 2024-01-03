@@ -817,7 +817,7 @@ import { error } from 'console';
 
         },
         (error) => {
-          window.alert("Failed")
+          window.alert("Failed! Nomination already exists")
           console.error('Error submitting nominee data:', error);
           // Handle error, such as showing an error message
         }
