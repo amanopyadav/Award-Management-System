@@ -193,6 +193,8 @@ export class HrDashboardComponent implements OnInit {
   public filteredEmployeeData: EmployeeTableRow[];
   public searchTerm: string = '';
 
+  selectedTeamMember: boolean = false;
+
 
   @ViewChild('shortlistColumn') shortlistColumn: ElementRef;
   @ViewChild('selectColumn') selectColumn: ElementRef;
@@ -247,6 +249,7 @@ export class HrDashboardComponent implements OnInit {
 
     let projCode : string;
     console.log("Single member code: ",empCode);
+    this.selectedTeamMember = empCode !== 'ChooseTeamMember';
 
     // fetch employee of team details
     this.hrService.getEmployeeDetails(empCode).subscribe(
@@ -664,6 +667,7 @@ export class HrDashboardComponent implements OnInit {
   onCloseTeamDetailsModal() {
     console.log("Emp Details Modal Closed");
     this.displayTeamDetailsModal = false;
+    this.selectedTeamMember = false;
   }
 
 
