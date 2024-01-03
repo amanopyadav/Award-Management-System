@@ -317,6 +317,99 @@ select * from emp_ratings;
 
 
 -- ------------------------------------------------------------------------------------------
+------------------------03/01/2024---------------------------------------------------------
+-- Create the m_award table
+CREATE TABLE m_award (
+    award_id SERIAL PRIMARY KEY,
+    award_category VARCHAR(255),
+    award_sub_category VARCHAR(255),
+	award_sub_category2 VARCHAR(255),
+    period INT,
+    min_eligibility_criteria INT,
+	max_eligibility_criteria INT,
+    award_count INT,
+    award_price INT,
+    total_value INT,
+    active_yn BOOLEAN,
+    created_by VARCHAR(255),
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(255),
+    updated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert values into the m_award table
+INSERT INTO m_award (
+    award_id,
+    award_category,
+    award_sub_category,
+	award_sub_category2,
+    period,
+    min_eligibility_criteria,
+	max_eligibility_criteria,
+    award_count,
+    award_price,
+    total_value,
+    active_yn,
+    created_by,
+    created_on,
+    updated_by,
+    updated_on
+) VALUES
+(1, 'Promising newcomer', NULL, NULL, 3, 1,6, 10, 2000, 20000, NULL, NULL, NULL, NULL, NULL),
+(2, 'Quarterly Award', NULL, NULL, 3, 10,NULL , 20, 2000, 40000, NULL, NULL, NULL, NULL, NULL),
+(3, 'Rising Star Award', NULL, NULL, 3, 0,6, 5, 2000, 10000, NULL, NULL, NULL, NULL, NULL),
+(4, 'Spot Award', 'In Recognition Of', NULL, 1,NULL ,NULL  , 10, 2000, 20000, NULL, NULL, NULL, NULL, NULL),
+(5, 'Spot Award', 'Going Extra Mile', NULL, 1,NULL ,NULL , 10, 2000, 20000, NULL, NULL, NULL, NULL, NULL),
+(6, 'Half Yearly Award', 'Lead Award', NULL, 6, 7,NULL , 10, 2000, 20000, NULL, NULL,  NULL, NULL, NULL),
+(7, 'Half Yearly Award', 'Lead Award', 'Sales', 6, 7,NULL , 10, 2000, 20000, NULL, NULL,  NULL, NULL, NULL),
+(8, 'Half Yearly Award', 'Individual Award', NULL, 6,7,NULL , 10, 2000, 20000, NULL, NULL, NULL, NULL, NULL),
+(9, 'Team Award', NULL, NULL, 6,NULL ,NULL, 10, 2000, 20000, NULL, NULL,  NULL, NULL, NULL);
+
+select * from m_award;
+
+--drop view
+drop view emp_details;
+
+--create view
+create view emp_details1 as
+select 
+emp_name,
+emp_code as emp_id,
+designation_name,
+function_name,
+primary_skill_name,
+mindcraft_exp_mon,
+total_exp_mon,
+email,
+mobileno,
+dob,
+joining_date
+from m_employee 
+
+
+select * from emp_details1;
+
+
+
+create view emp_details as
+select 
+e.emp_name,
+e.emp_id,
+e.designation_name,
+e.function_name,
+e.primary_skill_name,
+e.mindcraft_exp_mon,
+e.total_exp_mon,
+e.email,
+e.mobileno,
+e.dob,
+e.joining_date,
+np.project_name
+from emp_details1 e
+LEFT JOIN
+    nominee_project_record_details np ON e.emp_id = np.emp_code;
+
+select * from emp_details;
 
 
 
