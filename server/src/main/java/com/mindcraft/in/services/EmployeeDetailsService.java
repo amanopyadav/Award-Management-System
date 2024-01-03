@@ -54,31 +54,31 @@ public class EmployeeDetailsService {
         String sql;
         switch (awardId.intValue()) {
             case 1:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 ";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
                 break;
             case 2:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon >= 10 ";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon >= 10 and project_name IS NOT NULL";
                 break;
             case 3:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
                 break;
             case 4:
-                sql = "SELECT * FROM emp_details ";
+                sql = "SELECT * FROM emp_details and project_name IS NOT NULL ";
                 break;
             case 5:
-                sql = "SELECT * FROM emp_details ";
+                sql = "SELECT * FROM emp_details and project_name IS NOT NULL";
                 break;
             case 6:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 7:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 8:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6";
+                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 9:
-                sql = "SELECT * FROM emp_details";
+                sql = "SELECT * FROM emp_details and project_name IS NOT NULL";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid award ID: " + awardId);
