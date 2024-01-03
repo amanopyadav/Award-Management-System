@@ -202,13 +202,13 @@ export class HrDashboardComponent implements OnInit {
   restData: any;
 
   ngOnInit() {
-
+    this.searchTerm = '';
     this.fetchNomineeList();
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
         'Shortlist',
-        'Award Category',
+        'Award Category', 
         'Emp Code',
         'Emp Name',
         'Designation',
@@ -292,10 +292,20 @@ export class HrDashboardComponent implements OnInit {
 
   applyFilter() {
     this.filteredEmployeeData = this.employeeTableData.dataRows.filter(row =>
-      Object.values(row).some(value =>
-        value.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
-      )
+      Object.values(row).some(value => {
+        if (value !== null && value !== undefined) {
+          return value.toString().toLowerCase().includes(this.searchTerm.toLowerCase());
+        }
+        return false;
+      })
     );
+  }
+  
+  
+
+
+  onSearchChange(value: string) {
+    console.log('Search term changed:', value);
   }
 
   fetchNomineeList() {

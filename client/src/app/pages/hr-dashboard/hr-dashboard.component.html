@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-md-12">
+
     <div class="card">
+
       <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
         <div class="col-md-4 pr-1">
           <h4 class="card-title">Nominee List</h4>
@@ -8,13 +10,13 @@
         <div class="col-md-4 px-1">
         </div>
         <div class="col-md-4 pl-1">
-          <div class="form-group input-group">
+          <div class="form-group input-group ">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="fa fa-search"></i>
               </span>
             </div>
-            <input class="form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()">
+            <input class="form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()" (ngModelChange)="onSearchChange($event)">
           </div>
         </div>
       </div>
@@ -146,11 +148,13 @@
               <div class="modal-content">
 
                 <div class="modal-header">
-                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == false">{{EmpRand.empName}} : {{EmpRand.empCode}}</h5>
+                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == false">{{EmpRand.empName}} :
+                    {{EmpRand.empCode}}</h5>
 
-                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == true">{{stringifyTeamProjName()}} : {{teamRand.teamCount}} members</h5>
+                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == true">{{stringifyTeamProjName()}} :
+                    {{teamRand.teamCount}} members</h5>
                 </div>
-                
+
                 <div class="modal-body">
                   <div class="table-responsive">
                     <table class="table">
@@ -328,15 +332,17 @@
             <div class="modal-dialog modal-xl" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == true">{{stringifyTeamProjName()}} : {{teamRand.teamCount}} members
+                  <h5 class="modal-title text-primary" *ngIf="checkIfItsTeam == true">{{stringifyTeamProjName()}} :
+                    {{teamRand.teamCount}} members
                   </h5>
 
                   <div class="col-md-6 pr-1">
                     <div class="form-group">
                       <label for="teamMember">Select team member</label>
-                      <select class="form-control form-control-sm" (change)="fetchSingleMemberOfProject($event.target.value)" id="teamMember" name="teamMember">
+                      <select class="form-control form-control-sm"
+                        (change)="fetchSingleMemberOfProject($event.target.value)" id="teamMember" name="teamMember">
                         <option value="" selected>Choose Team Member</option>
-                        <option *ngFor="let single_member of TeamMembersOfProjects"  [value]="single_member.emp_code">
+                        <option *ngFor="let single_member of TeamMembersOfProjects" [value]="single_member.emp_code">
                           {{ single_member.emp_name }} - {{single_member.emp_code}}
                         </option>
                       </select>
@@ -345,7 +351,7 @@
 
                 </div>
 
-                
+
 
                 <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
 
@@ -361,7 +367,8 @@
 
                               <div class="detail-item">
                                 <span class="detail-label">Award Category : </span>
-                                <span><b>{{EmployeeNominationForteam?.award_category ? EmployeeNominationForteam?.award_category :
+                                <span><b>{{EmployeeNominationForteam?.award_category ?
+                                    EmployeeNominationForteam?.award_category :
                                     'none'}}</b></span>
                               </div><br>
                               <div class="detail-item">
