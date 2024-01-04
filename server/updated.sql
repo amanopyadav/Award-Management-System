@@ -413,7 +413,7 @@ LEFT JOIN
 select * from emp_details;
 
 
------Function for not allowing duplicate entries in nominee list
+------function for duplicate entries
 CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -425,6 +425,18 @@ BEGIN
     ) THEN
         RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
     END IF;
+	
+	-- Check if it is a team award, and if yes, check if the same combination of award_id and project_code exists
+    IF NEW.award_category = 'Team Award' THEN
+        IF EXISTS (
+            SELECT 1
+            FROM nominee_list
+            WHERE NEW.award_id = award_id AND NEW.project_code = project_code
+        ) THEN
+            RAISE EXCEPTION 'Duplicate team nomination not allowed for emp_code % and project_code %', NEW.emp_code, NEW.project_code;
+        END IF;
+    END IF;
+
     
     -- If no duplicate, allow the insertion
     RETURN NEW;
@@ -437,9 +449,6 @@ CREATE TRIGGER before_insert_prevent_duplicate_nomination
 BEFORE INSERT ON nominee_list
 FOR EACH ROW
 EXECUTE FUNCTION prevent_duplicate_nomination();
-
-
-
 
 
 
