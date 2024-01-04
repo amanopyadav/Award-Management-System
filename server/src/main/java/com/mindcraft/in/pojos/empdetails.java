@@ -48,15 +48,12 @@ public class EmpDetails {
     @Column(name = "joining_date")
     private Date joining_date;
 
-    @Column(name="project_name")
-    private String project_name;
-
     public EmpDetails() {
     }
 
     public EmpDetails(Integer id, String emp_name, String designation_name, String unit, String primary_skill_name,
             Integer mindcraft_exp_mon, Integer total_exp_mon, String email, Long mobileno, Date dob,
-            Date joining_date, String project_name) {
+            Date joining_date) {
         this.id = id;
         this.emp_name = emp_name;
         this.designation_name = designation_name;
@@ -68,7 +65,6 @@ public class EmpDetails {
         this.mobileno = mobileno;
         this.dob = dob;
         this.joining_date = joining_date;
-        this.project_name = project_name;
     }
 
     public Integer getId() {
@@ -158,16 +154,6 @@ public class EmpDetails {
     public void setJoining_date(Date joining_date) {
         this.joining_date = joining_date;
     }
-
-    public String getProject_name() {
-        return project_name;
-    }
-
-    public void setProject_name(String project_name) {
-        this.project_name = project_name;
-    }
-
-    
 
 
 }

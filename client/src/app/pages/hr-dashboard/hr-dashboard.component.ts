@@ -3,6 +3,7 @@ import { HrService } from './hr.service';
 import { FormGroup } from '@angular/forms';
 import { NgZone } from '@angular/core';
 import { error } from 'protractor';
+import * as XLSX from 'xlsx';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -234,6 +235,17 @@ export class HrDashboardComponent implements OnInit {
 
 
   }
+
+  downloadExcel() {
+    // Convert the nominee list data to Excel format
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.employeeTableData.dataRows);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Nominee List');
+
+    // Save the Excel file
+    XLSX.writeFile(wb, 'nominee_list.xlsx');
+  }
+
 
   stringifyTeamProjName(): string {
     const jsonString = JSON.stringify(this.teamRand.projName['projectName']);
