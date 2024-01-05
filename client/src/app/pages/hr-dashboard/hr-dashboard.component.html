@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-
     <div class="card">
 
       <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -10,13 +9,14 @@
         <div class="col-md-4 px-1">
         </div>
         <div class="col-md-4 pl-1">
-          <div class="form-group input-group ">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="fa fa-search"></i>
               </span>
             </div>
-            <input class="form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()" (ngModelChange)="onSearchChange($event)">
+            <input class="form-control" type="text" id="search" [(ngModel)]="searchTerm" (input)="applyFilter()"
+              (ngModelChange)="onSearchChange($event)">
           </div>
         </div>
       </div>
@@ -27,7 +27,8 @@
           <div class="col-md-3 pr-1">
             <div class="form-group">
               <label for="award_category">Award Category</label>
-              <select class="form-control form-control-sm" id="award_category" name="award_category">
+              <select class="form-control form-control-sm" id="award_category" name="award_category"
+                [(ngModel)]="selectedAwardCategory" (change)="applyFilter()">
                 <option value="" selected>Choose Award Category</option>
                 <option value="Promising newcomer">Promising Newcomer</option>
                 <option value="Quarterly Award">Quarterly Award</option>
@@ -38,7 +39,6 @@
               </select>
             </div>
           </div>
-
 
           <div class="col-md-3 px-1">
             <div class="form-group">
@@ -66,24 +66,31 @@
           <div class="col-md-3 pr-1">
             <div class="form-group">
               <label for="dob">Start Date</label>
-              <input type="date" class="form-control form-control-sm" placeholder="Ex. DD/MM/YYYY">
+              <input type="date" class="form-control form-control-sm" placeholder="Ex. DD/MM/YYYY"
+                [(ngModel)]="startDate" (change)="applyFilter()">
             </div>
           </div>
 
           <div class="col-md-3 pl-1">
             <div class="form-group">
               <label for="joiningDate">End Date</label>
-              <input type="date" class="form-control form-control-sm" placeholder="Ex. DD/MM/YYYY">
+              <input type="date" class="form-control form-control-sm" placeholder="Ex. DD/MM/YYYY" [(ngModel)]="endDate"
+                (change)="applyFilter()">
+              
+              <!-- Move the button here, inside the same row -->
+              <div class="form-group mt-2 text-right">
+                <button class="btn btn-primary" (click)="downloadExcel()">Convert to Excel</button>
+              </div>
             </div>
           </div>
-
-
+        </div>
+    
           <div class="table-responsive" #tableContainer>
             <table class="table" style="width: auto; overflow-x: auto;">
               <thead class="text-primary" style="white-space: nowrap;">
                 <th class="align-middle">Shortlist</th>
                 <th class="align-middle">Select</th>
-                <th class="align-middle">Award Category</th>
+                <th class="align-middle">Award Category</th>  
                 <th class="align-middle">Emp Code</th>
                 <th class="align-middle">Emp Name</th>
                 <th class="align-middle">Designation</th>
@@ -107,8 +114,7 @@
                   <td class="text-center align-middle">{{ employee.awardCategory }}</td>
                   <td class="text-center align-middle">{{ employee.empCode ? employee.empCode : '-' }}</td>
                   <td class="text-center align-middle">{{ employee.empName ? employee.empName : '-' }}</td>
-                  <td class="text-center align-middle">{{ employee.emp_designation ? employee.emp_designation : '-' }}
-                  </td>
+                  <td class="text-center align-middle">{{ employee.emp_designation ? employee.emp_designation : '-' }}</td>
                   <td class="text-center align-middle">{{ employee.dob ? employee.dob : '-' }}</td>
                   <td class="text-center align-middle">{{ employee.project_code }}</td>
                   <td class="text-center align-middle">{{ employee.client }}</td>
@@ -139,7 +145,6 @@
 
                 </tr>
               </tbody>
-              <button (click)="downloadExcel()">Convert to Excel</button>
             </table>
           </div>
 

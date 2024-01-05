@@ -130,6 +130,24 @@ interface EmployeeDetailsNew1{
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
+  originalEmployeeData: { awardCategory: string; awardSubCategory: string; awardSubCategory2: string; empCode: string; empName: string; emp_designation: string; dob: Date; project_code: number; client: string; doj: Date; unit: string; skill: string; total_exp_in_months: number; mindcraft_exp_in_months: number; nominatedBy: string; }[];
+  selectedAwardCategory: string='';
+  startDate: string | number | Date;
+  endDate: string | number | Date;
+// filterByAwardCategory() {
+// throw new Error('Method not implemented.');
+// }
+
+filterByAwardCategory() {
+  if (this.selectedAwardCategory) {
+    this.filteredEmployeeData = this.originalEmployeeData.filter(employee =>
+      employee.awardCategory === this.selectedAwardCategory
+    );
+  } else {
+    // If no award category is selected, show all employees
+    this.filteredEmployeeData = this.originalEmployeeData.slice();
+  }
+}
   selectedSubcategory: string = ''; // Property to store the selected subcategory
   isCheckboxEnabled: boolean = false; // Property to control the checkbox state
   checkboxChecked: boolean = false; // Property to track the checkbox state
@@ -232,9 +250,11 @@ export class HrDashboardComponent implements OnInit {
     };
     this.filteredEmployeeData = [...this.employeeTableData.dataRows];
     this.dataLoaded = true;
-
-
+    this.originalEmployeeData = [...this.employeeTableData.dataRows];
+    this.filteredEmployeeData = this.originalEmployeeData.slice();
+    
   }
+
 
   downloadExcel() {
     // Convert the nominee list data to Excel format
@@ -306,6 +326,7 @@ export class HrDashboardComponent implements OnInit {
   
 
   applyFilter() {
+    // Existing filter logic
     this.filteredEmployeeData = this.employeeTableData.dataRows.filter(row =>
       Object.values(row).some(value => {
         if (value !== null && value !== undefined) {
@@ -314,7 +335,23 @@ export class HrDashboardComponent implements OnInit {
         return false;
       })
     );
+  
+    // Additional filter for the selected award category
+    this.filteredEmployeeData = this.filteredEmployeeData.filter(employee => {
+      return !this.selectedAwardCategory || employee.awardCategory === this.selectedAwardCategory;
+    });
+  
+    // Add the following lines to filter by start date and end date
+    this.filteredEmployeeData = this.filteredEmployeeData.filter(employee => {
+      const startDate = new Date(this.startDate).getTime();
+      const endDate = new Date(this.endDate).getTime();
+  
+      const empDate = new Date(employee.doj).getTime(); // Assuming 'doj' is the property representing the employee's start date
+  
+      return (!this.startDate || empDate >= startDate) && (!this.endDate || empDate <= endDate);
+    });
   }
+
   
   
 

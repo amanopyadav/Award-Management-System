@@ -6,6 +6,9 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class HrService {
+    getEmployeeData() {
+      throw new Error('Method not implemented.');
+    }
     getEmployeeRatings(id: any): any {
       throw new Error('Method not implemented.');
     }
@@ -122,7 +125,7 @@ interface EmployeeDetails {
   industryName: string;
 }
 
-interface EmployeeNominationForTeam{
+export interface EmployeeNominationForTeam{
   award_category: string;
   nominated_by: string;
   nom_by_designation: string;
