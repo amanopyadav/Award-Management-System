@@ -482,8 +482,8 @@ CREATE TABLE nominee_list (
 	nom_by_designation VARCHAR(100),
 	onbehalf_of VARCHAR(100),
 	on_behalf_designation VARCHAR(100),
-    is_shortlist char(10),
-    is_selected char(10),
+    is_shortlist char(1),
+    is_selected char(1),
 	active_yn BOOLEAN,
 	created_by VARCHAR(100),
 	created_on TIMESTAMP,
@@ -542,7 +542,7 @@ select * from emp_ratings;
 
 CREATE OR REPLACE VIEW nomination_details AS
 SELECT award_category, award_sub_category,award_sub_category2, emp_code,nominated_by, nom_by_designation, onbehalf_of, on_behalf_designation 
-FROM nominee_list
+FROM nominee_list;
 
 select * from nomination_details;
 
