@@ -613,42 +613,44 @@ FROM nominee_list;
 select * from nomination_details;
 
 
--- Function for duplicated entries
+-----------------new function 
+-----------------new function(christina)-----------------
 CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Check if the combination of emp_code and award_id already exists
+
+   -- Check if award_id is 9 and the combination of award_id and project_code is the same
+    IF NEW.award_id = 9 AND EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.award_id = nominee_list.award_id
+          AND NEW.project_code = nominee_list.project_code
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for award_id % and project_code %', NEW.award_id, NEW.project_code;
+    END IF;
+	
+    -- Check if the combination of emp_code and award_id and project_code already exists
     IF EXISTS (
         SELECT 1
         FROM nominee_list
-        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id
+        WHERE NEW.emp_code = nominee_list.emp_code
+          AND NEW.award_id = nominee_list.award_id
+          AND NEW.project_code = nominee_list.project_code
     ) THEN
         RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
     END IF;
-	
-	-- Check if it is a team award, and if yes, check if the same combination of award_id and project_code exists
-    IF NEW.award_category = 'Team Award' THEN
-        IF EXISTS (
-            SELECT 1
-            FROM nominee_list
-            WHERE NEW.award_id = award_id AND NEW.project_code = project_code
-        ) THEN
-            RAISE EXCEPTION 'Duplicate team nomination not allowed for emp_code % and project_code %', NEW.emp_code, NEW.project_code;
-        END IF;
-    END IF;
 
-    
     -- If no duplicate, allow the insertion
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 
--- Trigger 
+
+
+
 
 CREATE TRIGGER before_insert_prevent_duplicate_nomination
 BEFORE INSERT ON nominee_list
 FOR EACH ROW
 EXECUTE FUNCTION prevent_duplicate_nomination();
-
-
