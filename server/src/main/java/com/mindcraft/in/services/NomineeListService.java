@@ -29,8 +29,8 @@ public class NomineeListService {
         "(award_id, award_category, award_sub_category, award_sub_category2, emp_code, emp_name, emp_designation, unit, skill, " +
         "mindcraft_exp_in_months, total_exp_in_months, email_id, contact_number, dob, doj, project_name, " +
         "project_code, client, industry_name, nominated_by, nom_by_designation, onbehalf_of, " +
-        "on_behalf_designation, active_yn, created_by, created_on, updated_by, updated_on) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "on_behalf_designation,is_shortlist,is_selected, active_yn, created_by, created_on, updated_by, updated_on) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ? , ? , ?, ?, ?, ?)";
 
          System.out.println("Nomination ID : "+nomineeList.getNominationId());
 
@@ -63,6 +63,8 @@ public class NomineeListService {
                 .addValue("nom_by_designation", nomineeList.getNomByDesignation())
                 .addValue("onbehalf_of", nomineeList.getOnbehalfOf())
                 .addValue("on_behalf_designation", nomineeList.getOnBehalfDesignation())
+                .addValue("is_shortlist", 'N')
+                .addValue("is_selected", 'N')
                 .addValue("active_yn", nomineeList.isActiveYN())
                 .addValue("created_by", nomineeList.getCreatedBy())
                 .addValue("created_on", new Timestamp(System.currentTimeMillis())) 
