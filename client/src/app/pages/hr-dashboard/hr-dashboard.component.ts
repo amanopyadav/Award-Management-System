@@ -8,6 +8,8 @@ import * as XLSX from 'xlsx';
 declare interface EmployeeTableData {
   headerRow: string[];
   dataRows: {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -27,6 +29,8 @@ declare interface EmployeeTableData {
 }
 
 interface EmployeeTableRow {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -236,6 +240,38 @@ export class HrDashboardComponent implements OnInit {
 
   }
 
+  checkIfShortlist(employee: EmployeeTableRow): boolean {
+    // Check if employee.isShortList is 'N', return true to disable the checkbox
+    console.log("IsShortList: ",employee.isShortList,"Yes");
+    if(employee.isShortList === "N" && employee.isSelect === "N"){
+      return false;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "N"){
+      return true;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "Y"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  checkIfSelect(employee: EmployeeTableRow): boolean{
+    if(employee.isShortList === "N" && employee.isSelect === "N"){
+      return true;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "N"){
+      return false;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "Y"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   downloadExcel() {
     // Convert the nominee list data to Excel format
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.employeeTableData.dataRows);
@@ -323,12 +359,15 @@ export class HrDashboardComponent implements OnInit {
     console.log('Search term changed:', value);
   }
 
+
   fetchNomineeList() {
     this.hrService.getNomineeList().subscribe(
       (data: any[]) => {
         this.ngZone.run(() => {
           console.log('Nominee List Data:', data);
           this.employeeTableData.dataRows = data.map(item => ({
+            isShortList: item.is_shortlist,
+            isSelect: item.is_selected,
             awardCategory: item.award_category,
             awardSubCategory: item.award_sub_category,
             awardSubCategory2: item.award_sub_category2,
