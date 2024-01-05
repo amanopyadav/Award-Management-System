@@ -8,6 +8,8 @@ import * as XLSX from 'xlsx';
 declare interface EmployeeTableData {
   headerRow: string[];
   dataRows: {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -27,6 +29,8 @@ declare interface EmployeeTableData {
 }
 
 interface EmployeeTableRow {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -329,6 +333,8 @@ export class HrDashboardComponent implements OnInit {
         this.ngZone.run(() => {
           console.log('Nominee List Data:', data);
           this.employeeTableData.dataRows = data.map(item => ({
+            isShortList: item.is_shortlist,
+            isSelect: item.is_selected,
             awardCategory: item.award_category,
             awardSubCategory: item.award_sub_category,
             awardSubCategory2: item.award_sub_category2,
