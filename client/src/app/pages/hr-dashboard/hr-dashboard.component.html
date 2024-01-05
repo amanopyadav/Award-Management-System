@@ -90,7 +90,9 @@
               <thead class="text-primary" style="white-space: nowrap;">
                 <th class="align-middle">Shortlist</th>
                 <th class="align-middle">Select</th>
-                <th class="align-middle">Award Category</th>  
+                <th class="align-middle">IsShortList</th>
+                <th class="align-middle">IsSelect</th>
+                <th class="align-middle">Award Category</th>
                 <th class="align-middle">Emp Code</th>
                 <th class="align-middle">Emp Name</th>
                 <th class="align-middle">Designation</th>
@@ -107,10 +109,14 @@
               </thead>
               <tbody>
                 <tr *ngFor="let employee of filteredEmployeeData">
-                  <td class="text-center align-middle"><input class="form-check-input" type="checkbox"
-                      [(ngModel)]="employee.shortlist"></td>
-                  <td class="text-center align-middle"><input class="form-check-input" type="checkbox"
-                      [(ngModel)]="employee.select"></td>
+                  <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true"></td>
+
+                  <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfSelect(employee) === true"></td>
+                  
+                  <td class="text-center align-middle">{{ employee.isShortList }}</td>
+
+                  <td class="text-center align-middle">{{ employee.isSelect }}</td>
+
                   <td class="text-center align-middle">{{ employee.awardCategory }}</td>
                   <td class="text-center align-middle">{{ employee.empCode ? employee.empCode : '-' }}</td>
                   <td class="text-center align-middle">{{ employee.empName ? employee.empName : '-' }}</td>

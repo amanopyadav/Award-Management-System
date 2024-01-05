@@ -452,3 +452,203 @@ EXECUTE FUNCTION prevent_duplicate_nomination();
 
 
 
+-------------------------------------------------------------------------------------------------------------
+-----------------------------------05/01/2024------------------------------------------------------------
+---------------------drop------------
+DROP TRIGGER before_insert_prevent_duplicate_nomination ON nominee_list;
+DROP FUNCTION prevent_duplicate_nomination();
+-----------------new function-----------------
+CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
+RETURNS TRIGGER AS $$
+BEGIN
+
+    IF NEW.award_id = 9 THEN
+        -- Allow duplicate insertions
+        RETURN NEW;
+    END IF;
+	
+    -- Check if the combination of emp_code and award_id already exists
+    IF EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id AND NEW.project_code = project_code
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
+    END IF;
+
+   
+
+    -- If no duplicate, allow the insertion
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+-------------------------------------------------------------------------------------------------------------
+-----------------------------------05/01/2024------------------------------------------------------------
+---------------------drop------------
+DROP TRIGGER before_insert_prevent_duplicate_nomination ON nominee_list;
+DROP FUNCTION prevent_duplicate_nomination();
+-----------------new function-----------------
+CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
+RETURNS TRIGGER AS $$
+BEGIN
+
+    IF NEW.award_id = 9 THEN
+        -- Allow duplicate insertions
+        RETURN NEW;
+    END IF;
+	
+    -- Check if the combination of emp_code and award_id already exists
+    IF EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id AND NEW.project_code = project_code
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
+    END IF;
+
+   
+
+    -- If no duplicate, allow the insertion
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+-- -------------------- 05/01/2024 --------------------------
+-- Mihir changed the HR dashboard
+
+-- Nominee List(Added is_shortlist and is_selected)
+
+CREATE TABLE nominee_list (
+    nomination_id SERIAL PRIMARY KEY,
+	award_id BIGINT NOT NULL,
+	award_category VARCHAR(100) NOT NULL,
+	award_sub_category VARCHAR(100),
+	award_sub_category2 VARCHAR(100),
+    emp_code VARCHAR(100),
+    emp_name VARCHAR(100),
+	emp_designation VARCHAR(100),
+	unit VARCHAR(100),
+	skill VARCHAR(100),
+	mindcraft_exp_in_months BIGINT,
+	total_exp_in_months BIGINT,
+	email_id VARCHAR(100),
+	contact_number BIGINT,
+	dob DATE,
+	doj DATE,
+	project_name VARCHAR(100),
+	project_code BIGINT,
+	client VARCHAR(100),
+	industry_name VARCHAR(100),
+	nominated_by VARCHAR(100),
+	nom_by_designation VARCHAR(100),
+	onbehalf_of VARCHAR(100),
+	on_behalf_designation VARCHAR(100),
+    is_shortlist char(1),
+    is_selected char(1),
+	active_yn BOOLEAN,
+	created_by VARCHAR(100),
+	created_on TIMESTAMP,
+	updated_by VARCHAR(100),
+	updated_on TIMESTAMP
+);
+
+
+-- Updated Function
+
+CREATE OR REPLACE FUNCTION insert_into_param()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the award_id and nomination_id are provided
+  IF NEW.award_id IS NOT NULL AND NEW.nomination_id IS NOT NULL THEN
+    -- Insert parameters into the parameter table based on award_id
+    INSERT INTO parameter (nomination_id, parameter_id)
+    SELECT NEW.nomination_id, parameter_id
+    FROM m_parameter
+    WHERE award_id = NEW.award_id;
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+-- updated Trigger
+
+CREATE TRIGGER trigger_insert_into_param
+AFTER INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION insert_into_param();
+
+
+-- Updated emp_rating view
+
+CREATE OR REPLACE VIEW emp_ratings AS
+SELECT
+    p.id AS id,
+    mp.parameter_name AS parameter_name,
+    p.nomination_id AS nomination_id,
+    p.description AS description,
+    p.rating AS rating
+FROM
+    parameter p
+JOIN
+    m_parameter mp ON p.parameter_id = mp.parameter_id;
+
+
+select * from emp_ratings;
+
+
+-- Nomination details
+
+CREATE OR REPLACE VIEW nomination_details AS
+SELECT award_category, award_sub_category,award_sub_category2, emp_code,nominated_by, nom_by_designation, onbehalf_of, on_behalf_designation 
+FROM nominee_list;
+
+select * from nomination_details;
+
+
+-- Function for duplicated entries
+CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Check if the combination of emp_code and award_id already exists
+    IF EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
+    END IF;
+	
+	-- Check if it is a team award, and if yes, check if the same combination of award_id and project_code exists
+    IF NEW.award_category = 'Team Award' THEN
+        IF EXISTS (
+            SELECT 1
+            FROM nominee_list
+            WHERE NEW.award_id = award_id AND NEW.project_code = project_code
+        ) THEN
+            RAISE EXCEPTION 'Duplicate team nomination not allowed for emp_code % and project_code %', NEW.emp_code, NEW.project_code;
+        END IF;
+    END IF;
+
+    
+    -- If no duplicate, allow the insertion
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- Trigger 
+
+CREATE TRIGGER before_insert_prevent_duplicate_nomination
+BEFORE INSERT ON nominee_list
+FOR EACH ROW
+EXECUTE FUNCTION prevent_duplicate_nomination();
+
+

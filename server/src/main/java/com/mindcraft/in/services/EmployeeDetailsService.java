@@ -63,10 +63,10 @@ public class EmployeeDetailsService {
                 sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
                 break;
             case 4:
-                sql = "SELECT * FROM emp_details and project_name IS NOT NULL ";
+                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL ";
                 break;
             case 5:
-                sql = "SELECT * FROM emp_details and project_name IS NOT NULL";
+                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL";
                 break;
             case 6:
                 sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
@@ -78,7 +78,7 @@ public class EmployeeDetailsService {
                 sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 9:
-                sql = "SELECT * FROM emp_details and project_name IS NOT NULL";
+                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid award ID: " + awardId);

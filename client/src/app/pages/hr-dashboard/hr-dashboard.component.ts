@@ -8,6 +8,8 @@ import * as XLSX from 'xlsx';
 declare interface EmployeeTableData {
   headerRow: string[];
   dataRows: {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -27,6 +29,8 @@ declare interface EmployeeTableData {
 }
 
 interface EmployeeTableRow {
+    isShortList: string;
+    isSelect: string;
     awardCategory: string;
     awardSubCategory: string;
     awardSubCategory2: string;
@@ -138,16 +142,7 @@ export class HrDashboardComponent implements OnInit {
 // throw new Error('Method not implemented.');
 // }
 
-filterByAwardCategory() {
-  if (this.selectedAwardCategory) {
-    this.filteredEmployeeData = this.originalEmployeeData.filter(employee =>
-      employee.awardCategory === this.selectedAwardCategory
-    );
-  } else {
-    // If no award category is selected, show all employees
-    this.filteredEmployeeData = this.originalEmployeeData.slice();
-  }
-}
+
   selectedSubcategory: string = ''; // Property to store the selected subcategory
   isCheckboxEnabled: boolean = false; // Property to control the checkbox state
   checkboxChecked: boolean = false; // Property to track the checkbox state
@@ -251,8 +246,40 @@ filterByAwardCategory() {
     this.filteredEmployeeData = [...this.employeeTableData.dataRows];
     this.dataLoaded = true;
     this.originalEmployeeData = [...this.employeeTableData.dataRows];
-    this.filteredEmployeeData = this.originalEmployeeData.slice();
+    // this.filteredEmployeeData = this.originalEmployeeData.slice();
     
+  }
+
+  checkIfShortlist(employee: EmployeeTableRow): boolean {
+    // Check if employee.isShortList is 'N', return true to disable the checkbox
+    console.log("IsShortList: ",employee.isShortList,"Yes");
+    if(employee.isShortList === "N" && employee.isSelect === "N"){
+      return false;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "N"){
+      return true;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "Y"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  checkIfSelect(employee: EmployeeTableRow): boolean{
+    if(employee.isShortList === "N" && employee.isSelect === "N"){
+      return true;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "N"){
+      return false;
+    }
+    else if(employee.isShortList === "Y" && employee.isSelect === "Y"){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
 
@@ -360,12 +387,15 @@ filterByAwardCategory() {
     console.log('Search term changed:', value);
   }
 
+
   fetchNomineeList() {
     this.hrService.getNomineeList().subscribe(
       (data: any[]) => {
         this.ngZone.run(() => {
           console.log('Nominee List Data:', data);
           this.employeeTableData.dataRows = data.map(item => ({
+            isShortList: item.is_shortlist,
+            isSelect: item.is_selected,
             awardCategory: item.award_category,
             awardSubCategory: item.award_sub_category,
             awardSubCategory2: item.award_sub_category2,

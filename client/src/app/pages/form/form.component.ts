@@ -79,7 +79,7 @@ import { error } from 'console';
       this.nominationForm = this.fb.group({
         award_category: ['choose sample', Validators.required],
         spot_award_subcategory: [''],
-        timeSpan: [''],
+        
         half_yearly_award_subcategory: [''],
         half_yearly_award_isSales: ['']
       });
@@ -838,7 +838,7 @@ import { error } from 'console';
       // Check if the selected category is spot_award or its subcategories
       if (
         awardCategory === 'Spot Award' ||
-        (timeSpanCategories.includes(awardCategory) && [4, 7, 10, 12].includes(currentMonth)) ||
+        (timeSpanCategories.includes(awardCategory) && [4, 7, 10, 1].includes(currentMonth)) ||
         (awardCategory === 'Spot Award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
         (awardCategory === 'Half Yearly Award' && [7, 1].includes(currentMonth)) ||
         (awardCategory === 'Team Award' && [7, 1].includes(currentMonth))
