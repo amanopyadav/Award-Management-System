@@ -452,3 +452,36 @@ EXECUTE FUNCTION prevent_duplicate_nomination();
 
 
 
+-------------------------------------------------------------------------------------------------------------
+-----------------------------------05/01/2024------------------------------------------------------------
+---------------------drop------------
+DROP TRIGGER before_insert_prevent_duplicate_nomination ON nominee_list;
+DROP FUNCTION prevent_duplicate_nomination();
+-----------------new function-----------------
+CREATE OR REPLACE FUNCTION prevent_duplicate_nomination()
+RETURNS TRIGGER AS $$
+BEGIN
+
+    IF NEW.award_id = 9 THEN
+        -- Allow duplicate insertions
+        RETURN NEW;
+    END IF;
+	
+    -- Check if the combination of emp_code and award_id already exists
+    IF EXISTS (
+        SELECT 1
+        FROM nominee_list
+        WHERE NEW.emp_code = emp_code AND NEW.award_id = award_id AND NEW.project_code = project_code
+    ) THEN
+        RAISE EXCEPTION 'Duplicate nomination not allowed for emp_code % and award_id %', NEW.emp_code, NEW.award_id;
+    END IF;
+
+   
+
+    -- If no duplicate, allow the insertion
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
