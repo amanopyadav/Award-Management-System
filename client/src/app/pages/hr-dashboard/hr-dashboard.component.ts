@@ -199,15 +199,17 @@ export class HrDashboardComponent implements OnInit {
 
 
   // Checkbox logic
-  shortlistedEmployees: { awardCategory: string; empCode: string }[] = [];
+  shortlistedEmployees: { awardCategory: string; empCode: string; projCode: number }[] = [];
   isConfirmShortlistEnabled: boolean = false;
+
+
 
   toggleShortlist(employee: EmployeeTableRow) {
     const index = this.shortlistedEmployees.findIndex(emp => emp.empCode === employee.empCode);
   
     if (index === -1) {
       // Employee is not shortlisted, checking it
-      this.shortlistedEmployees.push({ awardCategory: employee.awardCategory, empCode: employee.empCode });
+      this.shortlistedEmployees.push({ awardCategory: employee.awardCategory, empCode: employee.empCode, projCode: employee.project_code});
     } else {
       // Employee was previously shortlisted, unchecking it
       this.shortlistedEmployees.splice(index, 1);
@@ -216,7 +218,17 @@ export class HrDashboardComponent implements OnInit {
     this.isConfirmShortlistEnabled = this.shortlistedEmployees.length > 0;
   }
 
+
+
+
+
   confirmShortlist() {
+    this.hrService.updateShortlistStatus(this.shortlistedEmployees).subscribe(response => {
+      console.log("Successfully updated shortlist status");
+    }, error => {
+      console.error("Failed to update shortlist status");
+    });
+    
     console.log('Shortlisted Employees:', this.shortlistedEmployees);
   }
 

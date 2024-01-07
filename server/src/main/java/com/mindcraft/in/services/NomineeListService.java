@@ -230,6 +230,36 @@ public class NomineeListService {
     }
     
 
+
+    // Shortlist logic 
+    public Map<String, String> updateShortlistStatus(List<Map<String, Object>> shortlistedEmployees) {
+        String updateSqlWithEmpCode = "UPDATE nominee_list SET is_shortlist = 'Y' WHERE award_category = ? AND emp_code = ?";
+        String updateSqlWithoutEmpCode = "UPDATE nominee_list SET is_shortlist = 'Y' WHERE award_category = ? AND project_code = ?";
+    
+        try {
+            for (Map<String, Object> employee : shortlistedEmployees) {
+                if (employee.get("empCode") != null && !((String) employee.get("empCode")).isEmpty()) {
+                    jdbcTemplate.update(updateSqlWithEmpCode,
+                            employee.get("awardCategory"),
+                            employee.get("empCode"));
+                } else {
+                    jdbcTemplate.update(updateSqlWithoutEmpCode,
+                            employee.get("awardCategory"),
+                            employee.get("projCode"));
+                }
+            }
+    
+            Map<String, String> response = Map.of("status", "success", "message", "Shortlist status updated successfully.");
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log or handle the exception as needed
+    
+            Map<String, String> response = Map.of("status", "error", "message", "Error updating shortlist status.");
+            return response;
+        }
+    }
+    
+
     
 }
 
