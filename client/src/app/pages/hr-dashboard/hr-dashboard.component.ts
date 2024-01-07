@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NgZone } from '@angular/core';
 import { error } from 'protractor';
 import * as XLSX from 'xlsx';
+import { ToastrService } from 'ngx-toastr';
 
 declare interface EmployeeTableData {
   headerRow: string[];
@@ -225,16 +226,24 @@ export class HrDashboardComponent implements OnInit {
   confirmShortlist() {
     this.hrService.updateShortlistStatus(this.shortlistedEmployees).subscribe(response => {
       console.log("Successfully updated shortlist status");
+      this.ngOnInit()
+      this.toastr.success("Confirmed Status Updated")
+      this.isConfirmShortlistEnabled = false
+      this.ngOnInit();
     }, error => {
       console.error("Failed to update shortlist status");
+      this.toastr.error("Failed to update status")
+      this.isConfirmShortlistEnabled = false
+      this.ngOnInit();
     });
     
     console.log('Shortlisted Employees:', this.shortlistedEmployees);
+    
   }
 
 
 
-  constructor(private hrService: HrService, private ngZone: NgZone) {
+  constructor(private hrService: HrService, private ngZone: NgZone,private toastr: ToastrService) {
     this.isCheckboxEnabled = false;
    }
 
