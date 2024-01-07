@@ -104,9 +104,17 @@ export class HrService {
     }
 
 
-    // ShortList logic 
+    // ShortList endpoint
     updateShortlistStatus(dataArray: any[]): Observable<any> {
       const url = 'http://localhost:8080/updateShortlistStatus';
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+      return this.http.post(url, dataArray, { headers: headers });
+    }
+
+    // Select endpoint
+    updateSelectStatus(dataArray: any[]): Observable<any> {
+      const url = 'http://localhost:8080/updateSelectStatus';
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
       return this.http.post(url, dataArray, { headers: headers });

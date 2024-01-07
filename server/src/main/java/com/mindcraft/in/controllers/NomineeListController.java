@@ -101,6 +101,18 @@ public class NomineeListController {
         }
     }
 
+    // Select controller
+    @PostMapping("/updateSelectStatus")
+    public ResponseEntity<Map<String, String>> updateSelectStatus(@RequestBody List<Map<String, Object>> selectedEmployees) {
+        Map<String, String> response = nomineeListService.updateSelectStatus(selectedEmployees);
+        
+        if ("success".equals(response.get("status"))) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
 
 }
 

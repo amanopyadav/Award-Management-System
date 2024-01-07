@@ -201,7 +201,9 @@ export class HrDashboardComponent implements OnInit {
 
   // Checkbox logic
   shortlistedEmployees: { awardCategory: string; empCode: string; projCode: number }[] = [];
+  selectedEmployees: { awardCategory: string; empCode: string; projCode: number }[] = [];
   isConfirmShortlistEnabled: boolean = false;
+  isConfirmSelectedEnabled: boolean = false;
 
 
 
@@ -220,6 +222,21 @@ export class HrDashboardComponent implements OnInit {
   }
 
 
+  toggleSelect(employee: EmployeeTableRow) {
+    const index = this.selectedEmployees.findIndex(emp => emp.empCode === employee.empCode);
+  
+    if (index === -1) {
+      // Employee is not shortlisted, checking it
+      this.selectedEmployees.push({ awardCategory: employee.awardCategory, empCode: employee.empCode, projCode: employee.project_code});
+    } else {
+      // Employee was previously shortlisted, unchecking it
+      this.selectedEmployees.splice(index, 1);
+    }
+  
+    this.isConfirmSelectedEnabled = this.selectedEmployees.length > 0;
+  }
+
+
 
 
 
@@ -227,7 +244,7 @@ export class HrDashboardComponent implements OnInit {
     this.hrService.updateShortlistStatus(this.shortlistedEmployees).subscribe(response => {
       console.log("Successfully updated shortlist status");
       this.ngOnInit()
-      this.toastr.success("Confirmed Status Updated")
+      this.toastr.success("Confirmed shortlist status")
       this.isConfirmShortlistEnabled = false
       this.ngOnInit();
     }, error => {
@@ -238,6 +255,25 @@ export class HrDashboardComponent implements OnInit {
     });
     
     console.log('Shortlisted Employees:', this.shortlistedEmployees);
+    
+  }
+
+
+  confirmSelect() {
+    this.hrService.updateSelectStatus(this.selectedEmployees).subscribe(response => {
+      console.log("Successfully updated select status");
+      this.ngOnInit()
+      this.toastr.success("Confirmed Selected Status")
+      this.isConfirmSelectedEnabled = false
+      this.ngOnInit();
+    }, error => {
+      console.error("Failed To Update Select Status");
+      this.toastr.error("Failed To Select Status")
+      this.isConfirmSelectedEnabled = false
+      this.ngOnInit();
+    });
+    
+    console.log('Selected Employees:', this.selectedEmployees);
     
   }
 
