@@ -381,8 +381,8 @@ export class HrDashboardComponent implements OnInit {
 
 
   downloadExcel() {
-    // Convert the nominee list data to Excel format
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.employeeTableData.dataRows);
+    // Convert the current filtered nominee list data to Excel format
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredEmployeeData);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Nominee List');
 
