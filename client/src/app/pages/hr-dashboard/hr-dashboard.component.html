@@ -92,7 +92,7 @@
 
             <div class="col-md-2 pr-1">
               <div class="form-group">
-                <button class="btn btn-success" disabled="true" (click)="downloadExcel()">Confirm Shortlist</button>
+                <button class="btn btn-success" [disabled]="!isConfirmShortlistEnabled" (click)="confirmShortlist()">Confirm Shortlist</button>
               </div>
             </div>
 
@@ -131,7 +131,17 @@
               </thead>
               <tbody>
                 <tr *ngFor="let employee of filteredEmployeeData">
-                  <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true"></td>
+                  <!-- <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true" (change)="toggleShortlist(employee)">
+                  </td> -->
+
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true" (change)="toggleShortlist(employee)">
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>
+                  </td>
 
                   <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfSelect(employee) === true"></td>
                   

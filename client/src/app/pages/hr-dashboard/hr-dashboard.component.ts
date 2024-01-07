@@ -198,6 +198,30 @@ export class HrDashboardComponent implements OnInit {
   }
 
 
+  // Checkbox logic
+  shortlistedEmployees: { awardCategory: string; empCode: string }[] = [];
+  isConfirmShortlistEnabled: boolean = false;
+
+  toggleShortlist(employee: EmployeeTableRow) {
+    const index = this.shortlistedEmployees.findIndex(emp => emp.empCode === employee.empCode);
+  
+    if (index === -1) {
+      // Employee is not shortlisted, checking it
+      this.shortlistedEmployees.push({ awardCategory: employee.awardCategory, empCode: employee.empCode });
+    } else {
+      // Employee was previously shortlisted, unchecking it
+      this.shortlistedEmployees.splice(index, 1);
+    }
+  
+    this.isConfirmShortlistEnabled = this.shortlistedEmployees.length > 0;
+  }
+
+  confirmShortlist() {
+    console.log('Shortlisted Employees:', this.shortlistedEmployees);
+  }
+
+
+
   constructor(private hrService: HrService, private ngZone: NgZone) {
     this.isCheckboxEnabled = false;
    }
@@ -252,7 +276,6 @@ export class HrDashboardComponent implements OnInit {
 
   checkIfShortlist(employee: EmployeeTableRow): boolean {
     // Check if employee.isShortList is 'N', return true to disable the checkbox
-    console.log("IsShortList: ",employee.isShortList,"Yes");
     if(employee.isShortList === "N" && employee.isSelect === "N"){
       return false;
     }
