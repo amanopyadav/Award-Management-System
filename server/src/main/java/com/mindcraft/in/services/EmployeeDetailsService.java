@@ -54,31 +54,302 @@ public class EmployeeDetailsService {
         String sql;
         switch (awardId.intValue()) {
             case 1:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
-                break;
+    sql = "SELECT " +
+            "\"mindcraft_exp_mon\"," +
+            "\"mobileno\"," +
+            "\"dob\"," +
+            "\"joining_date\"," +
+            "\"total_exp_mon\"," +
+            "\"email\"," +
+            "\"emp_name\"," +
+            "\"project_name\"," +
+            "\"emp_id\"," +
+            "\"designation_name\"," +
+            "\"function_name\"," +
+            "\"primary_skill_name\"" +
+            "FROM (" +
+            "    SELECT " +
+            "        \"mindcraft_exp_mon\"," +
+            "        \"mobileno\"," +
+            "        \"dob\"," +
+            "        \"joining_date\"," +
+            "        \"total_exp_mon\"," +
+            "        \"email\"," +
+            "        \"emp_name\"," +
+            "        \"project_name\"," +
+            "        \"emp_id\"," +
+            "        \"designation_name\"," +
+            "        \"function_name\"," +
+            "        \"primary_skill_name\"," +
+            "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+            "    FROM emp_details " +
+            ") AS ranked " +
+            "WHERE row_num = 1 AND mindcraft_exp_mon <= 6 AND project_name IS NOT NULL";
+    break;
+
             case 2:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon >= 10 and project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND mindcraft_exp_mon>=10 AND project_name IS NOT NULL";
                 break;
             case 3:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND mindcraft_exp_mon <= 6 and project_name IS NOT NULL";
                 break;
             case 4:
-                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL ";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND project_name IS NOT NULL ";
                 break;
             case 5:
-                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND project_name IS NOT NULL";
                 break;
             case 6:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 7:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 8:
-                sql = "SELECT * FROM emp_details WHERE mindcraft_exp_mon > 6 and project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND mindcraft_exp_mon > 6 and project_name IS NOT NULL";
                 break;
             case 9:
-                sql = "SELECT * FROM emp_details WHERE project_name IS NOT NULL";
+                sql = "SELECT " +
+                "\"mindcraft_exp_mon\"," +
+                "\"mobileno\"," +
+                "\"dob\"," +
+                "\"joining_date\"," +
+                "\"total_exp_mon\"," +
+                "\"email\"," +
+                "\"emp_name\"," +
+                "\"project_name\"," +
+                "\"emp_id\"," +
+                "\"designation_name\"," +
+                "\"function_name\"," +
+                "\"primary_skill_name\"" +
+                "FROM (" +
+                "    SELECT " +
+                "        \"mindcraft_exp_mon\"," +
+                "        \"mobileno\"," +
+                "        \"dob\"," +
+                "        \"joining_date\"," +
+                "        \"total_exp_mon\"," +
+                "        \"email\"," +
+                "        \"emp_name\"," +
+                "        \"project_name\"," +
+                "        \"emp_id\"," +
+                "        \"designation_name\"," +
+                "        \"function_name\"," +
+                "        \"primary_skill_name\"," +
+                "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+                "    FROM emp_details " +
+                ") AS ranked " +
+                "WHERE row_num = 1 AND project_name IS NOT NULL";
                 break;
             default:
                 throw new IllegalArgumentException("Invalid award ID: " + awardId);
@@ -115,7 +386,39 @@ public class EmployeeDetailsService {
     }
 
     public List<Map<String, Object>> getAllExceptFreshers() {
-        String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'Fresher'";
+        //String sql = "SELECT * FROM emp_details WHERE primary_skill_name <> 'Fresher'";
+        String sql = "SELECT " +
+        "\"mindcraft_exp_mon\"," +
+        "\"mobileno\"," +
+        "\"dob\"," +
+        "\"joining_date\"," +
+        "\"total_exp_mon\"," +
+        "\"email\"," +
+        "\"emp_name\"," +
+        "\"project_name\"," +
+        "\"emp_id\"," +
+        "\"designation_name\"," +
+        "\"function_name\"," +
+        "\"primary_skill_name\"" +
+        "FROM (" +
+        "    SELECT " +
+        "        \"mindcraft_exp_mon\"," +
+        "        \"mobileno\"," +
+        "        \"dob\"," +
+        "        \"joining_date\"," +
+        "        \"total_exp_mon\"," +
+        "        \"email\"," +
+        "        \"emp_name\"," +
+        "        \"project_name\"," +
+        "        \"emp_id\"," +
+        "        \"designation_name\"," +
+        "        \"function_name\"," +
+        "        \"primary_skill_name\"," +
+        "        ROW_NUMBER() OVER (PARTITION BY \"emp_id\" ORDER BY \"project_name\") AS row_num " +
+        "    FROM emp_details " +
+        ") AS ranked " +
+        "WHERE row_num = 1 AND primary_skill_name <> 'Fresher'";
+
 
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         Map<String, Object> response = new HashMap<>();
