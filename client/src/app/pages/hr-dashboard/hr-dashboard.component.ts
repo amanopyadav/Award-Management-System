@@ -135,26 +135,38 @@ interface EmployeeDetailsNew1{
   templateUrl: 'hr-dashboard.component.html'
 })
 export class HrDashboardComponent implements OnInit {
-  originalEmployeeData: { awardCategory: string; awardSubCategory: string; awardSubCategory2: string; empCode: string; empName: string; emp_designation: string; dob: Date; project_code: number; client: string; doj: Date; unit: string; skill: string; total_exp_in_months: number; mindcraft_exp_in_months: number; nominatedBy: string; }[];
+  originalEmployeeData: { isShortList: string; isSelect: string; awardCategory: string; awardSubCategory: string; awardSubCategory2: string; empCode: string; empName: string; emp_designation: string; dob: Date; project_code: number; client: string; doj: Date; unit: string; skill: string; total_exp_in_months: number; mindcraft_exp_in_months: number; nominatedBy: string; }[];
   selectedAwardCategory: string='';
   startDate: string | number | Date;
   endDate: string | number | Date;
-// filterByAwardCategory() {
-// throw new Error('Method not implemented.');
-// }
 
 
-  selectedSubcategory: string = ''; // Property to store the selected subcategory
+  view_status: string = ''; // Property to store the selected subcategory
   isCheckboxEnabled: boolean = false; // Property to control the checkbox state
   checkboxChecked: boolean = false; // Property to track the checkbox state
 
-  toggleCheckbox() {
-    // Enable the checkbox only when "Lead Award" is selected as the subcategory
-    this.isCheckboxEnabled = this.selectedSubcategory === 'Lead Award';
+  
 
-    // Set the checkbox state to unchecked
-    this.checkboxChecked = false;
+  view_status_shortlist_select() {
+
+    // Filter the employee data based on the selected view status
+    if (this.view_status === 'shortlist') {
+      this.filteredEmployeeData = this.employeeTableData.dataRows.filter(employee =>
+        employee.isShortList === 'Y' && employee.isSelect === 'N'
+      );
+    } else if (this.view_status === 'select') {
+      console.log("I reachged here plzz check");
+      
+      this.filteredEmployeeData = this.employeeTableData.dataRows.filter(employee =>
+        employee.isShortList === 'Y' && employee.isSelect === 'Y'
+      );
+    } else {
+      this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+    }
+
   }
+
+
 
 
   EmpForm: FormGroup
@@ -246,12 +258,15 @@ export class HrDashboardComponent implements OnInit {
       this.ngOnInit()
       this.toastr.success("Confirmed shortlist status")
       this.isConfirmShortlistEnabled = false
+      this.view_status = "shortlist";
       this.ngOnInit();
+
     }, error => {
       console.error("Failed to update shortlist status");
       this.toastr.error("Failed to update status")
       this.isConfirmShortlistEnabled = false
       this.ngOnInit();
+
     });
     
     console.log('Shortlisted Employees:', this.shortlistedEmployees);
@@ -265,10 +280,12 @@ export class HrDashboardComponent implements OnInit {
       this.ngOnInit()
       this.toastr.success("Confirmed Selected Status")
       this.isConfirmSelectedEnabled = false
+      this.view_status = "select";
       this.ngOnInit();
     }, error => {
       console.error("Failed To Update Select Status");
       this.toastr.error("Failed To Select Status")
+      this.view_status = "select";
       this.isConfirmSelectedEnabled = false
       this.ngOnInit();
     });
@@ -300,7 +317,6 @@ export class HrDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.searchTerm = '';
-    this.fetchNomineeList();
     // Initialize the employee data here or fetch it from a service
     this.employeeTableData = {
       headerRow: [
@@ -327,6 +343,7 @@ export class HrDashboardComponent implements OnInit {
     this.filteredEmployeeData = [...this.employeeTableData.dataRows];
     this.dataLoaded = true;
     this.originalEmployeeData = [...this.employeeTableData.dataRows];
+    this.fetchNomineeList();
     // this.filteredEmployeeData = this.originalEmployeeData.slice();
     
   }
@@ -494,6 +511,7 @@ export class HrDashboardComponent implements OnInit {
             
           }));
           this.filteredEmployeeData = [...this.employeeTableData.dataRows];
+          this.view_status_shortlist_select();
           this.dataLoaded = true;
         });
       },

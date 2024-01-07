@@ -41,15 +41,14 @@
           </div>
 
           <div class="col-md-3 px-1">
+
             <div class="form-group">
-              <label for="spot_award_subcategory">Award Subcategory</label>
-              <select class="form-control form-control-sm" id="spot_award_subcategory" name="spot_award_subcategory"
-                [(ngModel)]="selectedSubcategory" (change)="toggleCheckbox()">
-                <option value="" selected>Choose Subcategory</option>
-                <option value="In Recognition Of">In Recognition Of</option>
-                <option value="Going Extra Mile">Going Extra Mile</option>
-                <option value="Lead Award">Lead Award</option>
-                <option value="Individual Award">Individual Award</option>
+              <label for="spot_award_subcategory">View</label>
+              <select class="form-control form-control-sm" id="view_status" name="view_status" [(ngModel)]="view_status"
+                (change)="view_status_shortlist_select()">
+                <option value="" selected>Choose Shortlist / Select</option>
+                <option value="shortlist">shortlist</option>
+                <option value="select">select</option>
               </select>
             </div>
 
@@ -99,7 +98,8 @@
 
             <div class="col-md-2 pr-1">
               <div class="form-group">
-                <button class="btn btn-success" [disabled]="!isConfirmSelectedEnabled" (click)="confirmSelect()">Confirm Select</button>
+                <button class="btn btn-success" [disabled]="!isConfirmSelectedEnabled" (click)="confirmSelect()">Confirm
+                  Select</button>
               </div>
             </div>
 
@@ -158,78 +158,63 @@
                 <!-- <td class="text-center align-middle"><input class="form-check-input" type="checkbox"
                     [disabled]="checkIfSelect(employee) === true"></td> -->
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.isShortList }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.isSelect }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.awardCategory }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                   'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.empCode ? employee.empCode : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.empName ? employee.empName : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.emp_designation ? employee.emp_designation : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                   'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.dob ? employee.dob : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.project_code }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.client }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.doj ? employee.doj : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.unit ? employee.unit : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.skill ? employee.skill : '-' }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.total_exp_in_months }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.mindcraft_exp_in_months }}</td>
 
-                <td class="text-center align-middle"
-                  [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
                               'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
                   employee.nominatedBy }}</td>
 
