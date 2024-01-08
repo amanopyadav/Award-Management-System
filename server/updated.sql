@@ -654,3 +654,21 @@ CREATE TRIGGER before_insert_prevent_duplicate_nomination
 BEFORE INSERT ON nominee_list
 FOR EACH ROW
 EXECUTE FUNCTION prevent_duplicate_nomination();
+
+--------------------------------------------------------------------------------------------------------
+-----------------08/01/2024-----------------------------
+---christina
+CREATE OR REPLACE VIEW allprojects AS
+SELECT project_code,
+       project_desc,
+       client_name,
+       indstry_name
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY "project_code" ORDER BY "project_desc") AS row_num
+    FROM emp_projects
+    WHERE project_code IS NOT NULL
+) AS ranked
+WHERE row_num = 1;
+
+select * from allprojects;
