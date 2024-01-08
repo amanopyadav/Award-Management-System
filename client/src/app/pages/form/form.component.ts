@@ -1094,8 +1094,15 @@ export class FormComponent implements OnInit {
         console.log("Proj dialogbox opened");
 
         this.fetchSpecificProjects(empId);
-        // this.filteredProjects = this.Projects
-        this.displayProjModal = "block";
+         // Check if there are projects for the employee
+        if (this.filteredProjects && this.filteredProjects.length > 0) {
+          // Open the modal only when there are projects
+          this.displayProjModal = "block";
+        } else {
+          // Optionally, provide feedback that there are no projects
+          this.toastr.warning("Select nominee record first")
+          // You can also display a message or handle it as per your application logic
+        }
       
       }
 
@@ -1169,8 +1176,6 @@ export class FormComponent implements OnInit {
             console.error(error);
           }
         )
-
-
       }
 
 
