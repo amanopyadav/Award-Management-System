@@ -249,7 +249,7 @@
                         Details
                       </button>
                   
-                      <button *ngIf="shouldShowViewRatings(employee.awardCategory)" class="btn btn-info btn-sm" (click)="viewRatings(employee.empCode, employee.empName, employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2, employee.project_code)">
+                      <button [disabled]="!shouldShowViewRatings(employee.awardCategory)" class="btn btn-info btn-sm" (click)="viewRatings(employee.empCode, employee.empName, employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2, employee.project_code)">
                         Ratings
                       </button>
                     </div>
