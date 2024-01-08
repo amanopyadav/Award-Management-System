@@ -5,6 +5,7 @@ import { FormService } from './form.service';
 import { NotificationService } from './notification.service'; 
 import { Route, Router } from '@angular/router';
 import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
 // import { forkJoin } from 'rxjs';
 
 @Component({
@@ -74,7 +75,8 @@ export class FormComponent implements OnInit {
     private cdRef: ChangeDetectorRef, // Inject ChangeDetectorRef
     private formService: FormService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.nominationForm = this.fb.group({
       award_category: ['choose sample', Validators.required],
@@ -817,13 +819,33 @@ export class FormComponent implements OnInit {
 
       },
       (error) => {
-        window.alert("Failed! Nomination already exists")
+        this.ngOnInit()
+        this.reset_after_fail();
+      this.toastr.error("Failed! Nomination already exists");
+       // window.alert("Failed! Nomination already exists")
         console.error('Error submitting nominee data:', error);
         // Handle error, such as showing an error message
       }
     );
 
   }
+
+  reset_after_fail(){
+    this.EmpForm.reset();
+    this.ProjectForm.reset();
+    this.NominatedByForm.reset();
+    this.OnBehalfOfForm.reset();
+    this.mainForm.reset();
+
+    this.nominationForm.get('award_category').setValue('choose sample');
+    this.ngOnInit();
+    this.nominationForm.get('spot_award_subcategory').setValue('');
+    this.nominationForm.get('half_yearly_award_subcategory').setValue('');
+    this.nominationForm.get('half_yearly_award_isSales').setValue('');
+
+  }
+
+
 
 
   updateFormStatus(): boolean {
