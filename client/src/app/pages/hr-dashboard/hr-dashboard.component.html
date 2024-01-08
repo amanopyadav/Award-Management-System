@@ -77,6 +77,14 @@
                 (change)="applyFilter()">
             </div>
           </div>
+
+         
+  <div class="col-md-2 pr-1">
+    <div class="form-group">
+      <!-- Display the search icon without a button -->
+      <i class="fa fa-search" (click)="search()" style="cursor: pointer;"></i>
+    </div>
+  </div>
         </div>
 
 
@@ -107,35 +115,36 @@
         </div>
 
 
-
+        <div class="card-body">
         <div class="table-responsive" #tableContainer>
           <table class="table" style="width: auto; overflow-x: auto;">
-            <thead class="text-primary" style="white-space: nowrap;">
-              <th class="align-middle">Shortlist</th>
-              <th class="align-middle">Select</th>
-              <th class="align-middle">IsShortList</th>
-              <th class="align-middle">IsSelect</th>
-              <th class="align-middle">Award Category</th>
-              <th class="align-middle">Emp Code</th>
-              <th class="align-middle">Emp Name</th>
-              <th class="align-middle">Designation</th>
-              <th class="align-middle">DOB</th>
-              <th class="align-middle">Project Code</th>
-              <th class="align-middle">Client</th>
-              <th class="align-middle">DOJ</th>
-              <th class="align-middle">Unit</th>
-              <th class="align-middle">Skill</th>
-              <th class="align-middle">Total Experience</th>
-              <th class="align-middle">MindCraft Experience</th>
-              <th class="align-middle">Nominated By</th>
-              <th class="align-middle">Actions</th>
+            <thead class="text-center text-primary"style="white-space: nowrap;">
+              <th class="align-middle text-center" style="width: 100px;">Shortlist</th>
+              <th class="align-middle text-center" style="width: 100px;">Select</th>
+              <th class="align-middle text-center" style="width: 100px;">IsShortList</th>
+              <th class="align-middle text-center" style="width: 100px;">IsSelect</th>
+              <th class="align-middle text-center" style="width: 100px;">Award Category</th>
+              <th class="align-middle text-center" style="width: 100px;">Emp Code</th>
+              <th class="align-middle text-center" style="width: 100px;">Emp Name</th>
+              <th class="align-middle text-center" style="width: 100px;">Designation</th>
+              <th class="align-middle text-center" style="width: 100px;">DOB</th>
+              <th class="align-middle text-center" style="width: 100px;">Project Code</th>
+              <th class="align-middle text-center" style="width: 100px;">Client</th>
+              <th class="align-middle text-center" style="width: 100px;">DOJ</th>
+              <th class="align-middle text-center" style="width: 100px;">Unit</th>
+              <th class="align-middle text-center" style="width: 100px;">Skill</th>
+              <th class="align-middle text-center" style="width: 100px;">Total Experience</th>
+              <th class="align-middle text-center" style="width: 100px;">MindCraft Experience</th>
+              <th class="align-middle text-center" style="width: 100px;">Nominated By</th>
+              <th class="align-middle text-center" style="width: 100px;">Actions</th>
             </thead>
             <tbody>
-              <tr *ngFor="let employee of filteredEmployeeData">
+              <tr *ngFor="let employee of filteredEmployeeData" class="text-center">
                 <!-- <td class="text-center align-middle"><input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true" (change)="toggleShortlist(employee)">
                   </td> -->
+                  
 
-                <td>
+                <td style="width: 100px;">
                   <div class="form-check">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox" [disabled]="checkIfShortlist(employee) === true"
@@ -145,7 +154,7 @@
                   </div>
                 </td>
 
-                <td>
+                <td style="width: 100px;">
                   <div class="form-check">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox" [disabled]="checkIfSelect(employee) === true"
@@ -158,78 +167,84 @@
                 <!-- <td class="text-center align-middle"><input class="form-check-input" type="checkbox"
                     [disabled]="checkIfSelect(employee) === true"></td> -->
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.isShortList }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.isShortList }}</span></td>
+                  
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.isSelect }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.isSelect }}</span></td>
+               
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.awardCategory }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.awardCategory }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                  'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.empCode ? employee.empCode : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                  'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.empCode ? employee.empCode : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.empName ? employee.empName : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.empName ? employee.empName : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.emp_designation ? employee.emp_designation : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.emp_designation ? employee.emp_designation : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                  'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.dob ? employee.dob : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                  'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.dob ? employee.dob : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.project_code }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.project_code }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.client }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.client }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.doj ? employee.doj : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.doj ? employee.doj : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.unit ? employee.unit : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.unit ? employee.unit : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.skill ? employee.skill : '-' }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.skill ? employee.skill : '-' }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.total_exp_in_months }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.total_exp_in_months }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.mindcraft_exp_in_months }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.mindcraft_exp_in_months }}</span></td>
 
-                <td class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
-                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">{{
-                  employee.nominatedBy }}</td>
+                <td style="width: 100px;" class="text-center align-middle" [ngClass]="{'text-warning': employee.isShortList === 'Y' && employee.isSelect === 'N',
+                              'text-success': employee.isShortList === 'Y' && employee.isSelect === 'Y'}">      <span style="white-space: nowrap;">{{
+                  employee.nominatedBy }}</span></td>
 
                 <td class="align-middle">
 
-                  <li *ngIf="dataLoaded" style="list-style: none; cursor: pointer;">
+                  <li *ngIf="dataLoaded" style="list-style: none; cursor: pointer;"> 
                     <i class="nc-icon nc-single-copy-04"
                       (click)="viewDetails(employee.empCode,employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2, employee.project_code)"></i>
-                    <p>View Details</p>
+                      <span style="white-space: nowrap;">
+                        <p>View Details</p>
+                      </span>
                   </li>
 
                   <li *ngIf="shouldShowViewRatings(employee.awardCategory)" style="list-style: none; cursor: pointer;">
                     <i class="nc-icon nc-single-copy-04"
                       (click)="viewRatings(employee.empCode, employee.empName, employee.awardCategory, employee.awardSubCategory, employee.awardSubCategory2,employee.project_code)"></i>
-                    <p>View Ratings</p>
+                      <span style="white-space: nowrap;">
+                        <p>View Ratings</p>
+                      </span>
                   </li>
 
                 </td>

@@ -379,6 +379,12 @@ export class HrDashboardComponent implements OnInit {
     }
   }
 
+  search() {
+    // Call the function to apply filters or perform the search logic
+    // Example: applyFilter();
+    // You can also implement your custom search logic here
+  }
+
 
   downloadExcel() {
     // Convert the current filtered nominee list data to Excel format
@@ -476,7 +482,6 @@ export class HrDashboardComponent implements OnInit {
     });
   }
 
-  
   
 
 
