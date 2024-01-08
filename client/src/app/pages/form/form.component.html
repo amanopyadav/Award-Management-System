@@ -52,6 +52,13 @@
                       </select>
                     </div>
                   </div>
+
+                  <div class="col-md-4 pl-1" *ngIf="!showRatingScale && nominationForm.get('award_category').value !== 'Spot Award'">
+                    <div class="form-group">
+                      <label for="timeSpan">Award Nomination Period</label>
+                      <input type="text" formControlName="timeSpan" id="timeSpan" class="form-control" readonly>
+                    </div>
+                  </div>
               
                 </div>
           </form>

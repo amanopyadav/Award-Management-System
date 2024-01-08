@@ -82,6 +82,7 @@ export class FormComponent implements OnInit {
       award_category: ['choose sample', Validators.required],
       spot_award_subcategory: [''],
       half_yearly_award_subcategory: [''],
+      timeSpan: [''],
       half_yearly_award_isSales: ['']
     });
 
@@ -848,30 +849,125 @@ export class FormComponent implements OnInit {
 
 
 
-  updateFormStatus(): boolean {
+  // updateFormStatus(): boolean {
     
+  //   const currentMonth = this.dateService.getCurrentMonth();
+  //   const awardCategory = this.nominationForm.get('award_category').value;
+  //   const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
+
+  //   // Check if the selected category is spot_award or its subcategories
+  //   if (
+  //     awardCategory === 'Spot Award' ||
+  //     (awardCategory === 'Promising newcomer') ||
+  //     (awardCategory === 'Quarterly Award') ||
+  //     (awardCategory === 'Rising Star Award') ||
+  //     (awardCategory === 'Spot Award') ||
+  //     (awardCategory === 'Half Yearly Award') ||
+  //     (awardCategory === 'Team Award')
+      
+  //   ) {
+  //     this.setAwardForm = true;
+  //   } else {
+  //     this.setAwardForm = false;
+  //   }
+
+  //   return this.setAwardForm;
+  // }
+
+  updateFormStatus(): boolean {
     const currentMonth = this.dateService.getCurrentMonth();
     const awardCategory = this.nominationForm.get('award_category').value;
     const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
-
+  
+    // Define the award categories that have specific time spans
+    const timeSpanCategories = ['Promising newcomer', 'Quarterly Award', 'Rising Star Award'];
+  
     // Check if the selected category is spot_award or its subcategories
     if (
       awardCategory === 'Spot Award' ||
-      (awardCategory === 'Promising newcomer') ||
-      (awardCategory === 'Quarterly Award') ||
-      (awardCategory === 'Rising Star Award') ||
-      (awardCategory === 'Spot Award') ||
-      (awardCategory === 'Half Yearly Award') ||
-      (awardCategory === 'Team Award')
-      
+      (timeSpanCategories.includes(awardCategory) && [4, 7, 10, 1].includes(currentMonth)) ||
+      (awardCategory === 'Spot Award' && spotAwardSubcategory && spotAwardSubcategory !== '') ||
+      (awardCategory === 'Half Yearly Award' && [7, 1].includes(currentMonth)) ||
+      (awardCategory === 'Team Award' && [7, 1].includes(currentMonth))
     ) {
       this.setAwardForm = true;
+  
+      // Display the appropriate time span in a new field
+      this.displayTimeSpanField(awardCategory, currentMonth);
     } else {
       this.setAwardForm = false;
     }
-
+  
     return this.setAwardForm;
   }
+  
+
+  displayTimeSpanField(awardCategory: string, currentMonth: number): void {
+    const timeSpanMapping: Record<string, string> = {
+      'Promising newcomer': 'Jan-Mar',
+      'Quarterly Award': 'Apr-Jun',
+      'Rising Star Award': 'Jul-Sep',
+      'Spot Award': '', // No time span for Spot Award
+      'Half Yearly Award': 'Jan-Jun',
+      'Team Award': 'Jul-Dec',
+    };
+  
+    let timeSpan = timeSpanMapping[awardCategory];
+  
+    if ((awardCategory === 'Promising newcomer' || awardCategory === 'Quarterly Award' || awardCategory === 'Rising Star Award') &&
+        [1, 4, 7, 10].includes(currentMonth)) {
+      const currentYear = new Date().getFullYear();
+      let startMonth: number;
+      let endMonth: number;
+  
+      switch (currentMonth) {
+        case 1: // January
+          startMonth = 10; // 1st October of previous year
+          endMonth = 12; // 31st December of previous year
+          timeSpan = `${this.getMonthName(startMonth)} ${currentYear - 1}-${this.getMonthName(endMonth)} ${currentYear - 1}`;
+          break;
+        case 4: // April
+        case 7: // July
+        case 10: // October
+          startMonth = currentMonth - 3; // Three months before the current month
+          endMonth = currentMonth - 1; // One month before the current month
+          timeSpan = `${this.getMonthName(startMonth)} ${startMonth === 10 ? currentYear - 1 : currentYear}-${this.getMonthName(endMonth)} ${currentYear}`;
+          break;
+        default:
+          // Handle other cases if needed
+          break;
+      }
+    } else if ((awardCategory === 'Half Yearly Award' || awardCategory === 'Team Award') &&
+                [1, 7].includes(currentMonth)) {
+      const currentYear = new Date().getFullYear();
+      let startMonth: number;
+      let endMonth: number;
+  
+      switch (currentMonth) {
+        case 1: // January
+          startMonth = 7; // 1st July of previous year
+          endMonth = 12; // 31st December of previous year
+          timeSpan = `${this.getMonthName(startMonth)} ${currentYear - 1}-${this.getMonthName(endMonth)} ${currentYear - 1}`;
+          break;
+        case 7: // July
+          startMonth = 1; // 1st January of the current year
+          endMonth = 6; // 30th June of the current year
+          timeSpan = `${this.getMonthName(startMonth)} ${currentYear}-${this.getMonthName(endMonth)} ${currentYear}`;
+          break;
+        default:
+          // Handle other cases if needed
+          break;
+      }
+    }
+  
+    this.nominationForm.get('timeSpan').setValue(timeSpan);
+  }
+  
+  getMonthName(month: number): string {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months[month - 1];
+  }
+  
 
 
   checkIfItsTeamWard(): boolean {
@@ -890,6 +986,14 @@ export class FormComponent implements OnInit {
     const spotAwardSubcategory = this.nominationForm.get('spot_award_subcategory').value;
     const halfYearlyAwardSubcategory = this.nominationForm.get('half_yearly_award_subcategory').value;
     const halfYearlyAwardSubcategory1 = this.nominationForm.get('half_yearly_award_isSales').value;
+
+     // Call updateFormStatus to determine if the timeSpan field should be displayed
+  const displayTimeSpan = this.updateFormStatus();
+
+  // If the awardCategory has no time span, set the timeSpan field to empty
+  if (!displayTimeSpan) {
+    this.nominationForm.get('timeSpan').setValue('');
+  }
 
     console.log("Award: ", awardCategory);
     console.log("Spot award: ", spotAwardSubcategory);
